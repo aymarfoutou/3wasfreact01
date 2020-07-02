@@ -62,3 +62,41 @@ cursorInventor( { $and : [ { qty : {$gt : 45 }  }, { qty : {$lt : 90 } } ] }  ).
 //6. Affichez le nom des sociétés dont le statut est A ou le type est journal.
 
 cursorInventor( { $or: [ { status: "A" }, { type: "journal" } ] } ).sort({society:1}).forEach( invent => { print(invent.society, invent.qty) });
+
+// 7. Affichez le nom des sociétés dont le statut est A ou le type est journal et la quantité inférieur strictement à 100.
+
+cursorInventor( {
+    qty: { $lt : 100 },
+    $or: [ { status : "A" }, { type : "journal" } ]
+} ).sort({society:1}).forEach( doc => { 
+    print(doc.society, doc.qty) 
+});
+
+// 8. Affichez le type des articles qui ont (un prix de 0.99 ou 1.99 ) et ( qui sont true pour la propriété sale ou ont une quantité strictement inférieur à 100).
+
+cursorInventor( {
+    $and : [
+        { $or : [ { price : 0.99 }, { price : 1.99 } ] },
+        { $or : [ { sale : true }, { qty : { $lt : 100 } } ] }
+    ]
+}, { society : 1 } ).sort({ society : 1}).sort({society : 1}).forEach( doc => {
+    const { society, price, qty } = doc;
+
+    print(`Society : ${society} price :${price}, quantity : ${qty}`)
+})
+
+//9. Affichez le nom des scociétés qui ont des tags.
+
+cursorInventor( { tags : { $exists : true }}).sort({ society : 1}).sort({society : 1}).forEach( invent => {
+    const { tags, society } = invent;
+
+    print(`Society : ${society} tags :${tags.join(" ")}`)
+})
+
+//10. Affichez le nom des sociétés qui ont au moins un tag blank.
+
+cursorInventor( { tags : "blank"} ).sort({ society : 1}).sort({society : 1}).forEach( doc => {
+    const { tags, society } = doc;
+
+    print(`Society : ${society} tags :${tags.join(" ")}`)
+})
