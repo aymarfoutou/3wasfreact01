@@ -43,7 +43,6 @@ cursorInventor({ society: /^A/ }).forEach(doc => {
     print(`Type : ${type}, Société : ${society}`);
 });
 
-
 // 4.
 cursorInventor({ qty: { $gte: 45 } }).sort({ qty: 1 }).forEach( doc => {
     const { qty, society } = doc;
@@ -51,17 +50,15 @@ cursorInventor({ qty: { $gte: 45 } }).sort({ qty: 1 }).forEach( doc => {
     print(society, qty);
 });
 
-
-
-
 // 5. 
 
-cursorInventor({ qty : {$gt : 45 } }, { qty : {$lt : 90 } } ).sort({qty:1}).forEach( doc => { 
-    const { society, qty } = doc ;
-
-    print(society, qty) ;
-});
+cursorInventor( { $and : [ { qty : {$gt : 45 }  }, { qty : {$lt : 90 } } ] }  ).sort({qty:1}).forEach( invent => { print(invent.society, invent.qty) });
 
 //(p ∧ ¬q) ∨ (¬p ∧ q) ~ xor
 
 // { $or : [ $and : { [ qty : {} , $not : { qty : {} } ] }, $and : { [ $not : { qty : {} } , qty : {} ] } ] }
+
+
+//6. Affichez le nom des sociétés dont le statut est A ou le type est journal.
+
+cursorInventor( { $or: [ { status: "A" }, { type: "journal" } ] } ).sort({society:1}).forEach( invent => { print(invent.society, invent.qty) });
