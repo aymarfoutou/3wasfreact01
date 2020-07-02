@@ -79,7 +79,7 @@ cursorInventor( {
         { $or : [ { price : 0.99 }, { price : 1.99 } ] },
         { $or : [ { sale : true }, { qty : { $lt : 100 } } ] }
     ]
-}, { society : 1 } ).sort({ society : 1}).sort({society : 1}).forEach( doc => {
+}, { society : 1 } ).sort({ society : 1}).forEach( doc => {
     const { society, price, qty } = doc;
 
     // pour le priceTTC on a mis 20% pour la tva
@@ -101,3 +101,20 @@ cursorInventor( isBlank  ).sort({ society : 1}).sort({society : 1}).forEach( doc
 
     print(`Society : ${society} tags :${tags.join(" ")}`)
 })
+
+
+// Foreach
+
+// 1.
+db.inventory.find({ status: { $in: ["C", "D"] } }).forEach(
+    doc => {
+        db.inventory.updateOne({ 
+            _id: doc._id 
+        }, { $mul: { "qty": NumberDecimal("2.5") } })
+
+    }
+)
+
+db.inventory.updateMany( { status: { $in: ["YYY"] } } , { $mul: { "qty": 4.5 } } )
+
+// 2.
