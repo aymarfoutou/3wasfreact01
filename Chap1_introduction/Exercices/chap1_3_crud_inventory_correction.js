@@ -117,4 +117,28 @@ db.inventory.find({ status: { $in: ["C", "D"] } }).forEach(
 
 db.inventory.updateMany( { status: { $in: ["YYY"] } } , { $mul: { "qty": 4.5 } } )
 
+
+db.inventory.find({ $and: [{ status: { $in: ["A", "B"] }, tags: "blank" }] }).forEach(
+    doc => {
+        if (doc.tags.length > 2) {
+            db.inventory.updateOne({ _id: doc._id }, { $mul: { "qty": 2.5 } })
+        }
+    }
+)
+
+
 // 2.
+
+db.inventory.find({ $and: [{ status: { $in: ["A", "B"] }, tags: "blank" }] }, { tags : 1, _id : 1 }).forEach(
+    doc => {
+        const { tags, _id  } = doc;
+        let count = 0 ;
+
+        if(tags)
+            doc.tags.forEach( tag => { if( tag === "blank") count++  })
+
+        if (count > 2) {
+            db.inventory.updateOne({ _id: _id }, { $mul: { "qty": 2.5 } })
+        }
+    }
+)
