@@ -82,20 +82,20 @@ cursorInventor( {
 }, { society : 1 } ).sort({ society : 1}).sort({society : 1}).forEach( doc => {
     const { society, price, qty } = doc;
 
-    print(`Society : ${society} price :${price}, quantity : ${qty}`)
+    print(`Society : ${society} price :${price}, quantity : ${qty} priceTTC : ${ price * qty * 1.2}`)
 })
 
-//9. Affichez le nom des scociétés qui ont des tags.
+//9. Affichez le nom des scociétés qui ont des tags ou un tag
 
-cursorInventor( { tags : { $exists : true }}).sort({ society : 1}).sort({society : 1}).forEach( invent => {
-    const { tags, society } = invent;
+cursorInventor( { tags : { $exists : true }}).sort({ society : 1}).sort({society : 1}).forEach( doc => {
+    const { tags, society } = doc;
 
     print(`Society : ${society} tags :${tags.join(" ")}`)
 })
 
 //10. Affichez le nom des sociétés qui ont au moins un tag blank.
 
-cursorInventor( { tags : "blank"} ).sort({ society : 1}).sort({society : 1}).forEach( doc => {
+cursorInventor( { tags : "blank"}  ).sort({ society : 1}).sort({society : 1}).forEach( doc => {
     const { tags, society } = doc;
 
     print(`Society : ${society} tags :${tags.join(" ")}`)
