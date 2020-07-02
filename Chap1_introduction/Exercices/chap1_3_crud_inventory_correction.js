@@ -142,3 +142,13 @@ db.inventory.find({ $and: [{ status: { $in: ["A", "B"] }, tags: "blank" }] }, { 
         }
     }
 )
+
+// 3.
+
+db.inventory.updateOne(
+    { level: { $exists: true } },
+    { $unset: { level: "" } }
+)
+
+// Vérification cette requête ne retourne rien 
+db.inventory.find({ level: { $exists: true } }).pretty()
