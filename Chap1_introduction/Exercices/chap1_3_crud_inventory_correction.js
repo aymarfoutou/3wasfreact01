@@ -152,3 +152,29 @@ db.inventory.updateOne(
 
 // Vérification cette requête ne retourne rien 
 db.inventory.find({ level: { $exists: true } }).pretty()
+
+// switch
+
+db.inventory.updateMany(
+    { tags: { $exists: true } },
+    [
+
+        {
+            $set: {
+                label: {
+                    $switch: {
+                        branches: [
+                            { case: { $gt: [{ $size: "$tags" }, 3] }, then: "AA" },
+                            { case: { $gt: [{ $size: "$tags" }, 1] }, then: "A" },
+                        ],
+                        default: "B"
+                    }
+                }
+            }
+        },
+
+        { $set : { totalTags : { $size : "$tags"} } }
+    ]
+)
+
+db.inventory.find({ label: { $exists: true } }, { tags: 1, label: 1, totalTags : 1, _id : 0 })
