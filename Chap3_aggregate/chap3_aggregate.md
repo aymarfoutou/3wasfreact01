@@ -186,9 +186,9 @@ db.sales.aggregate( [
 
 - 1. A partir des données ci-dessus calculer le total des prix des restaurants par agence.
 
-- 2. Quelles sont les totaux dans ce regroupement qui sont supérieurs à 950000 ?
+- 2. Quelles sont les totaux dans ce regroupement qui sont supérieurs ou égaux à 950000 ?
 
-Remarques : vous pouvez également appliquer une condition de recherche par regroupement (HAVING) en utilisant l'opérateur suivant après l'opérateur de regroupement. Dans l'absolu vous pouvez donc enchaînner plusieurs opérateur match/group/match/group ...
+*Remarques : vous pouvez également appliquer une condition de recherche par regroupement (HAVING) en utilisant l'opérateur suivant après l'opérateur de regroupement. Dans l'absolu vous pouvez donc enchaînner plusieurs opérateur match/group/match/group ...*
 
 ```js
 
