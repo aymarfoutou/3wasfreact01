@@ -318,7 +318,7 @@ L'opérateur size permet de compter le nombre d'élément dans un array. Il faut
 
 Ajoutez la propriété **label** pour les documents ayant la propriété tags uniquement. Label prendra les valeurs suivantes selon le nombre de tags :
 
-- si le nombre de tags est strictement supérieur à 2 : A
+- si le nombre de tags est strictement supérieur à 1 : A
 - si le nombre de tags est strictement supérieur à 3 : AA
 - Et B sinon.
 
