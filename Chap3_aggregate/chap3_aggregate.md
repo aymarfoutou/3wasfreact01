@@ -122,7 +122,7 @@ Créez le document sales suivant, nous créerons au préalable un schéma cette 
 ```js
 
 db.createCollection("sales", 
-    { capped : true, size : 5242880, max : 5000, autoIndexId : true },
+    { capped : true, size : 5242880, max : 5000 },
     {
         validator : {
             $jsonSchema : {
