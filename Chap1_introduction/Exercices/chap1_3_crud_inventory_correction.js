@@ -191,7 +191,9 @@ db.inventory.find({}, { '_id': 1 } ).forEach( doc => {
     db.inventory.updateOne(
         { '_id': _id },
         [
-            { $set: { created_at : new Date(), expired_at : new Date( ISODate().getTime() + days ) } }
+            { $set: { 
+                created_at : new Date(ISODate().getTime() - days ), 
+                expired_at : new Date( ISODate().getTime() + days * Math.floor( Math.random() * 10 ) ) } }
         ]
     );
 })
