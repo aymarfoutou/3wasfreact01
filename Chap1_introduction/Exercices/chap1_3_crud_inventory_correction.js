@@ -44,7 +44,7 @@ cursorInventor({ society: /^A/ }).forEach(doc => {
 });
 
 // 4.
-cursorInventor({ qty: { $gte: 45 } }).sort({ qty: 1 }).forEach( doc => {
+cursorInventor({ qty: { $gte: 45 } }).sort({ qty: 1 }).forEach(doc => {
     const { qty, society } = doc;
 
     print(society, qty);
@@ -52,7 +52,7 @@ cursorInventor({ qty: { $gte: 45 } }).sort({ qty: 1 }).forEach( doc => {
 
 // 5. 
 
-cursorInventor( { $and : [ { qty : {$gt : 45 }  }, { qty : {$lt : 90 } } ] }  ).sort({qty:1}).forEach( invent => { print(invent.society, invent.qty) });
+cursorInventor({ $and: [{ qty: { $gt: 45 } }, { qty: { $lt: 90 } }] }).sort({ qty: 1 }).forEach(invent => { print(invent.society, invent.qty) });
 
 //(p ∧ ¬q) ∨ (¬p ∧ q) ~ xor
 
@@ -61,42 +61,42 @@ cursorInventor( { $and : [ { qty : {$gt : 45 }  }, { qty : {$lt : 90 } } ] }  ).
 
 //6. Affichez le nom des sociétés dont le statut est A ou le type est journal.
 
-cursorInventor( { $or: [ { status: "A" }, { type: "journal" } ] } ).sort({society:1}).forEach( invent => { print(invent.society, invent.qty) });
+cursorInventor({ $or: [{ status: "A" }, { type: "journal" }] }).sort({ society: 1 }).forEach(invent => { print(invent.society, invent.qty) });
 
 // 7. Affichez le nom des sociétés dont le statut est A ou le type est journal et la quantité inférieur strictement à 100.
 
-cursorInventor( {
-    qty: { $lt : 100 },
-    $or: [ { status : "A" }, { type : "journal" } ]
-} ).sort({society:1}).forEach( doc => { 
-    print(doc.society, doc.qty) 
+cursorInventor({
+    qty: { $lt: 100 },
+    $or: [{ status: "A" }, { type: "journal" }]
+}).sort({ society: 1 }).forEach(doc => {
+    print(doc.society, doc.qty)
 });
 
 // 8. Affichez le type des articles qui ont (un prix de 0.99 ou 1.99 ) et ( qui sont true pour la propriété sale ou ont une quantité strictement inférieur à 100).
 
-cursorInventor( {
-    $and : [
-        { $or : [ { price : 0.99 }, { price : 1.99 } ] },
-        { $or : [ { sale : true }, { qty : { $lt : 100 } } ] }
+cursorInventor({
+    $and: [
+        { $or: [{ price: 0.99 }, { price: 1.99 }] },
+        { $or: [{ sale: true }, { qty: { $lt: 100 } }] }
     ]
-}, { society : 1 } ).sort({ society : 1}).forEach( doc => {
+}, { society: 1 }).sort({ society: 1 }).forEach(doc => {
     const { society, price, qty } = doc;
 
     // pour le priceTTC on a mis 20% pour la tva
-    print(`Society : ${society} price :${price}, quantity : ${qty} priceTTC : ${ price * qty * 1.2}`); 
+    print(`Society : ${society} price :${price}, quantity : ${qty} priceTTC : ${price * qty * 1.2}`);
 })
 
 //9. Affichez le nom des scociétés qui ont des tags ou un tag
-cursorInventor( { tags : { $exists : true }}).sort({ society : 1}).forEach( doc => {
+cursorInventor({ tags: { $exists: true } }).sort({ society: 1 }).forEach(doc => {
     const { tags, society } = doc;
 
     print(`Society : ${society} tags :${tags.join(" ")}`)
 })
 
 //10. Affichez le nom des sociétés qui ont au moins un tag blank.
-const isBlank = { tags : { $in : ["blank"]} } ;
+const isBlank = { tags: { $in: ["blank"] } };
 
-cursorInventor( isBlank  ).sort({ society : 1}).sort({society : 1}).forEach( doc => {
+cursorInventor(isBlank).sort({ society: 1 }).sort({ society: 1 }).forEach(doc => {
     const { tags, society } = doc;
 
     print(`Society : ${society} tags :${tags.join(" ")}`)
@@ -108,14 +108,14 @@ cursorInventor( isBlank  ).sort({ society : 1}).sort({society : 1}).forEach( doc
 // 1.
 db.inventory.find({ status: { $in: ["C", "D"] } }).forEach(
     doc => {
-        db.inventory.updateOne({ 
-            _id: doc._id 
+        db.inventory.updateOne({
+            _id: doc._id
         }, { $mul: { "qty": NumberDecimal("2.5") } })
 
     }
 )
 
-db.inventory.updateMany( { status: { $in: ["YYY"] } } , { $mul: { "qty": 4.5 } } )
+db.inventory.updateMany({ status: { $in: ["YYY"] } }, { $mul: { "qty": 4.5 } })
 
 
 db.inventory.find({ $and: [{ status: { $in: ["A", "B"] }, tags: "blank" }] }).forEach(
@@ -129,13 +129,13 @@ db.inventory.find({ $and: [{ status: { $in: ["A", "B"] }, tags: "blank" }] }).fo
 
 // 2.
 
-db.inventory.find({ $and: [{ status: { $in: ["A", "B"] }, tags: "blank" }] }, { tags : 1, _id : 1 }).forEach(
+db.inventory.find({ $and: [{ status: { $in: ["A", "B"] }, tags: "blank" }] }, { tags: 1, _id: 1 }).forEach(
     doc => {
-        const { tags, _id  } = doc;
-        let count = 0 ;
+        const { tags, _id } = doc;
+        let count = 0;
 
-        if(tags)
-            doc.tags.forEach( tag => { if( tag === "blank") count++  })
+        if (tags)
+            doc.tags.forEach(tag => { if (tag === "blank") count++ })
 
         if (count > 2) {
             db.inventory.updateOne({ _id: _id }, { $mul: { "qty": 2.5 } })
@@ -172,29 +172,56 @@ db.inventory.updateMany(
                 }
             }
         },
-        { $set : { totalTags : { $size : "$tags"} } }
+        { $set: { totalTags: { $size: "$tags" } } }
     ]
 )
 
-db.inventory.find({ label: { $exists: true } }, { tags: 1, label: 1, totalTags : 1, _id : 0 })
+db.inventory.find({ label: { $exists: true } }, { tags: 1, label: 1, totalTags: 1, _id: 0 })
 
 
 
 // Hydratation
 // Attention Mongo manipule les dates au format ISODate même si vous utilisez new Date de JS
-db.inventory.find({}, { '_id': 1 } ).forEach( doc => {
+db.inventory.find({}, { '_id': 1 }).forEach(doc => {
 
     // les jours sont au format milième de secondes
-    const days = Math.floor(Math.random() * 100) * 24*60*60 * 1000 ;
+    const days = Math.floor(Math.random() * 100) * 24 * 60 * 60 * 1000;
     const { _id } = doc;
 
     db.inventory.updateOne(
         { '_id': _id },
         [
-            { $set: { 
-                created_at : new Date(ISODate().getTime() - days ), 
-                expired_at : new Date( ISODate().getTime() + days * Math.floor( Math.random() * 10 ) ) } }
+            {
+                $set: {
+                    created_at: new Date(ISODate().getTime() - days),
+                    expired_at: new Date(ISODate().getTime() + days * Math.floor(Math.random() * 10))
+                }
+            }
         ]
     );
 })
 
+
+// Nombre de jour
+// mieux optimis
+
+const Day = 24 * 60 * 60 * 1000;
+db.inventory.updateMany(
+    { _id: { $exists: true } },
+    [
+        { $set: { duration: { $divide: [ { $subtract: ["$expired_at", "$created_at",] }, Day ] } } },
+    ]
+);
+
+// Solution Lucas
+db.inventory.find().forEach( doc => {
+    const { _id, created_at, expired_at } = doc;
+    const calcDays = 24 * 60 * 60 * 1000;
+    const diffMilli = expired_at - created_at;
+    const diffDay = diffMilli / calcDays;
+    ​
+    db.inventory.updateOne(
+            {"_id" : _id},
+            {$set : {duration : diffDay}}
+    );
+});
