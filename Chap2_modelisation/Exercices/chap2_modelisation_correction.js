@@ -69,3 +69,25 @@ db.books.find(  { $or : [
         { category_id : { $in : [ null, "", 0 ]} }
     ] 
 }, { _id : 0} )
+
+// Algorithme de recherche des ancètres
+
+
+db.categoriestree.insertMany(categoriestree);
+db.categoriestree.createIndex({ parent: 1 }); // Optimisation pour la recherche
+
+// 1.
+
+const pushAncesstors = (_id, doc) => {
+    if (doc.parent) {
+        print(`parent  : ${doc.parent} id : ${_id} `)
+        db.categoriestree.update({ _id: _id }, { $addToSet: { "ancesstors": { _id: doc.parent } } });
+        pushAncesstors(_id, db.categoriestree.findOne({ _id: doc.parent }));
+    }
+}
+
+db.categoriestree.find().forEach(doc => {
+
+    pushAncesstors(doc._id, doc);
+});
+
