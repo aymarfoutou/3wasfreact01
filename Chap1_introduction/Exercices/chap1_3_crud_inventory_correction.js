@@ -159,7 +159,6 @@ db.inventory.find({ level: { $exists: true } }).pretty()
 db.inventory.updateMany(
     { tags: { $exists: true } },
     [
-
         {
             $set: {
                 label: {
@@ -173,9 +172,27 @@ db.inventory.updateMany(
                 }
             }
         },
-
         { $set : { totalTags : { $size : "$tags"} } }
     ]
 )
 
 db.inventory.find({ label: { $exists: true } }, { tags: 1, label: 1, totalTags : 1, _id : 0 })
+
+
+
+// Hydratation
+// Attention Mongo manipule les dates au format ISODate même si vous utilisez new Date de JS
+db.inventory.find({}, { '_id': 1 } ).forEach( doc => {
+
+    // les jours sont au format milième de secondes
+    const days = Math.floor(Math.random() * 100) * 24*60*60 * 1000 ;
+    const { _id } = doc;
+
+    db.inventory.updateOne(
+        { '_id': _id },
+        [
+            { $set: { created_at : new Date(), expired_at : new Date( ISODate().getTime() + days ) } }
+        ]
+    );
+})
+
