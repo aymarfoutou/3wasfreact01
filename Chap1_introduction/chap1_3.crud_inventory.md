@@ -153,7 +153,7 @@ Utilisez les opérateurs supérieur ou inférieur :
 
 8. Affichez le type des articles qui ont un prix de 0.99 ou 1.99 et qui sont true pour la propriété sale ou ont une quantité strictement inférieur à 45.
 
-9. Affichez le nom des scociétés et leur(s) tag(s) si et seulement ces sociétés ont des tags.
+9. Affichez le nom des scociétés et leur(s) tag(s) si et seulement si ces sociétés ont des tags ou un tag.
 
 Vous pouvez utiliser l'opérateur d'existance de Mongo pour vérifier que la propriété existe, il permet de sélectionner ou non des documents :
 
@@ -256,7 +256,7 @@ La méthode forEach permet d'itérer sur une collection :
 db.collection.find().forEach(<function>)
 ```
 
-1. En utilisant la fonction forEach et la fonction find augmentez de 50% la quantité de chaque document qui a un status C ou D. Utilisez l'opérateur set.
+1. En utilisant la fonction forEach et la fonction find augmentez de 50% la quantité de chaque document qui a un status C ou D.
 
 2. Augmentez maintenant de 150% les documents ayant un status A ou B et au moins 3 blanks dans leurs tags.
 
@@ -298,7 +298,7 @@ Vous pouvez utiliser l'opérateur switch afin de modifier un document selon une 
    $switch: {
       branches: [
          { case: { $eq: [ 0, 5 ] }, then: "equals" },
-         { case: { $gt: [ 0, 5 ] }, then: "greater than" },
+         { case: { $gt: 8 }, then: "greater than" },
          { case: { $gt: [ { $size :  "$notes" } , 2  ], then: "less than" }
       ],
       default : "nothing"
@@ -316,7 +316,7 @@ L'opérateur size permet de compter le nombre d'élément dans un array. Il faut
 { $size :  "$tags" }
 ```
 
-Ajoutez la propriété **grade** pour les documents ayant la propriété tags uniquement. Grade prendra les valeurs suivantes selon le nombre de tags :
+Ajoutez la propriété **label** pour les documents ayant la propriété tags uniquement. Label prendra les valeurs suivantes selon le nombre de tags :
 
 - si le nombre de tags est strictement supérieur à 2 : A
 - si le nombre de tags est strictement supérieur à 3 : AA
