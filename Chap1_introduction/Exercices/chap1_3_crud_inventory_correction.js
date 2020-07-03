@@ -155,6 +155,7 @@ db.inventory.find({ level: { $exists: true } }).pretty()
 
 // switch
 
+// Mettez des crochets pour évaluer les pipelines (instruction de modification/création) deuxième paramètre :
 db.inventory.updateMany(
     { tags: { $exists: true } },
     [
