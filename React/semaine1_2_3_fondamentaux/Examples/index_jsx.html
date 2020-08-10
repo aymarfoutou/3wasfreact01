@@ -28,9 +28,29 @@
             )
         }
 
+        const App = (props) => {
+
+            return (
+                <div className="main">
+                    <h1>Je suis l'App </h1>
+                    <Hello 
+                        message={props.messsage}
+                        subtitle={props.subtitle}
+                    />
+                </div>
+            )
+        }
+
         // Rendu dans le DOM
+        // App est composé d'un Hello := un arbre React
+        /*
+                App
+                 .
+                 .
+               Hello
+        */
         ReactDOM.render(
-            <Hello message = "Hello React" subtitle="Enjoy ! "/>,
+           <App message = "Hello React" subtitle="Enjoy ! " />,
             document.getElementById('root')
         );
     </script>
