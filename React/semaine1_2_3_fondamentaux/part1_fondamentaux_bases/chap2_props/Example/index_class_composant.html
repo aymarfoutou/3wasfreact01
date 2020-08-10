@@ -24,16 +24,30 @@
     <div id="root"></div>
     <script type="text/babel">
 
-        const Hello = (props) => {
-             //props.name = "Autre chose"  //IMPOSSIBLE
+        class HelloReact extends React.Component {
 
-            return <h1>Hello, {props.name}</h1>;
+            // On voit ça un peu plus tard. Mais retenez :
+            // On utilisera un constructeur plus tard pour utiliser une autre technique pour 
+            // définir des variables que l'on appelle state
+            // constructor(props) {
+            //     super(props);
+            // }
+
+            // render c'est une méthode de React.Component surchargée
+            // elle s'occupe de render 
+            render() {
+                return (
+                    <p>{this.props.name}</p>
+                )
+            }
         }
 
         ReactDOM.render(
-            <Hello name="Hello World" />,
+            // attribut cle/valeur == props
+            <HelloReact name="Hello React" />,
             document.getElementById('root')
         );
+
     </script>
 </body>
 
