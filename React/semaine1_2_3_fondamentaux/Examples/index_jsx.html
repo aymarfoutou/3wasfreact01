@@ -51,10 +51,10 @@
                         />
                     </div>
                     { /* Dans la partie render pour parcourir des éléments on doit utiliser la fonction map JS*/}
-                    { parag.map( () => {
+                    { parag.map( (p, i) => {
 
                         return (
-                            
+                            <p key={i} > Paragraphe {p} </p>
                         )
                     } ) }
                 </div>
