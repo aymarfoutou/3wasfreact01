@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <!-- compilation JSX => JS -->
+    <script type="text/babel">
+        /*
+
+            Vous êtes libre de vous organiser comme vous le souhaitez pour la construction de l'arbre React (composants)
+
+           1.  Affichez uniquement les étudiants ayant un status true, donnez pour chacun de ces étudiants le nombre de notes
+
+           2. Affichez lorsqu'il existe la liste des leçons suivis par les étudiants 
+        */
+        const container = document.getElementById('root');
+        const STUDENTS = [
+            { notes: [12, 11, 10, 12], name: "Alan", status : true, lessons : ['React', 'Symfony'] },
+            { notes: [18, 10, 19, 19, 10, 8], name: "Alice", status : true, lessons : ['React', 'Symfony', 'MongoDB'] },
+            { notes: [10, 9, 11, 8, 19, 20, 18, 19], name: "Bernard" , status : true, lessons : null},
+            { notes: [10, 9, 11, 18, 19], name: "Philippe" , status : false, lessons : null},
+            { notes: [10, 9, 11, 8, 19, 20, 18, 20, 20 ,17], name: "Tony" , status : false, lessons : null},
+            { notes: [11, 17, 19], name: "Sophie", status : true , lessons : ['Angular', 'Symfony'] },
+            { notes: [11.5, 17], name: "Aline", status : false, lessons : null },
+            { notes: [11, 17, 19, 19], name: "Sophie", status : true, lessons : null },
+        ];
+
+       
+        class App extends React.Component {
+
+            render() {
+                return (
+                    <div >
+                        
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <App students={STUDENTS} />,
+            container
+        );
+    </script>
+</body>
+
+</html>
