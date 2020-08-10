@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <title>Hello React</title>
@@ -9,11 +10,15 @@
     <!-- babel => compilation du JSX -->
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <style>
-        .heading{
+        .heading {
             color: purple;
+        }
+        .principal{
+            background-color: beige;
         }
     </style>
 </head>
+
 <body>
     <div id="root"></div>
     <script type="text/babel">
@@ -30,13 +35,28 @@
 
         const App = (props) => {
 
+            const parag = ['a', 'b', 'c', 'd' ] ;
+
+            // on peut parcourir ce tableau de manière standard dans le code du composant
+            for(let p of parag){ }
+
+            // render 
             return (
-                <div className="main">
-                    <h1>Je suis l'App </h1>
-                    <Hello 
-                        message={props.messsage}
-                        subtitle={props.subtitle}
-                    />
+                <div className="principal" >
+                    <div className="main">
+                        <h1 style={{ color : "red", backgroundColor : "black" }} >Je suis l'App </h1>
+                        <Hello
+                            message={props.messsage}
+                            subtitle={props.subtitle}
+                        />
+                    </div>
+                    { /* Dans la partie render pour parcourir des éléments on doit utiliser la fonction map JS*/}
+                    { parag.map( () => {
+
+                        return (
+                            
+                        )
+                    } ) }
                 </div>
             )
         }
@@ -50,9 +70,10 @@
                Hello
         */
         ReactDOM.render(
-           <App message = "Hello React" subtitle="Enjoy ! " />,
+            <App message="Hello React" subtitle="Enjoy ! " />,
             document.getElementById('root')
         );
     </script>
 </body>
+
 </html>
