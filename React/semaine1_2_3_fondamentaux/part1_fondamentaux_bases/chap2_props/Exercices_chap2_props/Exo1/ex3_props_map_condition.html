@@ -16,28 +16,75 @@
         /*
 
             Vous êtes libre de vous organiser comme vous le souhaitez pour la construction de l'arbre React (composants)
-           1.  Affichez uniquement les étudiants ayant un status true, donnez pour chacun de ces étudiants le nombre de notes
+           1. Affichez uniquement les étudiants ayant un status true, donnez pour chacun de ces étudiants le nombre de notes
            2. Affichez lorsqu'elle existe la liste des leçons suivies par les étudiants 
         */
         const container = document.getElementById('root');
         const STUDENTS = [
-            { notes: [12, 11, 10, 12], name: "Alan", status : true, lessons : ['React', 'Symfony'] },
-            { notes: [18, 10, 19, 19, 10, 8], name: "Alice", status : true, lessons : ['React', 'Symfony', 'MongoDB'] },
-            { notes: [10, 9, 11, 8, 19, 20, 18, 19], name: "Bernard" , status : true, lessons : null},
-            { notes: [10, 9, 11, 18, 19], name: "Philippe" , status : false, lessons : null},
-            { notes: [10, 9, 11, 8, 19, 20, 18, 20, 20 ,17], name: "Tony" , status : false, lessons : null},
-            { notes: [11, 17, 19], name: "Sophie", status : true , lessons : ['Angular', 'Symfony'] },
-            { notes: [11.5, 17], name: "Aline", status : false, lessons : null },
-            { notes: [11, 17, 19, 19], name: "Sophie", status : true, lessons : null },
+            { notes: [12, 11, 10, 12], name: "Alan", status: true, lessons: ['React', 'Symfony'] },
+            { notes: [18, 10, 19, 19, 10, 8], name: "Alice", status: true, lessons: ['React', 'Symfony', 'MongoDB'] },
+            { notes: [10, 9, 11, 8, 19, 20, 18, 19], name: "Bernard", status: true, lessons: null },
+            { notes: [10, 9, 11, 18, 19], name: "Philippe", status: false, lessons: null },
+            { notes: [10, 9, 11, 8, 19, 20, 18, 20, 20, 17], name: "Tony", status: false, lessons: null },
+            { notes: [11, 17, 19], name: "Sophie", status: true, lessons: ['Angular', 'Symfony'] },
+            { notes: [11.5, 17], name: "Aline", status: false, lessons: null },
+            { notes: [11, 17, 19, 19], name: "Sophie", status: true, lessons: null },
         ];
 
-       
+        const average = notes => {
+            const nbNotes = notes.length;
+            const sum = (curr, acc) => curr + acc;
+
+            if (nbNotes > 0) {
+                return Math.floor(notes.reduce(sum, 0) / nbNotes * 10) / 10;
+            }
+
+            return null;
+        }
+
+
         class App extends React.Component {
 
             render() {
+
+                // ordonner les notes par référence modifie le table this.props.students 
+                this.props.students.sort((a, b) => average( b.notes)  - average( a.notes ) )
+
+                return (
+                    <div>
+                        {this.props.students.map((student, i) => {
+                            if (student.status) return (
+                                <Student
+                                    notes={student.notes}
+                                    name={student.name}
+                                    lessons={student.lessons}
+                                    key={i}
+                                />
+                            )
+                        })}
+                    </div>
+                )
+
+            }
+        }
+
+        class Student extends React.Component {
+
+            render() {
+
+                // const notes = this.props.notes;
+                // const lessons = this.props.lessons;
+                // const name = this.props.name;
+
+                // décomposition permet d'assigner plus rapidement les variables
+                const { notes, lessons, name } = this.props;
+
                 return (
                     <div >
-                        
+                        <p style={{ fontSize: "25px" }}>Name : {name} </p>
+                        <p>{notes ? `Nombre de notes ${notes.length} Moyenne ${average(notes)}` : "Aucune note"} </p>
+                        {lessons != null ? <p>Lessons : {lessons.join(" ")}</p> : null}
+                        <p>----------</p>
                     </div>
                 );
             }
