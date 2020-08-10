@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <!-- compilation JSX => JS -->
+    <script type="text/babel">
+
+
+        // cette solution ne marche pas car on n'a pas demandé à React de mettre à jour le render via des variables particulières
+        // les states. React passe par un mécanisme d'optimisation du rendu en utilisant ces variables (states)
+        
+        class Clock extends React.Component {
+
+            render() {
+
+                let timer =  new Date;
+
+                setInterval(() => {
+                    timer = new Date
+
+                    console.log(timer.toLocaleTimeString())
+                }, 1000)
+
+                return (
+
+                    <div>
+                       <p>Timer : {timer.toLocaleTimeString()} </p>
+                    </div>
+                )
+            }
+        }
+
+        const container = document.getElementById('root');
+
+        ReactDOM.render(<Clock />, document.getElementById('root'));
+
+    </script>
+</body>
+
+</html>

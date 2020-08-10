@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <!-- compilation JSX => JS -->
+    <script type="text/babel">
+
+    class Clock extends React.Component{
+    
+    	render(){
+            const timer = new Date;
+
+        	return (
+                <div>
+                    {timer.toLocaleTimeString()}
+                </div>
+            );
+        }
+    }
+    
+    const container = document.getElementById('root');
+    
+    // Pour arriver à changer l'état de la variable timer dans le render une solution c'est de ré-exécuter le montage du composant
+    // dans le DOM
+    setInterval(() => {
+        ReactDOM.render( <Clock />, document.getElementById('root') );
+    }, 1000);
+
+    </script>
+</body>
+</html>
