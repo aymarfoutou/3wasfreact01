@@ -24,19 +24,57 @@
             { notes: [11, 17, 19], name: "Sophie" },
         ];
 
+        class Student extends React.Component {
+
+            render() {
+
+                // 1 Solution calcul de la moyenne
+                const nbNote = this.props.notes.length;
+
+                let averageFor = 0;
+
+                for (let note of this.props.notes) {
+                    averageFor += note;
+                }
+
+                averageFor = Math.floor( averageFor / nbNote * 10 ) / 10 ;
+
+                // 2 solution en utilisant reduce de JS sur un tableau
+                // curr la valeur courant de ton tableau acc = curr + acc 
+                // reduce( (curr, acc) => curr + acc, 0) le dernier paramètre permet d'initialiser acc par défaut il vaut 0
+
+                const sum = (curr, acc) => curr + acc ;
+                const average = Math.floor( this.props.notes.reduce( sum , 0) / nbNote * 10) / 10;
+
+                return (
+                    <ul>
+                        <li>Name : {this.props.name} </li>
+                        <li>Moyenne S1 : {average} </li>
+                        <li>Moyenne S2 : {averageFor} </li>
+                    </ul>
+                )
+            }
+        }
+
         class App extends React.Component {
 
             render() {
                 return (
-                    <div>
-
+                    <div >
+                        {this.props.students.map((student, i) => (
+                            <Student
+                                notes={student.notes}
+                                name={student.name}
+                                key={i}
+                            />)
+                        )}
                     </div>
                 );
             }
         }
 
         ReactDOM.render(
-            <App />,
+            <App students={STUDENTS} />,
             container
         );
     </script>
