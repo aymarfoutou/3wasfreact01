@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <title>Hello React</title>
@@ -7,22 +8,32 @@
 
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
 </head>
+
 <body>
     <div id="root"></div>
     <script type="text/javascript">
-    // Rendu dans le DOM de deux components hiérarchiques
+        // Rendu dans le DOM de deux components hiérarchiques
 
-        const el = <div>Hello react </div>
+        const App = (props) => {
+
+            let notes = [1, 2, 3, 4, 5]
+
+            // Exercice augmenter de 20% chaque valeurs du tableau notes. Utilisez map en JS.
+
+            return (
+                <div></div>
+            )
+        }
 
         ReactDOM.render(
-            React.createElement('div', { 'style': { 'color': 'red' } },
-                // définit un élément enfant à l'élément div
-                React.createElement('h1', null, "Oh Hello React !!!!")
-            ),
+            <App />,
             // identifiant root permettant de placer l'élément dans le DOM
             document.getElementById('root')
         );
     </script>
 </body>
+
 </html>
