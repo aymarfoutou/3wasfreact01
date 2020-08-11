@@ -92,3 +92,8 @@ ReactDOM.render(
 ## 1. Exercice Clock
 
 Ré-implémentez l'horloge précédente que nous avons vue dans le chaptire sur les props, cette fois utilisez un state pour gérer le temps qui passe (h/m/s).
+
+
+## 2. Counter Clock
+
+Construire une horloge à partir d'un compteur simple à l'aide d'un setInterval
