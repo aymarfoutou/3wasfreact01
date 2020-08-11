@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <style>
+        .special {
+            margin-top: 20%;
+            text-align: center;
+            height: 50px;
+            line-height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class CLock extends React.Component {
+            constructor(props) {
+                super(props);
+
+                // définition d'une variable mutable dans React : le state 
+                this.state = {
+                    count: 0
+                };
+
+                setInterval(
+                    () => {
+                        // met à jour le state en particulier notre variable count
+                        // this.state.count permet de lire la valeur dans le state
+                        // le setState fait muter la valeur count dans le state
+                        this.setState({ count: this.state.count + 1 })
+                    }, 1000
+                )
+            }
+
+            horologe(count) {
+
+                return {
+                    day: Math.floor(count / (24 * 3600)),
+                    hour: Math.floor(count / 3600) % 24,
+                    min: Math.floor(count / 60) % 60,
+                    second: count % 60
+                }
+            }
+
+            render() {
+
+                // décomposition on affecte les valeurs de notre fonction à nos constantes 
+                const { day, hour, min, second } = this.horologe(this.state.count);
+
+                return (
+                    <div className="container " >
+                        <div className="alert alert-dark special" role="alert">
+                            <p> {day} d {hour} h  {min} m  {second} s </p>
+                        </div>
+                    </div >
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <CLock />,
+            document.getElementById('root')
+        );
+
+    </script>
+</body>
+
+</html>
