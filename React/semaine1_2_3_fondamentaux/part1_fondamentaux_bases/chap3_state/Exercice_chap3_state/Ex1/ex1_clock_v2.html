@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <style>
+       
+        .special{
+            margin-top: 20%;
+            text-align: center;
+            height: 50px;
+            line-height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class CLock extends React.Component {
+            constructor(props) {
+                super(props);
+
+            }
+
+            horologe(seconds) {
+               
+            }
+
+            render() {
+
+
+                return (
+                    <div className="container " >
+                        <div className="alert alert-dark special" role="alert">
+                        
+                        </div>
+                    </div >
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <CLock />,
+            document.getElementById('root')
+        );
+
+    </script>
+</body>
+
+</html>
