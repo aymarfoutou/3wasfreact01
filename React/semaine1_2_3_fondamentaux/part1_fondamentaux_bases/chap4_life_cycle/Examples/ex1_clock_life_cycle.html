@@ -28,6 +28,10 @@
     <div id="root"></div>
     <script type="text/babel">
 
+        /*
+            Faire passer les messages letters de App vers Clock de manière cyclique a, b, c ... puis a, b, c ...
+            Affichez ce message dans la balise h1 de Clock
+        */
         const container = document.getElementById('root');
 
         class Clock extends React.Component {
@@ -94,6 +98,8 @@
 
                 this.state = {
                     life: true,
+                    letters : ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' ],
+                    letter : null
                 };
 
                 setTimeout(
@@ -101,6 +107,12 @@
                         this.setState({ life:  false  })
                     }, 1000 * 60
                 )
+
+                this.interval = setInterval(() => {
+                    this.setState({
+                        
+                    })
+                })
 
             }
 
