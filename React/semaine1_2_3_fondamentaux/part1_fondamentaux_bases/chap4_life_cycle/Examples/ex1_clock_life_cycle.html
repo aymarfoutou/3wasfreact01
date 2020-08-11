@@ -38,7 +38,8 @@
                     count: 0,
                 };
 
-                setInterval(
+                // définition d'une variable de classe rien avoir avec le state pur JS
+                this.interval = setInterval(
                     () => {
                         this.setState({ count: this.state.count + 1 })
                     }, 1000
@@ -62,20 +63,18 @@
             componentDidUpdate(prevProps, prevStates) {
 
                 if (this.state.count !== prevStates.count) {
-                    console.log('count prev states : ', this.state.count, prevStates.count)
+                    console.log( 'new state count :' , this.state.count, 'old state count',  prevStates.count)
                 }
             }
 
             componentWillUnmount() {
                 console.log('componentWillUnmount'.toUpperCase());
 
+                clearInterval(this.interval);
             }
 
-
             render() {
-
                 const { hour, min, second } = this.horologe(this.state.count);
-
                 console.log('2. render'.toUpperCase()) ;
 
                 return (
@@ -93,13 +92,13 @@
                 super(props);
 
                 this.state = {
-                    life: 15,
+                    life: true,
                 };
 
-                setInterval(
+                setTimeout(
                     () => {
-                        this.setState({ life: this.state.life - 1 })
-                    }, 1000
+                        this.setState({ life:  false  })
+                    }, 1000 * 10
                 )
 
             }
@@ -108,7 +107,7 @@
 
                 return (
                     <div className="container">
-                        {this.state.life <= 0 ? <p>Dead</p> : <Clock />}
+                        {this.state.life === false ? <p>Dead</p> : <Clock />}
                     </div>
                 )
             }
