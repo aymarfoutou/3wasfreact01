@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <style>
+        .special {
+            text-align: center;
+            height: 20px;
+            line-height: 20px;
+            margin-top: 2%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        /*
+           Correction affichez les étoiles ligne par ligne : deux composants
+        */
+        const container = document.getElementById('root');
+
+        class Bar extends React.Component {
+            constructor(props) {
+                super(props);
+
+                this.state = {
+                    star: '',
+                    count: 0,
+                    progress: false
+                };
+
+                this.interval = null;
+            }
+
+            draw() {
+                // définition d'une variable de classe rien avoir avec le state pur JS
+                this.interval = setInterval(
+                    () => {
+                        this.setState({
+                            count: this.state.count + 1,
+                            star: this.state.star + ' *'
+                        })
+                    }, 500
+                )
+            }
+
+            // cette méthode n'est déclenchée que si les props ou le state ont changé, elle n'est pas déclenchée au montage du composant
+            componentDidUpdate(prevProps, prevStates) {
+
+                if (this.state.count === 20) {
+                    clearInterval(this.interval);
+                }
+
+                if (this.props.progress != prevProps.progress && this.state.count === 0) {
+                    console.log(this.props.number, this.props.progress)
+                    this.draw();
+                }
+            }
+
+            componentDidMount() {
+                // pour la première Bar on est obligé de le lancer car props de Bar n'est mis à jour qu'au bout 500 * 20 dans App
+                if (this.props.number === 1) this.draw();
+            }
+
+            render() {
+                const { star } = this.state;
+
+                return (
+                    <div className="container special" >
+                        {this.state.count}
+                        {star}
+                    </div >
+                );
+            }
+        }
+
+        class App extends React.Component {
+            constructor(props) {
+                super(props);
+
+                this.state = {
+                    numberBar: 1 // le numéro de la ligne à dessiner
+                }
+
+                // définition d'une variable de classe rien avoir avec le state pur JS
+                this.interval = setInterval(
+                    () => {
+                        this.setState({
+                            numberBar: this.state.numberBar + 1
+                        })
+                    }, 500 * 20 // les numéros des bar étoiles à afficher sont fonction du temps qu'il faut pour dessiner une ligne d'étoile à savoir 500 * 20 ms
+                )
+            }
+
+            componentDidUpdate(prevProps, prevStates) {
+
+                if(this.state.numberBar === 10){
+                    clearInterval(this.interval);
+                }
+            }
+
+            render() {
+
+                return (
+                    <div className="container">
+                        {this.state.numberBar}
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num, i) => {
+
+                            return (
+                                <div>
+                                    <p>{this.state.numberBar === num ? 'yes' : 'no'}</p>
+                                    <Bar
+                                        key={i}
+                                        number={num}
+                                        progress={this.state.numberBar == num}
+                                    />
+                                </div>
+                            )
+                        }
+
+                        )}
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <App />,
+            container
+        );
+
+    </script>
+</body>
+
+</html>
