@@ -79,6 +79,7 @@
 
                 return (
                     <div className="container " >
+                        <h1>Message : { this.props.message} </h1>
                         <div className="alert alert-dark" role="alert">
                             <p>{hour} h  {min} m  {second} s </p>
                         </div>
@@ -98,7 +99,7 @@
                 setTimeout(
                     () => {
                         this.setState({ life:  false  })
-                    }, 1000 * 10
+                    }, 1000 * 60
                 )
 
             }
@@ -107,7 +108,7 @@
 
                 return (
                     <div className="container">
-                        {this.state.life === false ? <p>Dead</p> : <Clock />}
+                        {this.state.life === false ? <p>Dead</p> : <Clock message="a" />}
                     </div>
                 )
             }
