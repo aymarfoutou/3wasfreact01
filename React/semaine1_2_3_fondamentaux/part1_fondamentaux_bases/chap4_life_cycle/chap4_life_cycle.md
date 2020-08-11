@@ -36,7 +36,7 @@ componentDidMount(){
 
 ```js
 
-componentDidMount(){
+componentWillUnmount(){
     // ...
 }
 
