@@ -111,7 +111,8 @@ Une autre manière en version classe et non fonctionnelle comme ci-dessus
         class Hello extends React.Component {
 
             render() {
-                this.props.message = "Hello Angular";
+                // lecture seule pour les props
+               // this.props.message = "Hello Angular";
                 
                 return (
                     <div className="heading" >
