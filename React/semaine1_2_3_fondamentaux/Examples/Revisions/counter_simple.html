@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <!-- Library -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class TestState extends React.Component {
+            constructor(props) {
+                super(props);
+
+                // définition du state, un simple litteral
+                this.state = {
+                    count: 0
+                };
+
+            }
+
+            componentDidMount() {
+                // Update state
+                setInterval(
+                    () => {
+                        // this.state.count = this.state.count + 1 ;
+                        this.setState({ count: this.state.count + 1 })
+                    }, 1000
+                )
+            }
+
+            render() {
+                return (
+                    <div>
+                        <p>Count: {this.state.count} </p>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <TestState />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
