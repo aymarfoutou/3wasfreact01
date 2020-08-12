@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <!-- Library -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        // Création de composant en créant des classes
+        class Hello extends React.Component {
+
+            // une méthode de la librairie React permettant de faire du rendu
+            render() {
+                // lecture seule pour les props
+                //this.props.message = "Hello Angular";
+
+                return (
+                    <div className="heading" >
+                        <h1>{this.props.message}</h1>
+                        <p>{this.props.subtitle}</p>
+                    </div>
+                )
+            }
+        }
+
+        class App extends React.Component {
+
+            render() {
+
+                return (
+                    <div>
+                        <Hello message="Hello React" subtitle="Enjoy ! " />
+                        <Hello message="Hello Angular" subtitle="Enjoy ! " />
+                        <Hello message="Hello MongoDB" subtitle="Enjoy ! " />
+                        {123 + 10}
+
+                        <p> 123 + 10 </p>
+
+                        <p>Comment faire une boucle dans la partie render</p>
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function(number, indice) {
+                            return <p>La valeur du tableau parcouru : X </p>
+                        })}
+                    </div>
+                )
+            }
+        }
+
+        // Rendu dans le DOM
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root')
+        );
+    </script>
+
+
+</body>
+
+</html>
