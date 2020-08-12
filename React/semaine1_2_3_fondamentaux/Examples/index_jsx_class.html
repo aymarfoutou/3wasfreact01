@@ -28,8 +28,8 @@
             // une méthode de la librairie React permettant de faire du rendu
             render() {
                 // lecture seule pour les props
-                //this.props.message = "Hello Angular";
-
+               //this.props.message = "Hello Angular";
+                
                 return (
                     <div className="heading" >
                         <h1>{this.props.message}</h1>
@@ -39,40 +39,12 @@
             }
         }
 
-        class App extends React.Component {
-
-            render() {
-
-                return (
-                    <div>
-                        <Hello message="Hello React" subtitle="Enjoy ! " />
-                        <Hello message="Hello Angular" subtitle="Enjoy ! " />
-                        <Hello message="Hello MongoDB" subtitle="Enjoy ! " />
-                        {123 + 10}
-
-                        <p> 123 + 10 </p>
-
-                        <p>Comment faire une boucle dans la partie render</p>
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function(number, indice) {
-                            return <p key={indice} >La valeur du tableau parcouru : {number} </p>
-                        })}
-
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function(number, indice) {
-                            return <Hello key={indice} message={number} subtitle="a" />
-                        })}
-                    </div>
-                )
-            }
-        }
-
         // Rendu dans le DOM
         ReactDOM.render(
-            <App />,
+            <Hello message="Hello React" subtitle="Enjoy ! " />,
             document.getElementById('root')
         );
     </script>
-
-
 </body>
 
 </html>

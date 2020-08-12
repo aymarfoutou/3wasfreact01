@@ -29,7 +29,8 @@
 
                 // variable mutable de React
                 this.state = {
-                    message : 'Pas de message'
+                    message : 'Pas de message',
+                    count : 0
                 }
 
                 // pour modifier le state Bonjour les nouveaux !
@@ -44,6 +45,10 @@
                     this.setState({ message : 'Bonjour les nouveaux !' })
                 }, 3000)
                 // Pour modifier le state vous êtes obligé d'utiliser le setter de React
+
+                setInterval(() => {
+                    this.setState({ count : this.state.count + 1})
+                }, 1000)
             }
 
             render() {
@@ -53,7 +58,7 @@
                     <div>
                         <h1>{this.props.title}</h1>
                         <p>{this.state.message}</p>
-                        <p>Counter ... </p>
+                        <p>Counter {this.state.count === 0 ? 'Waiting ...Counter is comming ' : this.state.count } </p>
                     </div>
                 )
             }

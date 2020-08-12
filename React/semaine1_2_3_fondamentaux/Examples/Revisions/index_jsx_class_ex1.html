@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <!-- Library -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        class App extends React.Component {
+
+            constructor(props){
+                super(props);
+
+                this.state = {
+                    subtitle : "je suis un sous titre"
+                }
+            }
+
+            render() {
+
+                return (
+                    <div className="heading" >
+                        <Message
+                            m={this.state.subtitle}
+                            title="je suis un titre 1"
+                        />
+                        <Message m="Bonjour le monde 2" title="je suis un titre 2" />
+                    </div>
+                )
+            }
+        }
+
+        class Message extends React.Component {
+
+            render() {
+
+                // IMPOSSIBLE DE CHANGER UN PROPS
+                // this.props.m = "Hello wordl 1"
+
+                return (
+                    <div className="message" >
+                        <p>{this.props.m}</p>
+                        <p>{this.props.title}</p>
+                        <Text />
+                    </div>
+                )
+            }
+        }
+
+        class Text extends React.Component {
+
+            render() {
+
+                return (
+                    <p className="heading" >
+                        Hello
+                    </p>
+                )
+            }
+        }
+
+        // Rendu dans le DOM
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
