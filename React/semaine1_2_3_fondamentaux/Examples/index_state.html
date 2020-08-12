@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <!-- Library -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        class App extends React.Component {
+
+            constructor(props){
+                super(props); // surcharge
+
+                // variable mutable de React
+                this.state = {
+                    message : 'Pas de message'
+                }
+
+                // pour modifier le state Bonjour les nouveaux !
+                // this.state.message = 'Bonjour les nouveaux !'
+                console.log('1. CONSTRUCTOR')
+
+            }
+
+            componentDidMount(){
+                console.log('3. Component Did Mount')
+                setTimeout(() => {
+                    this.setState({ message : 'Bonjour les nouveaux !' })
+                }, 3000)
+                // Pour modifier le state vous êtes obligé d'utiliser le setter de React
+            }
+
+            render() {
+                console.log('2. Render')
+
+                return (
+                    <div>
+                        <h1>{this.props.title}</h1>
+                        <p>{this.state.message}</p>
+                        <p>Counter ... </p>
+                    </div>
+                )
+            }
+        }
+
+        // Rendu dans le DOM
+        ReactDOM.render(
+            <App title="Page principale" />,
+            document.getElementById('root')
+        );
+    </script>
+
+
+</body>
+
+</html>
