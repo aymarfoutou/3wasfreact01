@@ -124,5 +124,11 @@ Associez pour chaque compteur un bouton stop qui permet d'arrêter le compteur c
 
 Mettez une propriété **disabled** sur le start et le stop, disabled sera placé sur stop si on n'a pas appuyé sur start et réciproquement.
 
+Options possibles à notre exercice
+
+- Les compteurs doivent tous s'arrêter lorsqu'ils atteignent 20, vous pouvez soit tout ré-initialiser, soit arrêter le compteur et laisser la valeur la valeur 20 affichée. 
+
+- Si vous avez le temps développer un compteur cyclique et un compteur binaire.
+
 ![Counter](../images/button_counter.png)
 
