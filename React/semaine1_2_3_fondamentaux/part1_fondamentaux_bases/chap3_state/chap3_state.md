@@ -56,40 +56,39 @@ this.setState({maValeur : 'nouvelle valeur'});
 
 ```js
 class TestState extends React.Component {
-  constructor(props) {
-    super(props);
+            constructor(props) {
+                super(props);
 
-    // définition du state, un simple litteral
-    this.state = {
-        count:0
-    };
+                // définition du state, un simple litteral
+                this.state = {
+                    count: 0
+                };
 
-  }
-  
-  componentDidMount(){
-    // Update state
-    setInterval(
-      () => {
-        // this.state.count = this.state.count + 1 ;
-        this.setState({ count : count  + 1})
-        }, 1000
-    )
-    console.log(this.state.count);
-  }
+            }
 
-  render() {
-    return (
-      <div>
-        <p>Count: {this.state.count} </p>
-      </div>
-    );
-  }
-}
+            componentDidMount() {
+                // Update state
+                setInterval(
+                    () => {
+                        // this.state.count = this.state.count + 1 ;
+                        this.setState({ count: this.state.count + 1 })
+                    }, 1000
+                )
+            }
 
-ReactDOM.render(
-  <TestState />,
-  document.getElementById('root')
-);
+            render() {
+                return (
+                    <div>
+                        <p>Count: {this.state.count} </p>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <TestState />,
+            document.getElementById('root')
+        );
 ```
 
 ## 1. Exercice Clock
