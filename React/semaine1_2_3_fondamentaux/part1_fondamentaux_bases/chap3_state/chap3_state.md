@@ -64,6 +64,9 @@ class TestState extends React.Component {
         count:0
     };
 
+  }
+  
+  componentDidMount(){
     // Update state
     setInterval(
       () => {
