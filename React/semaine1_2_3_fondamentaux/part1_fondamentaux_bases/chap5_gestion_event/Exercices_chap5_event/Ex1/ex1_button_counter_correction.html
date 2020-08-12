@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .app_btn {
+            margin: 2rem;
+        }
+
+        .app__center {
+            text-align: center;
+            font-size: 2rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const container = document.getElementById('root');
+        const SECOND = 1000;
+
+        class Counter extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    count: 0,
+                    active: false
+                }
+
+                this.start = this.start.bind(this);
+
+                this.interval = null;
+            }
+
+            start() {
+                clearInterval(this.interval);
+
+                this.setState({ active: true })
+
+                this.interval = setInterval(() => {
+                    this.setState({
+                        count: this.state.count + this.props.step,
+                    })
+                }, SECOND)
+            }
+
+            render() {
+                const { count, active } = this.state;
+                const { step } = this.props; // { step : 1 } passer en props dans <Counter  step={1} /> dans App
+
+                return (
+                    <div>
+                        <button
+                            className="btn btn-primary app_btn"
+                            onClick={this.start}
+                            disabled={active}
+                        >
+                            Start + {step}
+                        </button>
+                        <button
+                            className="btn btn-primary app_btn"
+                            disabled={!active}
+                        >
+                            Stop
+                        </button>
+                        {(count >= 1 || count >= 2) ?
+                            <button className="btn btn-primary app_btn" >
+                                reset
+                            </button> :
+                            null
+                        }
+                        <p className="app__center">{count}</p>
+                    </div>
+                );
+            }
+        }
+
+        class App extends React.Component {
+
+            render() {
+
+                return (
+                    <div>
+                        <Counter step={1} />
+                        <Counter step={2} />
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <App />,
+            container
+        );
+
+
+    </script>
+</body>
+
+</html>
