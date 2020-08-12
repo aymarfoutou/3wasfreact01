@@ -80,6 +80,59 @@ Avec les navigateurs modernes le code JSX sera théoriquement correctement compi
 
 ```
 
+Une autre manière en version classe et non fonctionnelle comme ci-dessus
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <!-- Library -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        // Création de composant en créant des classes
+        class Hello extends React.Component {
+
+            render() {
+                this.props.message = "Hello Angular";
+                
+                return (
+                    <div className="heading" >
+                        <h1>{this.props.message}</h1>
+                        <p>{this.props.subtitle}</p>
+                    </div>
+                )
+            }
+        }
+
+        // Rendu dans le DOM
+        ReactDOM.render(
+            <Hello message="Hello React" subtitle="Enjoy ! " />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
+
+
 ## Attributs
 
 Ils s'écrivent soit dans des cotes simples ou doubles lorsqu'on a des chaîne de caractères comme valeur ou bien des accolades lorsqu'on a une expression en JS :
