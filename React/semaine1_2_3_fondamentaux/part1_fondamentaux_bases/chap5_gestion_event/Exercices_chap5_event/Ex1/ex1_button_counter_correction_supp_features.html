@@ -24,8 +24,10 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
-        const container = document.getElementById('root');
-        const SECOND = 1000;
+        // Constantes de l'application
+        const CONTAINER = document.getElementById('root');
+        const SECOND = 100;
+        const MAX_STEP = 20;
 
         class Counter extends React.Component {
             constructor(props) {
@@ -64,9 +66,20 @@
                 this.setState({ active: false, count: 0 });
             }
 
+            binary(count){
+
+                return parseInt(count, 10).toString(2) ;
+            }
+
+            componentDidUpdate(prevProps, prevState) {
+                if ( this.state.count >= MAX_STEP && this.state.active !== false ) {
+                    this.stop();
+                }
+            }
+
             render() {
                 const { count, active } = this.state;
-                const { step } = this.props; // { step : 1 } passer en props dans <Counter  step={1} /> dans App
+                const { step, binary } = this.props; // { step : 1 } passer en props dans <Counter  step={1} /> dans App
 
                 return (
                     <div>
@@ -75,7 +88,7 @@
                             onClick={this.start}
                             disabled={active}
                         >
-                            Start + {step}
+                            Start { binary ? `binary + ${step}` : ` + ${step}` }
                         </button>
                         <button
                             className="btn btn-primary app_btn"
@@ -93,7 +106,7 @@
                             </button> :
                             null
                         }
-                        <p className="app__center">{count}</p>
+                        <p className="app__center">{binary ? this.binary(count) : count }</p>
                     </div>
                 );
             }
@@ -107,6 +120,8 @@
                     <div>
                         <Counter step={1} />
                         <Counter step={2} />
+                        <Counter step={3} />
+                        <Counter step={1} binary={true} />
                     </div>
                 )
             }
@@ -114,7 +129,7 @@
 
         ReactDOM.render(
             <App />,
-            container
+            CONTAINER
         );
 
 

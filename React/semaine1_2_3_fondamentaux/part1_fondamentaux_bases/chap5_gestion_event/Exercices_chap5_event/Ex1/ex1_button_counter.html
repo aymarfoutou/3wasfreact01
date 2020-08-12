@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .app_btn{
+            margin: 2rem;
+        }
+        .app__center{
+            text-align: center;
+            font-size: 2rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    const container = document.getElementById('root');
+    const second = 1000;
+
+    class Counter extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = { count : 1, active : false};
+        }
+
+        // arrow fonction pour récupérer le this de la classe
+        start = () => {
+
+            clearInterval(this.timer);
+
+            this.timer = setInterval(() => {
+                this.setState( {
+                    count : this.state.count + this.props.step,
+                    active : true
+                });
+            }, second);
+        }
+
+        reset = () => {
+            clearInterval(this.timer);
+            this.setState({count : 1, active : false});
+        }
+        
+        stop = () => { 
+            clearInterval(this.timer); 
+            this.setState({active : false});
+        }
+
+        render() {
+            
+            const { active } = this.state;
+
+            return (
+            <div>
+                <button disabled={active} className="btn btn-primary app_btn" onClick={this.start}>
+                    Start  {this.props.name} 
+                </button>
+                <button disabled={!active} className="btn btn-primary app_btn" onClick={this.stop}>
+                    Stop
+                </button>
+                {this.state.count > 1 ?
+                <button  className="btn btn-primary app_btn" onClick={this.reset}>
+                    reset
+                </button> : null
+                }
+                <p className="app__center">{this.state.count}</p>
+            </div>
+            );
+        }
+    }
+
+    class App extends React.Component{
+        constructor(props) {
+            super(props);
+        }
+
+        render(){
+            return (
+                <div>
+                    <Counter step={1} name="(+ 1)" />
+                    <Counter step={2} name="(+ 2)" />
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <App />,
+        container
+    );
+    
+    </script>
+</body>
+
+</html>
