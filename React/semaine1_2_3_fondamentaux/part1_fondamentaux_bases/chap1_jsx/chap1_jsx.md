@@ -131,6 +131,7 @@ Une autre manière en version classe et non fonctionnelle comme ci-dessus
 </body>
 
 </html>
+```
 
 
 ## Attributs
