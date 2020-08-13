@@ -27,23 +27,31 @@
             constructor(props) {
                 super(props);
                 this.state = { value: '' };
+
+                this.handleChange = this.handleChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
             }
 
-            handleChange = (event) => {
+            handleChange(event) {
+                console.log(event.target)
                 this.setState({ value: event.target.value });
             }
 
-            handleSubmit = (event) => {
+            handleSubmit(event) {
                 console.log(`New User : ${this.state.value}`);
                 event.preventDefault();
             }
 
             render() {
+
+                const { value } = this.state;
+
                 return (
                     <form onSubmit={this.handleSubmit}>
                         <label>
                             Username:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        <input type="text" value={value} onChange={this.handleChange} />
+                        {value}
                         </label>
                         <input type="submit" value="Add" />
                     </form>
