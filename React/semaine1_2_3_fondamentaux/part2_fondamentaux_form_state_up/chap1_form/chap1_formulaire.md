@@ -189,7 +189,7 @@ Récupérez le code ci-dessous et gérez une connexion **login/password** en Rea
 
 Pour la gestion des erreurs : le formulaire est valide si les deux champs sont remplis. Pour la vérification de l'email, la vérification se fera directement dans le code HTML avec le type email en HTML.
 
-- Vérifiez le login/password pour valider le formulaire.
+- Vérifiez le login/password pour valider le formulaire. Une fois l'email et le password vérifiez dans le composant vous n'afficherez plus le formulaire et vous afficherez un message précisant que la "connexion" a réussi.
 
 Voici différentes vues du projet pour vous aider :
 
