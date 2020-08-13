@@ -174,18 +174,22 @@ Récupérez le code ci-dessous et gérez une connexion **login/password** en Rea
 ```html
 <!-- source bootstrap Twitter CSS v4.0 -->
 <form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  <div className="form-group">
+    <label htmlFor="exampleInputEmail1">Email address</label>
+    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  <div className="form-group">
+    <label htmlFor="exampleInputPassword1">Password</label>
+    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" className="btn btn-primary">Submit</button>
 </form>
 ```
+
+Pour la gestion des erreurs : le formulaire est valide si les deux champs sont remplis. Pour la vérification de l'email, la vérification se fera directement dans le code HTML avec le type email en HTML.
+
+- Vérifiez le login/password pour valider le formulaire. Une fois l'email et le password vérifiez dans le composant vous n'afficherez plus le formulaire et vous afficherez un message précisant que la "connexion" a réussi.
 
 Voici différentes vues du projet pour vous aider :
 
