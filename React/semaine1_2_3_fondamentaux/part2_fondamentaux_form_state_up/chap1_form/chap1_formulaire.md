@@ -10,7 +10,7 @@ Dans React la gestion des "mutables" passera ici par un state avec setState pour
 
 ```js
 
-class UserForm extends React.Component {
+class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: '' };
@@ -63,6 +63,43 @@ Indication sur la structure de l'application (à faire dans un seul et unique fi
          .
          .
        Users
+```
+
+Le composant Form pourrait ressembler à ceci :
+
+```js
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: '', users : [] };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+    handleChange(event) {
+      console.log(event.target)
+      this.setState({ value: event.target.value });
+    }
+
+    handleSubmit(event) {
+      console.log(`New User : ${this.state.value}`);
+      event.preventDefault();
+    }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Username:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Add user" />
+        Affichez ici les utilisateurs
+      </form>
+    );
+  }
+}
 ```
 
 ## Textarea
