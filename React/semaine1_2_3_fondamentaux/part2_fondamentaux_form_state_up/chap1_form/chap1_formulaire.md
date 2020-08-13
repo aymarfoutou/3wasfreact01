@@ -181,7 +181,7 @@ Récupérez le code ci-dessous et gérez une connexion **login/password** en Rea
   </div>
   <div class="form-group">
     <label forHtml="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
   </div>
   <button type="submit" className="btn btn-primary">Submit</button>
 </form>
