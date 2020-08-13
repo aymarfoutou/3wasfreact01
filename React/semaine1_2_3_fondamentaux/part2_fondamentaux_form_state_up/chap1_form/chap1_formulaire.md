@@ -187,6 +187,8 @@ Récupérez le code ci-dessous et gérez une connexion **login/password** en Rea
 </form>
 ```
 
+Pour la gestion des erreurs : le formulaire est valide si les deux champs sont remplis. Pour la vérification de l'email, la vérification se fera directement dans le code HTML avec le type email en HTML.
+
 Voici différentes vues du projet pour vous aider :
 
 ![Login password 1](../images/ex8_passwordlogin.png)
