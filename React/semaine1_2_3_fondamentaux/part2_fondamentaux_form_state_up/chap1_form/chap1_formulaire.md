@@ -156,10 +156,13 @@ Vous pouvez cependant utiliser la syntaxe suivante pour contrôler la saisie des
 
 ```js
 
-const fields = { username : '', email : '' };
+// fields dans le state = { username : '', email : '' };
 
+const { value, name } = event.target;
+
+// Puis de manière dynamique
 this.setState(
-  { [name] : {...fields } }
+  { [name] : value }
 )
 
 ```
