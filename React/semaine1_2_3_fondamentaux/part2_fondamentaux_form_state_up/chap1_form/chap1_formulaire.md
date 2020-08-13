@@ -13,17 +13,21 @@ Dans React la gestion des "mutables" passera ici par un state avec setState pour
 class UserForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: ''};
+    this.state = { value: '' };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange = (event) => {
-    this.setState({value: event.target.value});
-  }
+    handleChange(event) {
+      console.log(event.target)
+      this.setState({ value: event.target.value });
+    }
 
-  handleSubmit = (event) => {
-    console.log( `New User : ${this.state.value}`);
-    event.preventDefault();
-  }
+    handleSubmit(event) {
+      console.log(`New User : ${this.state.value}`);
+      event.preventDefault();
+    }
 
   render() {
     return (
@@ -43,11 +47,23 @@ class UserForm extends React.Component {
 
 Créez un formulaire pour ajouter à une liste user des utilisateurs, vous forcerez la saisie en majuscule dans le champ de saisie.
 
-Vérifiez que l'utilisateur n'existe pas déjà dans la liste, si l'utilisateur se trompe. Alors affichez un message d'avertissement.
+Vérifiez que l'utilisateur n'existe pas déjà dans la liste, si l'utilisateur se trompe alors affichez un message d'avertissement.
 
 Gérez également le cas où le champ est vide dans l'ajout d'un utilisateur.
 
-Affichez la liste sous le formulaire (Components conditionnels).
+Affichez la liste des utilsateurs sous le formulaire, affichez dans un composant Users la liste.
+
+Indication sur la structure de l'application (à faire dans un seul et unique fichier pour l'instant) :
+
+```text
+        App
+         .
+         .
+       Form
+         .
+         .
+       Users
+```
 
 ## Textarea
 
