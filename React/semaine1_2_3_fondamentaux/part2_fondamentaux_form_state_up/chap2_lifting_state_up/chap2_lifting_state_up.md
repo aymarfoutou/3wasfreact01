@@ -32,7 +32,7 @@ Dans le composant BaseNumberInput l'attribut onChangeBase sera appelé dans le c
 <BaseNumberInput onChangeBase={(e) => this.handleChange(e)} />
 
 // Dans le composant BaseNumberInput
-this.props.onNumberChanger(e.target.value)
+this.props.onChangeBase(e.target.value)
 
 ```
 
