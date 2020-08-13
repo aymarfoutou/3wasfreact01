@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+
+        .principal {
+            background-color: beige;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Form extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    user: '',
+                    lastname : '',
+                    users: [],
+                    message : ''
+                };
+
+                this.handleChange = this.handleChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            handleChange(event) {
+
+                const { value, name } = event.target; // target du champ inpute name et value
+
+                this.setState({ 
+                    [name]: value.toUpperCase(),
+                    message : ''
+                });
+            }
+
+            handleSubmit(event) {
+                event.preventDefault();
+
+                const { user, lastname, users } = this.state; 
+
+                if( users.find( u => ( u.user == user && u.lastname === lastname ) )){
+                    this.setState({
+                        message : `Attention l'utilisateur : ${user} existe déjà dans la liste`
+                    });
+
+                    return;
+                }
+
+                // lecture des users avec push dans le tableau attention le tableau renvoi 1 si il a 
+                // réussit à pusher la valeur
+                this.state.users.push({ user : user, lastname :lastname } );
+
+                this.setState({
+                    users: this.state.users,
+                    user : '',
+                    lastname : '',
+                    message : 'Merci pour votre ajout'
+                });
+
+            }
+
+            render() {
+                const { user, users, message, lastname } = this.state;
+
+                return (
+                    <React.Fragment>
+                        <form onSubmit={this.handleSubmit}>
+                            <label>
+                                firstName :
+                            <input type="text" value={user} name="user" onChange={this.handleChange} />
+                            </label>
+                            <br />
+                            <label>
+                                lastName :
+                            <input type="text" value={lastname} name="lastname" onChange={this.handleChange} />
+                            </label>
+                            <p><input type="submit" value="Add user" /></p>
+                        </form>
+                        { message !== '' ? <p>{message}</p> :  null }
+                        <UserList users={users} />
+                    </React.Fragment>
+                );
+            }
+        }
+
+        class UserList extends React.Component {
+
+
+            render() {
+
+                const { users } = this.props;
+
+                if (users.length > 0) {
+                    return (
+                        <div className="list-users">
+                            {users.map((u, i) => <p key={i}> User : {u.user}, Lastname : {u.lastname}</p>)}
+                        </div>
+                    )
+                }
+
+                return (
+                    <p>Pour l'instant pas de user ...</p>
+                )
+                
+            }
+        }
+
+        class App extends React.Component {
+
+            render() {
+
+                return (
+                    <div className="container">
+                        <h1>Formulaire de saisi des utilisateurs </h1>
+                        <Form />
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
