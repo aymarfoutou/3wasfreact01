@@ -63,14 +63,22 @@
 
       render() {
 
-        const { decimal, binary, b7 } = this.state;
+        const { decimal, binary } = this.state;
 
         return (
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <BaseNumberInput number={decimal} onChangeBase={(v, b) => this.setState({ decimal: v, binary: this.conversion(v, 10, 7) })} base="10" />
-                <BaseNumberInput number={binary} onChangeBase={(v, b) => this.setState({ decimal: this.conversion(v, 7, 10), binary: v })} base="7" />
+                <BaseNumberInput 
+                  number={decimal} 
+                  onChangeBase={(v, b) => this.setState({ decimal: v, binary: this.conversion(v, 10, 2) })} 
+                  base="10" 
+                />
+                <BaseNumberInput 
+                  number={binary} 
+                  onChangeBase={(v, b) => this.setState({ decimal: this.conversion(v, 2, 10), binary: v })} 
+                  base="2" 
+                />
               </div>
             </div>
           </div>
