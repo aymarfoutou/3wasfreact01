@@ -221,3 +221,18 @@ Multiple de 11 :
 ...
 99
 ```
+
+Indication pour les selects dans un formulaire en React :
+
+```jsx
+<select value={base} onChange={(e) => this.setState({ base: e.target.value })}>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="7">7</option>
+  <option value="0">Aucune</option>
+</select>
+```
+
+
+
+
