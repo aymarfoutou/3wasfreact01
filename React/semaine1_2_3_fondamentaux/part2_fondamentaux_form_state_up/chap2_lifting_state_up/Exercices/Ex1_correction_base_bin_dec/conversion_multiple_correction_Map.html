@@ -6,12 +6,8 @@
   <title>Hello React</title>
   <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-
   <!-- permet de compiler le JSX -->
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
@@ -19,30 +15,46 @@
 
   <script type="text/babel">
 
+    /* -------- Constantes de l'application --------- */
+
     const BASES = new Map([[2, 2], [3, 3], [7, 7], [11, 11], [13, 13]]);
+
+    const generateModulo = base => [...Array(Number(base)).keys()].map((num, i) => num > 9 ? "abcdefghijklmnopqrstuvwxyz".slice(num % 10, (num + 1) % 10) : String(num % base));
+
+    const checkNumCorrec = (number, base) => {
+      const sanitize = new Set(String(number).split('').map(num => generateModulo(base).find(n => n == num)))
+
+      return sanitize.has(undefined) === false
+    }
+
+    const isInteger = number => number.trim() !== '' && Number.isInteger(Number(number)) === true;
+
+    const CONTAINER = document.getElementById('root');
+
+    /* ----------------------------------------------- */
 
     class BaseNumberInput extends React.Component {
       constructor(props) {
         super(props);
-       
+
         this.handleChange = this.handleChange.bind(this);
       }
 
-      // event est récupérer dynamiquement par la fonction onChange de React
+      // event est recupere dynamiquement par la fonction onChange de React
       handleChange(event) {
-        // vérification des données avant traitement dans le parent
         const { value } = event.target;
         const { number, base } = this.props;
 
-        // méthod props appellée dans le contexte du parent
+        // life up state up (faire remonter l etat)
         this.props.onChangeBase(value, number);
       }
 
       componentDidUpdate(prevProps, prevState) {
 
-        if( prevProps.base != this.props.base ){ 
-          this.props.updateBase(this.props.number, prevProps.base, this.props.base)
-          }
+        if (prevProps.base != this.props.base) {
+          // la base a change donc on met a jour le champ de conversion en recuperant l'ancienne base et la nouvelle base
+          this.props.updateBase(this.props.number, prevProps.base, this.props.base);
+        }
       }
 
       render() {
@@ -64,40 +76,80 @@
         this.state = {
           number: '',
           decimal: '',
-          base: '0'
+          base: '0',
+          message: ''
         }
+
+        this.handleChange = this.handleChange.bind(this);
       }
 
+      //conversion 
       conversion(num, b1, b2) {
 
         return num === '' ? '' : parseInt(num, b1).toString(b2);
       }
 
+      handleChange(v, b) {
+
+        const { base } = this.state;
+
+        if (b === 10) {
+
+          if (isInteger(v))
+            this.setState({
+              decimal: v,
+              number: this.conversion(v, 10, base),
+              message: ''
+            });
+          else
+            this.setState({
+              message: `Erreur ce n'est pas un décimal ${v}`
+            })
+
+          return;
+        }
+
+        if (checkNumCorrec(v, base) === false) {
+
+          this.setState({
+            message: `Erreur Vous êtes dans la base ${base} les valeurs possibles sont : ${generateModulo(base).join(" ")} et ${v} n'est pas dans cette base.`
+          });
+
+          return;
+        }
+
+        this.setState({
+          decimal: this.conversion(v, base, 10),
+          number: v,
+          message: ''
+        })
+      }
+
       render() {
-        const { base, decimal, number } = this.state;
+        const { base, decimal, number, message } = this.state;
         const { bases: basesSelected } = this.props;
 
         return (
           <div className="container">
+            {message != '' && <p style={{ color: "red" }}>{message}</p>}
             <div className="row">
               <div className="col-md-12">
                 <BaseNumberInput
-                  disabled={ base === "0" }
+                  disabled={base === "0"}
                   number={decimal}
-                  onChangeBase={(v, b) => this.setState({ decimal: v, number: this.conversion(v, 10, base) })}
-                updateBase={ (v, b1, b2) => this.setState({ number : this.conversion(v, b1, b2) })}
+                  onChangeBase={(v, b) => this.handleChange(v, 10)}
                   base="10"
                 />
                 <h2>Choisissez une base de conversion </h2>
                 <select value={base} onChange={(e) => this.setState({ base: e.target.value })}>
-                  {[ ...basesSelected.entries() ].map((b, i) => <option key={i} value={b[0]}>{b[1]}</option>)}
+                  {[...basesSelected.entries()].map((b, i) => <option key={i} value={b[0]}>{b[1]}</option>)}
                   <option value="0">Aucune</option>
                 </select>
                 {base !== "0" &&
                   <BaseNumberInput
                     number={number}
-                    onChangeBase={(v, b) => this.setState({ decimal: this.conversion(v, base, 10), number: v })}
-                    updateBase={ (v, b1, b2) => this.setState({ number : this.conversion(v, b1, b2) })}
+                    onChangeBase={(v, b) => this.handleChange(v, b)}
+                    updateBase={(v, b1, b2) => this.setState({ number: this.conversion(v, b1, b2) })}
                     base={base}
                   />
                 }
@@ -110,7 +162,7 @@
 
     ReactDOM.render(
       <App bases={BASES} />,
-      document.getElementById('root')
+      CONTAINER
     );
 
   </script>
