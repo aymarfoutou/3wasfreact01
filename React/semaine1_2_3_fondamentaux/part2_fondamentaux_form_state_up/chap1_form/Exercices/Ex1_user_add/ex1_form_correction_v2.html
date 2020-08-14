@@ -42,7 +42,7 @@
                 const { value, name } = event.target; // target du champ inpute name et value
 
                 this.setState({ 
-                    [name]: value.toUpperCase(),
+                    [name]: value.toUpperCase(), // [name] permet dynamiquement d'associer des valeurs au clé du littérale
                     message : ''
                 });
             }

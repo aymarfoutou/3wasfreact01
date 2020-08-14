@@ -100,7 +100,7 @@
                 if (users.length > 0) {
                     return (
                         <div className="list-users">
-                            {users.map((user, i) => <p key={i}>{user}</p>)}
+                            {users.map((user, i) => { return <p key={i}>{user}</p> } )}
                         </div>
                     )
                 }

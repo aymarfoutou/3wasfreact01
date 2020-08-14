@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+
+        .principal {
+            background-color: beige;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const MAX_MULTIPLE = 100;
+        const CONTAINER = document.getElementById('root');
+
+        class App extends React.Component {
+
+            constructor(props) {
+                super(props);
+
+                this.state = {
+                    number: '',
+                    multiples: [],
+                    message: ''
+                }
+
+                this.handleChange = this.handleChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            handleChange(event) {
+                const { name, value } = event.target;
+
+                // les crochets permettent de retourner la valeur dans la variable pour retrouver le nom de la clé du littérale (state)
+                // concrètement ici JS fait [name] ===> number, attention name est variable cela mercherait avec d'autre champ et d'autre clé
+                this.setState({ [name]: value, message : '' });
+            }
+
+            handleSubmit(event) {
+                event.preventDefault();
+
+                // lecture du state
+                let { number, multiples } = this.state;
+
+                // gérer les messages d'erreurs
+                if ( number.trim() !== '' && Number.isInteger( Number(number) ) === true && number != "0" ) {
+
+                    multiples = this.multiple(number);
+                    this.setState({ multiples: multiples, number: '' });
+
+                    return; // arrête l'exécution des scripts
+                }
+
+                // Si on a une erreur : soit la chaine de caractère est vide, soit ce n'est pas un entier.
+
+                this.setState({ message : `Attention votre champ comporte une erreur ...vérifiez votre saisie : ${number}`, number : '' });
+            }
+
+            // code plus réutilisable non lié au state
+            multiple(number) {
+
+                let i = 1, mul = 0, result = [];
+                while (true) {
+                    mul = number * i; 
+                    i++;
+                    if (mul > MAX_MULTIPLE || mul === 0) break;
+
+                    result.push(mul);
+                }
+
+                return result;
+            }
+
+            render() {
+
+                const { number, multiples, message  } = this.state;
+
+                return (
+                    <React.Fragment>
+                        {message !== '' ? <p style={ {color : "red"} }>{message}</p> :  null}
+                        <form onSubmit={this.handleSubmit}>
+                            <label>
+                                Number :
+                            <input type="text" value={number} name="number" onChange={this.handleChange} />
+                            </label>
+                            <input type="submit" value="Calcul" />
+                        </form>
+                        <Multiple multiples={multiples} />
+                    </React.Fragment>
+                )
+            }
+        }
+
+        class Multiple extends React.Component {
+
+            render() {
+                const { multiples } = this.props;
+
+                return (
+                    <ul>
+                        {multiples.map((m, i) => <li key={i}>{m}</li>)}
+                    </ul>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <App />,
+            CONTAINER
+        );
+    </script>
+</body>
+
+</html>

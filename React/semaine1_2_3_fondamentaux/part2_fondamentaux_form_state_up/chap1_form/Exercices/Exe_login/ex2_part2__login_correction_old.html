@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=“UTF-8” />
+    <title>Hello React JSX</title>
+    <!-- React la librairie  attention libraire utiliser en développement prendre d’autre cdn si production voir le site react-->
+    <script src='https://unpkg.com/react@16/umd/react.development.js'></script>
+    <!-- React DOM pour monter l’arbre React dans le DOM -->
+    <script src='https://unpkg.com/react-dom@16/umd/react-dom.development.js'></script>
+    <!-- Il faut le compilateur du JSX pour transformer le JSX en JS que le navigateur comprend -->
+    <script src='https://unpkg.com/babel-standalone@6.15.0/babel.min.js'></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <!-- Point d’entrée du montage de l’arbre -->
+    <div id="root"></div>
+    <!-- cible ce qu’il faut compiler pour babel  -->
+    <script type="text/babel">
+
+       class App extends React.Component{
+
+          constructor(props){
+              super(props);
+              this.state={
+                email:"",
+                password:"",
+                auth: false,
+                isSubmit: false
+              }
+          }
+
+          handleChange = (e) => {
+            const {name, value} = e.target;
+          //  console.log(name, value);
+            //Les crochets récupèrent le name et associent la valeur(nom du champ au nom du state, de manière dynamique.)
+            // [name] = clé (et PAS une variable)
+            this.setState({[name]:value})
+
+          }
+
+          handleSubmit = (e) => {
+            //stop le comportement par default
+            e.preventDefault()
+            const {email, password} = this.state;
+            //console.log(email, password)
+            if(email === 'test@test.fr' && password === 'hello'){
+              this.setState({auth:true, isSubmit:true})
+            }else{
+              this.setState({auth:false, password:"", isSubmit:true})
+            }
+          }
+
+          render(){
+              const valid = this.state.email && this.state.password;
+
+              return(
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <form onSubmit = {this.handleSubmit} >
+                      {this.state.isSubmit && this.state.auth === false ? <p>Erreur de connexion (mot de passe ou login)</p> : null}
+                        <div className="form-group">
+                            <label htmlFor="email">Email address</label>
+                            <input
+                              value={this.state.email}
+                              onChange={this.handleChange}
+                              name="email"
+                              type="email"
+                              className="form-control"
+                              id="email"
+                              placeholder="Enter email"/>
+                          </div>
+
+                            <div className="form-group">
+                              <label htmlFor="p">Password</label>
+                              <input
+                                value={this.state.password}
+                                onChange={this.handleChange}
+                                name="password"
+                                type="password"
+                                className="form-control"
+                                id="p"
+                                placeholder="Password" 
+                              />
+                            </div>
+
+                <button type="submit" disabled={!valid}  className="btn btn-primary">Submit</button>
+
+              </form>
+            </div>
+            </div>
+            </div>
+            )
+          }
+        }
+
+        ReactDOM.render(
+            <App/>,
+            document.getElementById("root")
+        );
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- permet de compiler le JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading{
+            color: purple;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+class UserForm extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { value: '', users : [], error : null };
+  }
+
+  handleChange = (event) => {
+    const { value } = event.target;
+    this.setState({ value: value.trim().toUpperCase() });
+  }
+
+  handleSubmit = (event) => {
+    // stop le comportement par défaut du form
+    // qui cherche à faire une requete distante
+    event.preventDefault();
+
+    if( this.state.value === '' ){
+        this.setState({ 
+            error : 'Attention votre champ est vide'
+        });
+
+        return;
+    }
+
+    if( this.state.users.length === 0 || this.state.users.indexOf(this.state.value) == -1 ){
+        this.state.users.push(this.state.value);
+        this.setState({ users : this.state.users , error : '' });
+
+        return;
+    }
+
+    this.setState({ error : `L'utilisateur : ${this.state.value} est déjà dans la liste`, value : ''})
+  }
+
+  // Méthode permettant de gérer les erreurs dans le formulaire
+  error = () => {
+
+    if( this.state.error )
+        return (
+            <p>{this.state.error}</p>
+        )
+  }
+
+  render() {
+
+    return (
+      <div className="container">
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Username:
+            <input type="text" value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Add" />
+          {this.error()}
+        </form>
+        { /* si false le premier le deuxième n'est pas évalué et si vrai il évalue le deuxième membre en le retournant */ }
+        { this.state.users.length > 0 && <ListUser users={this.state.users} /> }
+      </div>
+    );
+  }
+}
+
+class ListUser extends React.Component{
+
+  render(){
+
+    const { users } = this.props;
+
+    return (
+        <React.Fragment>
+            { users.map((user, i) => <User key={i} user={user} /> )}
+        </React.Fragment>
+    );
+  }
+}
+
+class User extends React.Component{
+
+  render(){
+
+    const { user } = this.props;
+
+    return (
+        <li>{user}</li>
+    );
+  }
+}
+
+ReactDOM.render(
+  <UserForm />,
+  document.getElementById('root')
+);
+
+</script>
+</body>
+</html>
