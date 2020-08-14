@@ -20,9 +20,9 @@
   <script type="text/babel">
 
     class BaseNumberInput extends React.Component {
-    
-       constructor(props) {
-         super(props);
+
+      constructor(props) {
+        super(props);
         this.handleChange = this.handleChange.bind(this);
       }
 
@@ -30,11 +30,12 @@
       handleChange(event) {
         // vérification des données avant traitement dans le parent
         const { value } = event.target;
-        const { base } = this.props;
+        const { number } = this.props;
 
         // méthod props appellée dans le contexte du parent
-        this.props.onChangeBase(value, (base === '2' ? '10' : '2'));
+        this.props.onChangeBase(value, number);
       }
+
 
       render() {
 
@@ -57,8 +58,9 @@
       constructor(props) {
         super(props);
         this.state = {
-          binary: '',
-          decimal: ''
+          number: '',
+          decimal: '',
+          base : '0'
         }
       }
 
@@ -69,22 +71,31 @@
 
       render() {
 
-        const { decimal, binary } = this.state;
+        const { base, decimal, number } = this.state;
 
         return (
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <BaseNumberInput 
-                  number={decimal} 
-                  onChangeBase={(v, b) => this.setState({ decimal: v, binary: this.conversion(v, 10, 2) })} 
-                  base="10" 
+                <BaseNumberInput
+                  number={decimal}
+                  onChangeBase={(v, b) => this.setState({ decimal: v, number: this.conversion(v, 10, base) })}
+                  base="10"
                 />
-                <BaseNumberInput 
-                  number={binary} 
-                  onChangeBase={(v, b) => this.setState({ decimal: this.conversion(v, 2, 10), binary: v })} 
-                  base="2" 
-                />
+                <h2>Choisissez une base de conversion </h2>
+                <select value={base} onChange={(e) => this.setState({ base: e.target.value })}>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="7">7</option>
+                  <option value="0">Aucune</option>
+                </select>
+                {base !== "0" &&
+                  <BaseNumberInput
+                    number={number}
+                    onChangeBase={(v, b) => this.setState({ decimal: this.conversion(v, base, 10), number: v })}
+                    base={base}
+                  />
+                }
               </div>
             </div>
           </div>
