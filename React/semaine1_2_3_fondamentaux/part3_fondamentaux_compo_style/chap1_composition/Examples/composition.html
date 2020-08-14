@@ -27,12 +27,15 @@
         class Container extends React.Component {
 
             render() {
-                <div className="container">
-                    <header>{this.props.title}</header>
-                    <div className="content">
-                        {this.props.children}
+
+                return (
+                    <div className="container">
+                        <header>{this.props.title}</header>
+                        <div className="content">
+                            {this.props.children}
+                        </div>
                     </div>
-                </div>
+                )
             }
         }
 
@@ -54,16 +57,18 @@
             }
         }
 
-        class App extends React.Component{
+        class App extends React.Component {
 
-            render(){
-                <Container title="Super container">
-                    <h1>Liste de tous les posts de la page principale</h1>
-                    <Post />
-                    <Post />
-                    <Post />
-                    <Post />
-                </Container>
+            render() {
+                return (
+                    <Container title="Super container">
+                        <h1>Liste de tous les posts de la page principale</h1>
+                        <Post />
+                        <Post />
+                        <Post />
+                        <Post />
+                    </Container>
+                )
             }
         }
 
