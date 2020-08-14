@@ -20,10 +20,15 @@
   <script type="text/babel">
 
     class BaseNumberInput extends React.Component {
+    
+       constructor(props) {
+        this.handleChange = this.handleChange.bind(this);
+      }
 
-      handleChange = (e) => {
+      // event est récupérer dynamiquement par la fonction onChange de React
+      handleChange(event) {
         // vérification des données avant traitement dans le parent
-        const { value } = e.target;
+        const { value } = event.target;
         const { base } = this.props;
 
         // méthod props appellée dans le contexte du parent
