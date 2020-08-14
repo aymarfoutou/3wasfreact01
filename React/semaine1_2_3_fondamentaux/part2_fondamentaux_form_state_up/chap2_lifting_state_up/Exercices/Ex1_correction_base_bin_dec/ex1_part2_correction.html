@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello React</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+  <!-- permet de compiler le JSX -->
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    class BaseNumberInput extends React.Component {
+
+      handleChange = (e) => {
+        // vérification des données avant traitement dans le parent
+        const { value } = e.target;
+        const { base } = this.props;
+
+        // méthod props appellée dans le contexte du parent
+        this.props.onChangeBase(value, (base === '2' ? '10' : '2'));
+      }
+
+      render() {
+
+        // à chaque fois que je met une nouvelle valeur dans le champ input
+        // le parent renvoie la props number qui met à jour le rendu ci-dessous
+        const { number, base } = this.props;
+
+        return (
+          <React.Fragment>
+            <p>Base {base} </p>
+            {/* on déclenche la méthode handClick qui déclenchera la méthode du parent */}
+            <input value={number} onChange={this.handleChange} />
+          </React.Fragment>
+        )
+      }
+    }
+
+    class App extends React.Component {
+
+      constructor(props) {
+        super(props);
+        this.state = {
+          binary: '',
+          decimal: ''
+        }
+      }
+
+      conversion(num, b1, b2) {
+
+        return num === '' ? '' : parseInt(num, b1).toString(b2);
+      }
+
+      render() {
+
+        const { decimal, binary, b7 } = this.state;
+
+        return (
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <BaseNumberInput number={decimal} onChangeBase={(v, b) => this.setState({ decimal: v, binary: this.conversion(v, 10, 7) })} base="10" />
+                <BaseNumberInput number={binary} onChangeBase={(v, b) => this.setState({ decimal: this.conversion(v, 7, 10), binary: v })} base="7" />
+              </div>
+            </div>
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <App />,
+      document.getElementById('root')
+    );
+
+  </script>
+</body>
+
+</html>
