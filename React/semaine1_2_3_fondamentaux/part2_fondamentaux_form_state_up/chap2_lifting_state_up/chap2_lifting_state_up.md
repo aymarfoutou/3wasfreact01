@@ -41,3 +41,28 @@ this.props.onChangeBase(e.target.value)
 ## 1. Exercice Partie 2/2
 
 Implémentez la logique dans l'autre sens : si on rentre un nombre binaire dans le champ correspondant alors la conversion se fait dans l'autre sens (binaire vers décimal).
+
+## 2. Exercice conversion
+
+Reprendre l'exercice précédent, vous allez maintenant proposer un menu déroulant permettant de choisir la base dans laquelle on souhaite faire la conversion, utilisez les bases de conversion suivantes : 2, 3, et 7. Un champ de saisi en base 10 sera accessible dans le formulaire par défaut. Une fois la base sélectionnée le champ de saisi de cette base apparaîtra. Par défaut aucune base ne sera sélectionnée. Aidez vous des wireframes ci-dessous :
+
+wireframe 1 : aucune base sélectionnée
+
+```text
+base 10
+[ 1928 ]
+
+Choisissez une base : [aucune base]  <--- Menu déroulant par défaut aucune base 
+
+```
+
+wireframe 2 : une fois la base sélectionnée le champ de saisie apparaîtra et la conversion peut alors se faire
+
+```text
+base 10
+[ 1928 ]
+
+base 7
+[ 5423 ]
+
+```
