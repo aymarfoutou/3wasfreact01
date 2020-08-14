@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+
+        .principal {
+            background-color: beige;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        class Container extends React.Component {
+
+            render() {
+                <div className="container">
+                    <header>{this.props.title}</header>
+                    <div className="content">
+                        {this.props.children}
+                    </div>
+                </div>
+            }
+        }
+
+        class Post extends React.Component {
+
+            render() {
+
+                return (
+                    <article>
+                        <header>
+                            <h1>Un titre</h1>
+                        </header>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse nobis excepturi, ab dolorem assumenda est facere cum corrupti quo voluptatem voluptatibus, asperiores consectetur, nulla sapiente necessitatibus dignissimos aspernatur temporibus dicta.</p>
+                        <footer>
+                            <p>Footer</p>
+                        </footer>
+                    </article>
+                )
+            }
+        }
+
+        class App extends React.Component{
+
+            render(){
+                <Container title="Super container">
+                    <h1>Liste de tous les posts de la page principale</h1>
+                    <Post />
+                    <Post />
+                    <Post />
+                    <Post />
+                </Container>
+            }
+        }
+
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
