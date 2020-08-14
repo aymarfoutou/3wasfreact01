@@ -200,11 +200,11 @@ Voici différentes vues du projet pour vous aider :
 ![Login password 3](../images/ex8_passwordlogin3.png)
 
 
-## 3. Exercice formulaire multiple
+## 3. Exercice formulaire calcul des multiples d'un nombre entier
 
-- Créez un formulaire permettant de saisir un nombre entier et de calculer ses multiples entiers inférieurs ou égale à 100. Vous afficherez le résultat sous le formulaire dans une liste ul/li.
+Créez un formulaire permettant de calculer les multiples inférieurs ou égale à 100 d'un nombre entier. Vous afficherez le résultat sous le formulaire dans une liste ul/li.
 
-- Gérez les messages d'erreurs.
+Pensez à gérer les erreurs dans ce formulaire.
 
 Voyez le wireframe suivant pour vous aider :
 
