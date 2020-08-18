@@ -10,6 +10,8 @@ Voici la documentation officielle de [create-react-app](https://create-react-app
 
 Node et npm doivent être installés sur votre machine. Vérifiez que les versions de ces deux modules sont tels que : node >= 8.10 et npm >= 5.6
 
+- Vous pouvez utiliser yarn à la place de npm, dans ce cas utilisez uniquement yarn ou npm mais ne mélangez les deux cela posera des problèmes de gestion de dépendances dans votre projet (suivez le guide sur le site officiel).
+
 Puis installez de manière globale create-react-app :
 
 ```bash
@@ -46,8 +48,9 @@ Création du projet.
 Tapez les lignes de code ci-dessous :
 
 ```bash
+# à partir de la version 6 et +
+npm init react-app denomination
 
-npx create-react-app denomination
 
 cd denomination
 
@@ -88,8 +91,8 @@ denomination
 Pour faire ce projet vous allez utiliser un squelette d'application, tapez la ligne de commande suivante dans votre terminal :
 
 ```bash
-
-npx create-react-app denomination
+# à partir de la version npm 6 et +
+npm init react-app denomination
 
 ```
 
