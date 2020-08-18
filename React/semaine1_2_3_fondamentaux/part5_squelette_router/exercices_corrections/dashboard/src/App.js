@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { 
-  BrowserRouter as Router, 
-  Route, 
-  Link, 
-  Switch 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch
 } from "react-router-dom";
 
 import Posts from './components/Posts';
+import Post from './components/Post';
 
 class App extends Component {
 
@@ -42,6 +43,8 @@ class App extends Component {
                 <Route path="/dashboard">
                   <p>Dashboard</p>
                 </Route>
+                <Route path="/post/:id" component={Post } />
+                
               </Switch>
             </div>
           </div>
