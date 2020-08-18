@@ -153,3 +153,31 @@ token 10 : 1
 tokens  1 : 3
 
 ```
+
+## Indications
+
+Vous commencerez le développement de cette application en affichant la liste des tokens sur la page principale, l'application devrait ressembler à ce qui suit (voir le wireframe). L'utilisateur dans le premier exemple qui suit n'a pas encore saisi un montant.
+
+```txt
+
+Liste des tokens
+
+1
+5
+10
+20
+50
+100
+
+saisir le montant [ ]
+
+[ generate token(s) ]
+
+```
+
+Dans un deuxième temps, lorsque vous aurez implémenté l'algorithme de l'application gérer les erreurs de formulaire.
+
+
+
+
+
