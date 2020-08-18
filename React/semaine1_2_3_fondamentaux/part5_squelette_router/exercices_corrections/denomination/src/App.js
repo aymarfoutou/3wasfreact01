@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import Denomination from './components/Denomination';
+
 class App extends Component{
 
   render(){
