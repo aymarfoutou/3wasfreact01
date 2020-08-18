@@ -10,6 +10,8 @@ Voici la documentation officielle de [create-react-app](https://create-react-app
 
 Node et npm doivent être installés sur votre machine. Vérifiez que les versions de ces deux modules sont tels que : node >= 8.10 et npm >= 5.6
 
+- Vous pouvez utiliser yarn à la place de npm, dans ce cas utilisez uniquement yarn ou npm mais ne mélangez les deux cela posera des problèmes de gestion de dépendances dans votre projet (suivez le guide sur le site officiel).
+
 Puis installez de manière globale create-react-app :
 
 ```bash
@@ -46,8 +48,9 @@ Création du projet.
 Tapez les lignes de code ci-dessous :
 
 ```bash
+# à partir de la version 6 et +
+npm init react-app denomination
 
-npx create-react-app denomination
 
 cd denomination
 
@@ -88,8 +91,8 @@ denomination
 Pour faire ce projet vous allez utiliser un squelette d'application, tapez la ligne de commande suivante dans votre terminal :
 
 ```bash
-
-npx create-react-app denomination
+# à partir de la version npm 6 et +
+npm init react-app denomination
 
 ```
 
@@ -150,3 +153,31 @@ token 10 : 1
 tokens  1 : 3
 
 ```
+
+## Indications
+
+Vous commencerez le développement de cette application en affichant la liste des tokens sur la page principale, l'application devrait ressembler à ce qui suit (voir le wireframe). L'utilisateur dans le premier exemple qui suit n'a pas encore saisi un montant.
+
+```txt
+
+Liste des tokens
+
+1
+5
+10
+20
+50
+100
+
+saisir le montant [ ]
+
+[ generate token(s) ]
+
+```
+
+Dans un deuxième temps, lorsque vous aurez implémenté l'algorithme de l'application gérer les erreurs de formulaire.
+
+
+
+
+
