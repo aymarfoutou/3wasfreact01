@@ -180,6 +180,5 @@ Dans un deuxième temps, lorsque vous aurez implémenté l'algorithme de l'appli
 
 ## Exercice sac à dos
 
-Soit un sac à dos pouvant contenir 30 kg. Créez un champ de saisi pour ajouter des objets, saisissez uniquement le poids de ces objets dans une liste qui sera affichée. Puis créez un bouton qui permettra de proposer un possible rangement de ces objets en optimisant le remplissage du sac.
-
+Soit un sac à dos pouvant contenir 30 kg. Créez un champ de saisi pour ajouter des objets, saisissez uniquement le poids de ces objets dans une liste qui sera affichée. Une fois que vous avez terminé l'ajout des objets dans votre liste, affichez un bouton qui permettant de proposer la meilleurs optimisation de rangement dans le sac.
 
