@@ -199,26 +199,47 @@ Password : []
 
 ```
 
-### Page Dashboard
+### Page Dashboard partie 1
 
-Sur cette page vous afficherez les titres de chaque post. Ces derniers seront cliquables et une fois cliqués dessus on affichera le titre ainsi que le contenu de l'article dans le même composant Dashabord.
+Sur cette page vous afficherez les titres de chaque post.
+
+Ajoutez sur la page ub bouton permettant de supprimer un post
 
 ```txt
 Home Dashboard
 
 Bienvenu sur le Dashboard
 
-React JS
-React Native
-Angular
-Symfony
-MongoDB
+React JS  [delete]
+React Native  [delete]
+Angular  [delete]
+Symfony  [delete]
+MongoDB  [delete]
 
----- contenu de l'article
+```
 
-MongoDB
+### Page Dashboard partie 2
 
-Base de données NoSQL
+Implémentez maintenant un bouton pour ajouter un post à la liste des posts.
+
+```txt
+Home Dashboard
+
+Bienvenu sur le Dashboard
+
+ajouter : 
+
+title : []
+content : []
+
+[add]
+
+React JS  [delete]
+React Native  [delete]
+Angular  [delete]
+Symfony  [delete]
+MongoDB  [delete]
+
 ```
 
 Pour vous aidez voici ci-dessous la constante contenant les posts que l'on souhaite afficher :
