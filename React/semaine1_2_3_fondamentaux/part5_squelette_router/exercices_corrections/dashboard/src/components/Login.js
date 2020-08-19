@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { 
-  Redirect 
+import {
+  Redirect
 } from "react-router-dom";
 
 class Login extends Component {
@@ -11,7 +11,8 @@ class Login extends Component {
       email: '',
       password: '',
       auth: false, // auth pour vérifier que l'authentification
-      message :''
+      message: '',
+      token: null
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -20,36 +21,44 @@ class Login extends Component {
 
   handleChange(e) {
     const { value, name } = e.target;
-    this.setState({ [name]: value, message : '' })
+    this.setState({ [name]: value, message: '' })
   }
 
   handSubmit(e) {
     e.preventDefault();
 
-    if (this.state.email === 'alan@alan.fr' && this.state.password === '123') {
+    const { history } = this.props;
 
-      this.setState({ 
-        auth: true, 
-        message : 'Welcome Dashboard',
-        password : '' // pas d'enregistrement de mot de passe par secu
+    if (this.state.email === 'alan@alan.fr' && this.state.password === '123') {
+      localStorage.setItem('auth', 'true');
+
+      this.setState({
+        auth: true,
+        message: 'Welcome Dashboard',
+        password: '' // pas d'enregistrement de mot de passe par secu
       });
-      
+
       return;
     }
 
+    localStorage.setItem('auth', 'false');
+    
     this.setState({
-      message : `votre identifiant ou password n'est pas valid`, password : ''   })
+      message: `votre identifiant ou password n'est pas valid`, 
+      password: '', 
+      auth: false
+    })
   }
 
   render() {
     const { auth, email, password, message } = this.state;
 
-    if (auth === true)
+    if (auth)
       return (
         <Redirect
-          to={{ 
-            pathname: '/dashboard', 
-            state: { fromLogin: "/login", message: "Welcome Dashboard" } 
+          to={{
+            pathname: '/dashboard',
+            state: { message: "Welcome Dashboard", auth: true }
           }}
         />
       )

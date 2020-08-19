@@ -4,62 +4,49 @@ import {
   Route,
   Link,
   Switch,
-  Redirect,
+  Redirect
 } from "react-router-dom";
 
 import Posts from './components/Posts';
 import Post from './components/Post';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import Nav from './components/Nav';
+import PrivateRoute from './components/PrivateRoute';
 
 class App extends Component {
 
   render() {
 
-    const token = false;
+    console.log(this.props);
 
     return (
-      <Router>
+      <Router >
         <div className="container">
           <div className="row">
             <div className="col-md">
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-                <li>
-                  <Link to={{
-                    pathname: '/dashboard',
-                    state: { from: '/', message: '' }
-                  }}>Dashboard</Link>
-                </li>
-              </ul>
+              <Nav  />
             </div>
           </div>
           <div className="row">
             <div className="col-md">
               <Switch>
-                <Route exact path="/">
-                  <Posts />
-                </Route>
-                <Route exact path="/login">
-                  <Login />
-                </Route>
-                <Route exact path="/dashboard"
+              <Route path="/logout" render={
+                ({children, ...rest}) => { 
 
-                  // rest props et le spread operateur permet de faire une copie des props
-                  // la raison du spread c'est d'avoir une copie des props pour la mise à jour des
-                  // valeurs
-                  render={rest => token ? <Dashboard {...rest} /> :
-                    <Redirect to={{
-                      pathname: '/login',
-                      state: { from: '/', message: 'probleme de connexion' }
-                    }} />}
+                  localStorage.removeItem('auth');
 
-                />
+                  return(
+                    <Redirect to={ { pathname : "/" , state : { message : "vous êtes déconnecté"}}} />
+                  )
+                }
+              } />
+
+                <Route path="/login" component={Login} />
+                <Route exact path="/" component={Posts} />
+                <PrivateRoute path="/dashboard">
+                  <Dashboard />
+                </PrivateRoute>
                 <Route path="/post/:id" component={Post} />
               </Switch>
             </div>

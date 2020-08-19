@@ -25,7 +25,15 @@ class Posts extends Component {
 
     const { posts } = this.state;
 
+    const { location } = this.props;
+
+    console.log(localStorage, location)
+
+    const message = location.state && location.state.message ? location.state.message : null;
+
     return (
+      <>
+      {message && <p>{message}</p>}
       <ul>
         <h2>Une première version un peu geek ...</h2>
         {posts.map((post, i) =>
@@ -41,6 +49,7 @@ class Posts extends Component {
           <li key={i}><Link to={`/post/${post.id}`}>{post.title}</Link></li>
         )}
       </ul>
+      </>
     )
   }
 }
