@@ -7,11 +7,8 @@ import {
 
 class NavLocation extends Component {
 
-
     render() {
-
         const { match, location, history } = this.props;
-
         const auth = location.state && location.state.auth || localStorage.getItem('auth') === 'true';
 
         return (

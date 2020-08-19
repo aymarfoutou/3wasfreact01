@@ -26,7 +26,6 @@ class Login extends Component {
 
   handSubmit(e) {
     e.preventDefault();
-
     const { history } = this.props;
 
     if (this.state.email === 'alan@alan.fr' && this.state.password === '123') {
@@ -42,7 +41,7 @@ class Login extends Component {
     }
 
     localStorage.setItem('auth', 'false');
-    
+
     this.setState({
       message: `votre identifiant ou password n'est pas valid`, 
       password: '', 

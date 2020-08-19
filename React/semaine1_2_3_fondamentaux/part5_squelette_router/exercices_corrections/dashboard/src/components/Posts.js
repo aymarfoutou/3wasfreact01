@@ -3,29 +3,12 @@ import {
   Link
 } from "react-router-dom";
 
-import POSTS, { authors } from '../data_posts';
-
 class Posts extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      posts: []
-    }
-  }
-
-  componentDidMount() {
-    this.setState(
-      { posts: POSTS }
-    )
-  }
 
   render() {
 
-    const { posts } = this.state;
 
-    const { location } = this.props;
+    const { location, posts } = this.props;
 
     console.log(localStorage, location)
 
