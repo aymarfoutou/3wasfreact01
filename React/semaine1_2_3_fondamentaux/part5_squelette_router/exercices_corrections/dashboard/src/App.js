@@ -38,13 +38,12 @@ class App extends Component {
                   <Posts />
                 </Route>
                 <Route exact path="/login">
-                  <p>Login</p>
+                  <Login />
                 </Route>
                 <Route path="/dashboard">
                   <p>Dashboard</p>
                 </Route>
-                <Route path="/post/:id" component={Post } />
-                
+                <Route path="/post/:id" component={Post} />
               </Switch>
             </div>
           </div>
