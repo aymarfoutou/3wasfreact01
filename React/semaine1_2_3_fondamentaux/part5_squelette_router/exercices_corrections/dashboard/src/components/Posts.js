@@ -6,12 +6,7 @@ import {
 class Posts extends Component {
 
   render() {
-
-
     const { location, posts } = this.props;
-
-    console.log(localStorage, location)
-
     const message = location.state && location.state.message ? location.state.message : null;
 
     return (
@@ -27,10 +22,7 @@ class Posts extends Component {
               state : { post : post }  // nous ajoutons une clé à l'objet pour passer notre post
             }}>{post.title}</Link></li>
         )}
-        <h2>Une version plus simple</h2>
-        {posts.map((post, i) =>
-          <li key={i}><Link to={`/post/${post.id}`}>{post.title}</Link></li>
-        )}
+       
       </ul>
       </>
     )

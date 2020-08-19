@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 
-import POSTS from '../data_posts';
-
 class Dashboard extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      posts: []
+      posts : []
     }
+   
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({
-      posts: POSTS
-    });
-  
+  componentDidMount(){
+
+    this.setState({ posts : this.props.posts })
   }
+
 
   handleDelete(id){
     const posts = this.state.posts.filter( p => p.id != id );
@@ -38,7 +37,7 @@ class Dashboard extends Component {
     return (
       <>
         <h1>Dashboard</h1>
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">Id</th>
@@ -48,10 +47,10 @@ class Dashboard extends Component {
           </thead>
           <tbody>
               {posts && posts.map((post, i) =>
-                <tr>
+                <tr key={i}>
                   <td>{post.id}</td>
                   <td>{post.title}</td>
-                  <td><button class="btn btn-danger" onClick={ () => this.handleDelete(post.id)}>Delete</button></td>
+                  <td><button className="btn btn-danger" onClick={ () => this.handleDelete(post.id)}>Delete</button></td>
                 </tr>
               )}
           </tbody>
