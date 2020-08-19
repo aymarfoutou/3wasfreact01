@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
+  Link
 } from "react-router-dom";
 
 const POSTS = [
@@ -37,7 +34,11 @@ class Posts extends Component {
     return (
       <ul>
         {posts.map((post, i) =>
-          <li key={i}><Link to={`/post/${post.id}`}>{post.title}</Link> </li>
+          <li key={i}><Link
+            to={{
+              pathname: `/post/${post.id}`,
+              state: { post: "quelquechose" }
+            }}>{post.title}</Link></li>
         )}
       </ul>
     )
