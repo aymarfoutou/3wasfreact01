@@ -4,7 +4,7 @@ import {
   Route,
   Link,
   Switch,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 
 import Posts from './components/Posts';
@@ -15,6 +15,8 @@ import Dashboard from './components/Dashboard';
 class App extends Component {
 
   render() {
+
+    const token = false;
 
     return (
       <Router>
@@ -29,7 +31,10 @@ class App extends Component {
                   <Link to="/login">Login</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard">Dashboard</Link>
+                  <Link to={{
+                    pathname: '/dashboard',
+                    state: { from: '/', message: '' }
+                  }}>Dashboard</Link>
                 </li>
               </ul>
             </div>
@@ -43,9 +48,18 @@ class App extends Component {
                 <Route exact path="/login">
                   <Login />
                 </Route>
-                <Route exact path="/dashboard">
-                  <p>Hello dashboard</p>
-                </Route>
+                <Route exact path="/dashboard"
+
+                  // rest props et le spread operateur permet de faire une copie des props
+                  // la raison du spread c'est d'avoir une copie des props pour la mise à jour des
+                  // valeurs
+                  render={rest => token ? <Dashboard {...rest} /> :
+                    <Redirect to={{
+                      pathname: '/login',
+                      state: { from: '/', message: 'probleme de connexion' }
+                    }} />}
+
+                />
                 <Route path="/post/:id" component={Post} />
               </Switch>
             </div>

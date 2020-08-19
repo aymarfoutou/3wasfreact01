@@ -8,8 +8,13 @@ class Dashboard extends Component {
 
     console.log(this.props)
 
+    const { message } = this.props.location.state;
+
     return (
+      <>
       <p>Dashboard board hello</p>
+      { message ? <p>{message}</p> : null }
+      </>
     )
   }
 
