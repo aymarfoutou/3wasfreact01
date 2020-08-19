@@ -6,9 +6,11 @@ class Post extends Component {
 
   render() {
 
-    const { post } = this.props.location;
-    const { id }  = this.props.match.params; 
+    // première solution vous passez par le state de location
+    const { post } = this.props.location.state;
 
+    // deuxième solution
+    const { id }  = this.props.match.params; 
     const post2 = POSTS.find( post => post.id == id );
 
     // console.log(post2, id, POSTS );

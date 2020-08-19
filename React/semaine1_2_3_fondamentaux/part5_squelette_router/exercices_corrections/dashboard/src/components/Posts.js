@@ -33,7 +33,7 @@ class Posts extends Component {
             // ceci est passé en props dans le composant Link
             to={{
               pathname: `/post/${post.id}`, // paramètre de react-router-dom
-              post : post  // nous ajoutons une clé à l'objet pour passer notre post
+              state : { post : post }  // nous ajoutons une clé à l'objet pour passer notre post
             }}>{post.title}</Link></li>
         )}
         <h2>Une version plus simple</h2>
