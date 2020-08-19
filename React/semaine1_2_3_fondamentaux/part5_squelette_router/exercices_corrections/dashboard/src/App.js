@@ -3,11 +3,14 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  Switch
+  Switch,
+  Redirect
 } from "react-router-dom";
 
 import Posts from './components/Posts';
 import Post from './components/Post';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 
 class App extends Component {
 
@@ -40,8 +43,8 @@ class App extends Component {
                 <Route exact path="/login">
                   <Login />
                 </Route>
-                <Route path="/dashboard">
-                  <p>Dashboard</p>
+                <Route exact path="/dashboard">
+                  <p>Hello dashboard</p>
                 </Route>
                 <Route path="/post/:id" component={Post} />
               </Switch>
