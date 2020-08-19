@@ -62,7 +62,7 @@ Si vous avez plusieurs routes à gérer dans votre application, vous devez utili
         <Route exact path="/">
             <Home />
         </Route>
-        <Route path="/login">
+        <Route  path="/login">
             <Login />
         </Route>
         <Route path="/dashboard">
