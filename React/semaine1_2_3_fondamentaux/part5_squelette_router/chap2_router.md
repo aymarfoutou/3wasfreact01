@@ -255,3 +255,49 @@ const posts = [
 ];
 
 ```
+
+## Exercice jeu mathématiques
+
+Installez un nouveau projet que vous appelerez game-calcul. Ce jeu proposera deux pages : une page de présentation du jeu et une page pour jouer au jeu proprement dit. Vous utilierez react-router-dom pour la gestion de la navigation dans l'application.
+
+### Principe du jeu
+
+Pour le projet vous utiliserez le bootstrap twitter, tapez le ligne de commandes suivantes :
+
+```bash
+# merci à Benjamin pour uuid apparamment pour gérer la syntaxe ES6
+npm install bootstrap uuid --save
+
+# Gestion du sass
+npm install --save node-sass
+```
+
+Proposez une multiplication à deviner. L'utilisateur pourra répondre dans un champ sous la question posée. Au bout de 5 propositions de calcul on sera redirigé vers une page affichant le score.
+
+Ajoutez un lien permettant de re-initialiser le jeu.
+
+*Optionnelle : gérez un temps minimal pour répondre. Au bout de 5 secondes passez à la question suivante.*
+
+Aidez vous des Wireframes suivants pour réaliser le projet :
+
+
+- Page d'accueil
+
+```txt
+Home Game Multiplication
+
+Présentation du jeu : cliquez sur Game pour commencer le jeu. Ce dernier consiste à trouver
+une multiplication. Vous avez 5 multiplications à trouver. Puis une fois le jeu terminé on affichera
+votre score.
+
+```
+
+- Page du jeu
+
+```txt
+Home Game Multiplication
+
+Combien font 5 X 9 
+votre réponse [ ]
+[valider]
+```
