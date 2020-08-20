@@ -260,7 +260,51 @@ const posts = [
 
 Installez un nouveau projet que vous appelerez game-calcul. Ce jeu proposera deux pages : une page de présentation du jeu et une page pour jouer au jeu proprement dit. Vous utilierez react-router-dom pour la gestion de la navigation dans l'application.
 
-### Principe du jeu
+### Principe du jeu proposition 1
+
+Pour le projet vous utiliserez le bootstrap twitter, tapez le ligne de commandes suivantes :
+
+```bash
+# merci à Benjamin pour uuid pb d'encodage ...
+npm install bootstrap uuid --save
+
+# Gestion du sass
+npm install --save node-sass
+```
+
+Créez une app qui propose 2 liens : Home et Multiplication.
+
+La page d'accueil affichera un petit texte présentant l'app :
+
+Voici les tables de multiplication de 1 à 10
+
+La page Multiplication proposera 10 liens pour les 10 tables de multiplication. Ces liens sont cliquables et afficherons chacune des tables.
+
+wireframe 1
+
+```txt
+Home Multiplication
+
+Voici les tables de multiplication de 1 à 10
+
+```
+
+wireframe Z
+
+```txt
+Home Multiplication
+
+Table de multiplication 1
+Table de multiplication 2
+Table de multiplication 3
+...
+Table de multiplication 10
+
+
+```
+
+
+### Principe du jeu proposition 2
 
 Pour le projet vous utiliserez le bootstrap twitter, tapez le ligne de commandes suivantes :
 
