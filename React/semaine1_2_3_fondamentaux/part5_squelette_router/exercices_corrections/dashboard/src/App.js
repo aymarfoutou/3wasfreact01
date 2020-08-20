@@ -11,7 +11,7 @@ import Posts from './components/Posts';
 import Post from './components/Post';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
-import Nav from './components/Nav';
+import Nav from './components/Nav'; // export default NavWithRouter on peut choisir le nom qu'on veut
 import PrivateRoute from './components/PrivateRoute';
 
 import POSTS, { authors } from './data_posts';
@@ -21,8 +21,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],
-      redirect : false
+      posts: []
     }
 
   }
@@ -35,7 +34,7 @@ class App extends Component {
 
   render() {
 
-    const { posts, redirect } = this.state;
+    const { posts } = this.state;
 
     return (
       <Router >
@@ -49,11 +48,11 @@ class App extends Component {
             <div className="col-md">
               <Switch>
                 <Route path="/logout" render={
-                  () => {
-                    localStorage.removeItem('auth');
+                  ({location}) => {
+                    localStorage.removeItem('auth'); // on supprime la clé dans le localstorage (persistence)
 
                     return (
-                      <Redirect to={{ pathname: "/", state: { message: "vous êtes déconnecté" } }} />
+                      <Redirect to={{ pathname: "/", state: { message: "vous êtes déconnecté", auth : false } }} />
                     )
                   }
                 } />
@@ -69,7 +68,7 @@ class App extends Component {
                       (location.state && location.state.auth) ? (
                         <Dashboard
                           posts={posts}
-                          updatePosts={(posts) => this.setState({ posts: posts, redirect : false })} // lift state up faire remonter l'état au parent des posts
+                          updatePosts={(posts) => this.setState({ posts: posts })} // lift state up faire remonter l'état au parent des posts
                         />
                       ) : (
                         <Redirect

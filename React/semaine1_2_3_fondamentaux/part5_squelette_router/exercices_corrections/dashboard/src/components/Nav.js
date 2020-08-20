@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+// context API ou redux (on voir plus tard ...)
 import { withRouter } from "react-router";
 
 import {

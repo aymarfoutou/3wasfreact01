@@ -55,7 +55,7 @@ class Dashboard extends Component {
     this.setState({ posts: this.state.posts, title : '', content : '' });
 
     // mise à jour pour la page d'accueil
-    this.props.updatePosts(this.state.posts, true);
+    this.props.updatePosts(this.state.posts);
   }
 
 
