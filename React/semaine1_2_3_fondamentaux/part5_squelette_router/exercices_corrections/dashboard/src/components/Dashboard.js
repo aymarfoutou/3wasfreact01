@@ -49,7 +49,7 @@ class Dashboard extends Component {
             </tr>
           </thead>
           <tbody>
-              {posts && posts.map((post, i) =>
+              { posts.length > 0 && posts.map((post, i) =>
                 <tr key={i}>
                   <td>{post.id}</td>
                   <td>{post.title}</td>

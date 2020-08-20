@@ -8,9 +8,9 @@ import {
 class NavLocation extends Component {
 
     render() {
-        const { match, location, history } = this.props;
+        const { match, location, history } = this.props; // router
         const auth = location.state && location.state.auth || localStorage.getItem('auth') === 'true';
-
+        console.log(this.props)
         return (
             <ul>
                 <li>
@@ -29,6 +29,9 @@ class NavLocation extends Component {
     }
 }
 
-const NavWithRouter = withRouter(NavLocation);
+// withRouter c'est une fonction qui permet de passer les props du router au composant NavLocation React
+// en l'occurence lorsque le state du router change le composant NavLocation récupère ces changements
+// automatiquement
+const NavWithRouter = withRouter(NavLocation); // contextualisé notre composant avec les props du Router
 
 export default NavWithRouter;

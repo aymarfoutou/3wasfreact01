@@ -57,14 +57,17 @@ class App extends Component {
                   }
                 } />
                 <Route path="/login" component={Login} />
-                <Route exact path="/"  component={({children, ...rest }) => <Posts { ...rest } posts={posts} />} />
+                {/** location se trouve dans les props du router on les destructures (décomposition) puis on les passe au composant
+                 * Post en proprs
+                 */}
+                <Route exact path="/"  component={({location}) => <Posts location={location} posts={posts} />} />
                 <Route
                   path="/dashboard"
                   render={({ location }) =>
                     localStorage.getItem('auth') === 'true' ||
                       (location.state && location.state.auth) ? (
                         <Dashboard 
-                          posts={posts} 
+                          posts={posts}
                           updatePosts={(posts) => this.setState({ posts: posts })} // lift state up faire remonter l'état au parent des posts
                         />
                       ) : (
@@ -78,6 +81,8 @@ class App extends Component {
                   }
                 />
                 <Route path="/post/:id" component={Post} />
+                {/** Page 404 */}
+                <Route  component={({location}) => (<p>404 Page Not Found </p>)} />
               </Switch>
             </div>
           </div>

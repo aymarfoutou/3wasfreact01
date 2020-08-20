@@ -6,29 +6,31 @@ import {
 class Posts extends Component {
 
   render() {
-    const { location, posts } = this.props;
+    const { location, posts } = this.props; // voir le router dans App.js 
+
+    // gestion des messages dans cette partie
     const message = location.state && location.state.message ? location.state.message : null;
 
     return (
       <>
-      {message && <p>{message}</p>}
+      { message && <p>{message}</p> }
       <ul>
         <h2>Une première version un peu geek ...</h2>
-        {posts.map((post, i) =>
+        {posts.length > 0 ? posts.map((post, i) =>
           <li key={i}><Link
             // ceci est passé en props dans le composant Link
             to={{
               pathname: `/post/${post.id}`, // paramètre de react-router-dom
               state : { post : post }  // nous ajoutons une clé à l'objet pour passer notre post
             }}>{post.title}</Link></li>
-        )}
-       
+        ): 
+            <li>Désolé il n'y pas de posts</li>
+        }
       </ul>
       </>
     )
   }
 }
-
 
 export default Posts;
 
