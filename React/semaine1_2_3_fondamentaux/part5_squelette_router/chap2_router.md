@@ -268,6 +268,29 @@ npm install bootstrap uuid --save
 npm install --save node-sass
 ```
 
+Pour que le framework Bootstap Twitter soit installé dans l'application vous devez importez ses styles dans le fichier index.js de votre application comme suit :
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css'; // css pour global 
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+```
+
 ### Proposition 1
 
 Créez une app qui propose 2 liens : Home et Multiplication.
