@@ -273,8 +273,12 @@ Pour que le framework Bootstap Twitter soit installé dans l'application vous de
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
+// Pour la gestion global des styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'; // css pour global 
+// Pour sass
+// import './index.scss'; 
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
