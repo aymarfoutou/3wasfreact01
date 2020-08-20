@@ -196,7 +196,8 @@ Une fois que vous avez ajouté votre liste afficher cette liste :
 
 ```txt
 
-Liste d'objets avec leurs valeurs
+Liste d'objets avec leurs valeurs respectives
+
 P     V
 1     4
 2     3
