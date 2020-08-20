@@ -265,7 +265,7 @@ Installez un nouveau projet que vous appelerez game-calcul. Ce jeu proposera deu
 Pour le projet vous utiliserez le bootstrap twitter, tapez le ligne de commandes suivantes :
 
 ```bash
-# merci à Benjamin pour uuid apparamment pour gérer la syntaxe ES6
+# merci à Benjamin pour uuid pb d'encodage ...
 npm install bootstrap uuid --save
 
 # Gestion du sass
@@ -279,7 +279,6 @@ Ajoutez un lien permettant de re-initialiser le jeu.
 *Optionnelle : gérez un temps minimal pour répondre. Au bout de 5 secondes passez à la question suivante.*
 
 Aidez vous des Wireframes suivants pour réaliser le projet :
-
 
 - Page d'accueil
 
