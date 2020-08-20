@@ -21,7 +21,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: []
+      posts: [],
+      redirect : false
     }
 
   }
@@ -34,7 +35,7 @@ class App extends Component {
 
   render() {
 
-    const { posts } = this.state;
+    const { posts, redirect } = this.state;
 
     return (
       <Router >
@@ -60,15 +61,15 @@ class App extends Component {
                 {/** location se trouve dans les props du router on les destructures (décomposition) puis on les passe au composant
                  * Post en proprs
                  */}
-                <Route exact path="/"  component={({location}) => <Posts location={location} posts={posts} />} />
+                <Route exact path="/" component={({ location }) => <Posts location={location} posts={posts} />} />
                 <Route
-                  path="/dashboard"
+                  exact path="/dashboard"
                   render={({ location }) =>
                     localStorage.getItem('auth') === 'true' ||
                       (location.state && location.state.auth) ? (
-                        <Dashboard 
+                        <Dashboard
                           posts={posts}
-                          updatePosts={(posts) => this.setState({ posts: posts })} // lift state up faire remonter l'état au parent des posts
+                          updatePosts={(posts) => this.setState({ posts: posts, redirect : false })} // lift state up faire remonter l'état au parent des posts
                         />
                       ) : (
                         <Redirect
@@ -82,7 +83,7 @@ class App extends Component {
                 />
                 <Route path="/post/:id" component={Post} />
                 {/** Page 404 */}
-                <Route  component={({location}) => (<p>404 Page Not Found </p>)} />
+                <Route component={({ location }) => (<p>404 Page Not Found </p>)} />
               </Switch>
             </div>
           </div>
