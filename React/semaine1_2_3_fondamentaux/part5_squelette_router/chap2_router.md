@@ -256,27 +256,25 @@ const posts = [
 
 ```
 
-## Exercice jeu mathématiques
+### Exercices supplémentaires Jeux maths
 
-Installez un nouveau projet que vous appelerez game-calcul. Ce jeu proposera deux pages : une page de présentation du jeu et une page pour jouer au jeu proprement dit. Vous utilierez react-router-dom pour la gestion de la navigation dans l'application.
-
-### Principe du jeu proposition 1
-
-Pour le projet vous utiliserez le bootstrap twitter, tapez le ligne de commandes suivantes :
+Pour les deux projets suivants installez celui-ci avec CRA et utilisez react-router-dom. Pour la partie CSS et SASS si vous voulez, tapez les lignes de commmandes suivantes dans le projet CRA. Notez que si vous utilisez node-sass vos fichiers CSS auront pour extension .scss ou .sass. L'extension s'occupe de transpiler le code SASS en CSS.
 
 ```bash
-# merci à Benjamin pour uuid pb d'encodage ...
+# merci à Mathias pour uuid pb d'encodage (...)
 npm install bootstrap uuid --save
 
 # Gestion du sass
 npm install --save node-sass
 ```
 
+### Proposition 1
+
 Créez une app qui propose 2 liens : Home et Multiplication.
 
 La page d'accueil affichera un petit texte présentant l'app :
 
-Voici les tables de multiplication de 1 à 10
+Voici les tables de multiplication de 1 à 10.
 
 La page Multiplication proposera 10 liens pour les 10 tables de multiplication. Ces liens sont cliquables et afficherons chacune des tables.
 
@@ -289,7 +287,7 @@ Voici les tables de multiplication de 1 à 10
 
 ```
 
-wireframe Z
+wireframe 2
 
 ```txt
 Home Multiplication
@@ -300,42 +298,28 @@ Table de multiplication 3
 ...
 Table de multiplication 10
 
-
 ```
 
+### Proposition 2
 
-### Principe du jeu proposition 2
-
-Pour le projet vous utiliserez le bootstrap twitter, tapez le ligne de commandes suivantes :
-
-```bash
-# merci à Benjamin pour uuid pb d'encodage ...
-npm install bootstrap uuid --save
-
-# Gestion du sass
-npm install --save node-sass
-```
-
-Proposez une multiplication à deviner. L'utilisateur pourra répondre dans un champ sous la question posée. Au bout de 5 propositions de calcul on sera redirigé vers une page affichant le score.
-
-Ajoutez un lien permettant de re-initialiser le jeu.
-
-*Optionnelle : gérez un temps minimal pour répondre. Au bout de 5 secondes passez à la question suivante.*
-
-Aidez vous des Wireframes suivants pour réaliser le projet :
+Vous allez créer un jeu qui permettra de s'entrainer avec les tables de multiplication. Voyez ce qui suit :
 
 - Page d'accueil
+
+Présentera le jeu
 
 ```txt
 Home Game Multiplication
 
 Présentation du jeu : cliquez sur Game pour commencer le jeu. Ce dernier consiste à trouver
-une multiplication. Vous avez 5 multiplications à trouver. Puis une fois le jeu terminé on affichera
+une multiplication. Vous avez 5 multiplications à trouver. Puis une fois le jeu terminé on affichera (redirection)
 votre score.
 
 ```
 
 - Page du jeu
+
+Sur cette page vous proposez des multiplications à deviner. Vous proposerez 5 multiplications à deviner, une fois terminé on est redirigé vers une page qui affichera le score du jeu.
 
 ```txt
 Home Game Multiplication
@@ -344,3 +328,6 @@ Combien font 5 X 9
 votre réponse [ ]
 [valider]
 ```
+Une option possible : gérez le temps de réponse de l'utilisateur. Par exemple créez un compteur une fois celui-ci dépassé et si l'utilisateur n'a pas répondu vous proposerez une autre multiplication à devinier.
+
+
