@@ -26,10 +26,9 @@ class Login extends Component {
 
   handSubmit(e) {
     e.preventDefault();
-    const { history } = this.props;
 
     if (this.state.email === 'alan@alan.fr' && this.state.password === '123') {
-      localStorage.setItem('auth', 'true');
+      localStorage.setItem('auth', 'true'); // persistence de l'authentification
 
       this.setState({
         auth: true,

@@ -63,7 +63,10 @@ class App extends Component {
                   render={({ location }) =>
                     localStorage.getItem('auth') === 'true' ||
                       (location.state && location.state.auth) ? (
-                        <Dashboard posts={posts} updatePosts={(posts) => this.setState({ posts: posts })} />
+                        <Dashboard 
+                          posts={posts} 
+                          updatePosts={(posts) => this.setState({ posts: posts })} // lift state up faire remonter l'état au parent des posts
+                        />
                       ) : (
                         <Redirect
                           to={{

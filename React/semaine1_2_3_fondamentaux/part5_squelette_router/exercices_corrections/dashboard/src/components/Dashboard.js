@@ -14,11 +14,13 @@ class Dashboard extends Component {
 
   componentDidMount(){
 
+    // récupération des posts injectés par le parent (centraliser la gestion des données dans App.js le composant racine)
     this.setState({ posts : this.props.posts })
   }
 
 
   handleDelete(id){
+    // on lit les posts dans le state puis on applique filter 
     const posts = this.state.posts.filter( p => p.id != id );
 
     this.setState(
@@ -27,6 +29,7 @@ class Dashboard extends Component {
       }
     )
 
+    // lift state up : faire remonter l'état des posts au parent => une ré-hydratation des composants React de l'application
     this.props.updatePosts(posts);
   }
 
@@ -50,7 +53,7 @@ class Dashboard extends Component {
                 <tr key={i}>
                   <td>{post.id}</td>
                   <td>{post.title}</td>
-                  <td><button className="btn btn-danger" onClick={ () => this.handleDelete(post.id)}>Delete</button></td>
+                  <td><button className="btn btn-danger" onClick={() => this.handleDelete(post.id)}>Delete</button></td>
                 </tr>
               )}
           </tbody>
