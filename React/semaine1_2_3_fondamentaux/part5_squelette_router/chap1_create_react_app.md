@@ -192,7 +192,7 @@ saisir la valeur [ ]
 
 ```
 
-Une fois que vous avez ajouter votre liste afficher cette liste :
+Une fois que vous avez ajouté votre liste afficher cette liste :
 
 ```txt
 
