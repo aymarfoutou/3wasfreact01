@@ -79,21 +79,42 @@ class Game2 extends Component {
     const { result: resultUser, count, multiplications } = this.state;
     const { result: resultComputer } = multiplications[count];
 
+    // refactoring => synthétiser l'écriture du code pour lecture et optimisation, ici c'est pour la lisibilité
+    let message, score;
+
     if (resultComputer === Number(resultUser)) {
+
+      score = this.state.score + 1;
+      message = "Bravo !";
+
+      /*  --refactoring
       this.setState({
         score: this.state.score + 1,
         count: this.state.count + 1,
         message: `Bravo !`,
         result: ''
-      });
+      }); */
 
     } else {
+
+      score = this.state.score;
+      message = `Dommage il fallait trouvé : ${resultComputer} !`;
+
+       /*  --refactoring
       this.setState({
         count: this.state.count + 1,
         message: `Dommage il fallait trouvé : ${resultComputer} !`,
         result: ''
       });
+      */
     }
+
+    this.setState({
+      message: message,
+      score : score,
+      result: '',
+      count: this.state.count + 1,
+    });
 
     this.generate();
   }
@@ -145,7 +166,6 @@ class Game2 extends Component {
           ))}
           </div>
         </div>
-
       </div>
     )
   }
