@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <!-- Library -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const MAX_WEIGHT = 30;
+
+        class App extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    weights: new Map(),
+                    weight: '',
+                    optimization: []
+                }
+
+                this.handleChange = this.handleChange.bind(this);
+                this.handleOptimize = this.handleOptimize.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            handleChange(e) {
+                const { name, value } = event.target;
+
+                this.setState({ [name]: value });
+            }
+
+            handleOptimize() {
+                const size = this.state.weights.size;
+                const comb = size - 1;
+
+                for (const i = 0; i < size; i++) {
+                    
+                }
+            }
+
+            render() {
+                const { weights, weight, optimization } = this.state;
+
+                return (
+                    <div>
+                        <h2>Choix des poids pour le sac </h2>
+                        <p><input type="text" name="weight" value={weight} onChange={this.handleChange} /></p>
+                        {weights.map((weight, i) => {
+                            <p key={i}>{weight}</p>
+                        })}
+                        <p><button onClick={this.handleSubmit} >Ajouter dans le sac</button></p>
+                        <p><button onClick={this.handleOptimize} >Calcul</button></p>
+                        <h2>Optimisation</h2>
+                    </div>
+                );
+            }
+        }
+
+        // Rendu dans le DOM
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
