@@ -6,7 +6,7 @@ import {
 class Posts extends Component {
 
   render() {
-    const { location, posts } = this.props; // voir le router dans App.js 
+    const { location, posts } = this.props; // voir le router dans App.js  context du Router on récupère les props
 
     // gestion des messages dans cette partie
     const message = location.state && location.state.message ? location.state.message : null;

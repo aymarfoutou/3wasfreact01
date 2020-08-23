@@ -14,7 +14,9 @@ class Score extends Component {
     return (
       <div>
         <p>Votre score est : {score}</p>
-        <p><Link to="/game">Rejouer ?</Link></p>
+        <p><Link to="/game">Rejouer 1 ?</Link></p>
+        <p><Link to="/game2">Rejouer 2 ?</Link></p>
+        <p><Link to="/game3">Rejouer 3 ?</Link></p>
       </div>
     )
   }

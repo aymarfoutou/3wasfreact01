@@ -6,35 +6,30 @@ class Timer extends Component {
     super(props);
 
     this.state = {
-      timer: 5
+      timer:0 
     }
-
 
     this.interval = null;
   }
 
 
   componentDidMount() {
+    
     this.interval = setInterval(() => {
-      console.log(this.state);
-      if (this.state.timer === 0) {
-
-        this.props.stopTimer( false );
-
-        return
-      }
-      this.setState({ timer: this.state.timer - 1 });
-
+      this.setState({ timer: this.state.timer + 1 });
+      this.props.getTimer(this.state.timer)
     }, 1000)
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     clearInterval(this.interval);
   }
 
   render() {
 
     const { timer } = this.state;
+
+    console.log(timer, 'timer')
 
     return (
       <p>Timer : {timer}</p>

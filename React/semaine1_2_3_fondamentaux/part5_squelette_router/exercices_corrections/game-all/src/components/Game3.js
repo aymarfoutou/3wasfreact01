@@ -6,6 +6,7 @@ import {
 import Timer from './Timer'
 
 const MAX_MULTIPLICATION = 5;
+const TIMER = 10;
 
 class Game2 extends Component {
 
@@ -19,7 +20,8 @@ class Game2 extends Component {
       result: '',
       message: '',
       score: 0,
-      status: true,
+      isSubmit: false,
+      timer: 0,
     }
 
     this.generate = this.generate.bind(this);
@@ -27,7 +29,7 @@ class Game2 extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  generate() {
+  generate(start = false) {
 
     if (this.state.multiplications.length > MAX_MULTIPLICATION) {
 
@@ -69,13 +71,12 @@ class Game2 extends Component {
     this.setState({
       multiplications: this.state.multiplications,
       proposition: `Combien font : ${numb1} par ${numb2}`,
-      count: this.state.count + 1,
-      status: true
+      count: start === true ? 0 : this.state.count + 1
     })
   }
 
   componentDidMount() {
-    this.generate();
+    this.generate(true);
   }
 
   handleSubmit(event) {
@@ -99,7 +100,8 @@ class Game2 extends Component {
       count: this.state.count + 1,
       message: message,
       result: '',
-      status: true
+      timer: TIMER,
+      isSubmit : true
     });
 
     this.generate();
@@ -115,18 +117,20 @@ class Game2 extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('ici', this.state.status )
-    if (this.state.status === false) {
+    if (this.state.timer === TIMER) {
+      
+      // waiting ...
       setTimeout(() => {
-        this.generate();
-      }, 1000)
+        this.setState({ timer: 0, });
+        if(this.state.isSubmit === false) this.generate()
+      }, 1000);
     }
 
   }
 
   render() {
 
-    const { status, count, proposition, result, message, score, multiplications } = this.state;
+    const { timer, count, proposition, result, message, score, multiplications } = this.state;
 
     if (count >= MAX_MULTIPLICATION)
       return (
@@ -145,14 +149,14 @@ class Game2 extends Component {
             {message !== '' && <p>{message}</p>}
             <p>Vous avez : {MAX_MULTIPLICATION - count} multiplication(s) à deviner ...</p>
             <p>{proposition}</p>
-            <p>{status && <Timer stopTimer={(status) => this.setState({ status: status })} />}</p>
+            <p>{timer === TIMER ? "waiting ..." : <Timer getTimer={(timer) => this.setState({ timer: timer, isSubmit : false })} />}</p>
             <form onSubmit={this.handleSubmit}>
               <p>
                 <input
                   name="result"
                   value={result}
                   onChange={this.handleChange}
-                  disabled={status === false}
+                  disabled={ timer === 0 || timer === TIMER}
                 />
               </p>
               <p><input type="submit" /></p>

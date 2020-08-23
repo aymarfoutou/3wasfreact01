@@ -21,10 +21,10 @@ class Nav extends Component {
           <NavLink exact activeClassName="selected" to="/game">Game</NavLink>
         </li>
         <li>
-          <NavLink exact activeClassName="selected" to="/game2">Game plus dur</NavLink>
+          <NavLink exact activeClassName="selected" to="/game2">Game 2</NavLink>
         </li>
         <li>
-          <NavLink exact activeClassName="selected" to="/game3">Game plus dur encore</NavLink>
+          <NavLink exact activeClassName="selected" to="/game3">Game 3</NavLink>
         </li>
       </ul>
     )

@@ -37,7 +37,7 @@ class App extends Component {
     const { posts } = this.state;
 
     return (
-      <Router >
+      <Router>
         <div className="container">
           <div className="row">
             <div className="col-md">

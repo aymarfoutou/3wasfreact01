@@ -33,7 +33,6 @@ class App extends Component {
           <Route path="/game2" component={Game2} />
           <Route path="/game3" component={Game3} />
           <Route path="/score" component={Score} />
-          
           <Route component={({ location }) => (<p>404 Page Not Found </p>)} />
         </Switch>
       </Router>
