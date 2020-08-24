@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+
+        .principal {
+            background-color: beige;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const Counter = () => {
+            const [count, setCount] = React.useState(0);
+            const [count2, setCount2] = React.useState(0);
+
+            // Au montage la première fois que le constructor de la classe
+            // Et dès que le state change. componentDidUpdate
+            // React.useEffect(() => {
+            //     console.log("montage")
+            //     setTimeout(() => {
+            //         console.log(`First message: You clicked ${count} count 1`);
+            //         console.log(`First message: You clicked ${count2} count 2`);
+            //     }, 1000);
+            // });
+            
+            // useEffect peut être définie pour écouter un state spécifique
+            React.useEffect(() => {
+                console.log("montage")
+                setTimeout(() => {
+                    console.log(`First message: You clicked ${count} count 1`);
+                    console.log(`First message: You clicked ${count2} count 2`);
+                }, 1000);
+
+                // une fonction qui s'exécute au démontage
+                // équivalent à la méthode componentWillUmount dans les classes
+                () => {
+
+                    console.log("denomtage");
+                }
+
+            }, [count]); // on peut écouter state spécifiquement ou plusieurs [count, count2]
+
+            // Si on souhaite exécuter quelque chose qu'une fois on montage
+            React.useEffect(() => {
+                console.log("qu'au montage ...");
+
+            }, [])
+
+            return (
+                <div>
+                    <p>You clicked {count} times</p>
+                    <button onClick={() => setCount(count + 1)}>
+                        Click me
+                    </button>
+                    <button onClick={() => setCount2(count2 + 1)}>
+                        Click me 2
+                    </button>
+                </div>
+            );
+        }
+
+        ReactDOM.render(
+            <Counter />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
