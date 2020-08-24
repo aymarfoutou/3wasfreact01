@@ -145,7 +145,7 @@ Dans certain cas vous pouvez indiquer à React **de n'exécuter qu'une seule foi
 // Au montage uniquement et éventuellement au démontage.
 useEffect(() => {
 
-  () => {
+  return () => {
     // ...
   }
 }, []);
