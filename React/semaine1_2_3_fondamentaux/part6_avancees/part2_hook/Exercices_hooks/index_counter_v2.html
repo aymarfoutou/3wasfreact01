@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        let interval = null;
+        const CONTAINER = document.getElementById('root');
+        const TIMER_COUNT = 1000;
+
+        const Counter = () => {
+            // variables mutables => maj du render
+            const [ count, setCount ] = React.useState(0);
+            const [ active, setActive ] = React.useState(false);
+
+            const start = () => {
+                setActive(true);
+
+                interval = setInterval(() => {
+                    setCount( count => count + 1 );
+                }, TIMER_COUNT);
+            }
+
+            const stop = () => {
+                setActive(false);
+                clearInterval(interval);
+            }
+
+            const reset = () => {
+                setActive(false);
+                clearInterval(interval);
+                setCount(0);
+            }
+
+            // Nettoyage => s'exécute que quand le composant Counter sera supprimé
+            React.useEffect(() => {
+                return () => {
+                    clearInterval(interval);
+                    interval = null;
+                }
+            }, []); 
+
+            const showReset = () => {
+                if(count > 1) 
+                    return (
+                        <p><button onClick={reset}>Reset</button></p>
+                    );
+                
+                return null;
+            }
+
+            return (
+                <React.Fragment>
+                    <div>Counter : {count}</div>
+                    <p><button disabled={active} onClick={start}>Start</button></p>
+                    <p><button disabled={!active} onClick={stop}>Stop</button></p>
+                    {showReset()}
+                </React.Fragment>
+            );
+        }
+
+        const App = () => {
+            const [ display, setDisplay ] = React.useState(false);
+            const toggle = () => {
+                setDisplay(!display);
+            }
+
+            return (
+                <div>
+                  <p><button onClick={toggle}>Toggle counter</button></p>
+                  {display && <Counter />}
+                </div>
+            );
+        }
+
+
+        ReactDOM.render(
+            <App />,
+            CONTAINER
+        );
+    </script>
+</body>
+
+</html>
