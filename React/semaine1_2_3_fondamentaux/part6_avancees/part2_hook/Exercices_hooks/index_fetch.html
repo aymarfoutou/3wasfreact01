@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const URL_USERS = `https://jsonplaceholder.typicode.com/users`;
+        const CONTAINER = document.getElementById('root');
+
+        const App = (props) => {
+            const [users, setUsers] = React.useState([]);
+
+            React.useEffect(() => {
+                // requete sur des serveurs distants 
+                // 1. then prépare les données dans un format demané
+                // 2. then récupérer les données au format demandé
+                fetch(URL_USERS).then( response => response.json() ).then( users => console.log(users))
+                                
+            }, []);
+
+            return (
+                <p>Fetch</p>
+            )
+        }
+
+        ReactDOM.render(
+            <App />,
+            CONTAINER
+        );
+    </script>
+
+    <script src="./dist/bundle.js"></script>
+</body>
+
+</html>
