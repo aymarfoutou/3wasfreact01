@@ -37,24 +37,30 @@
             // si on a besoin d'autre state dans ce cas on le définit
             const [numbers, setNumbers] = React.useState([]);
 
-            const addNumber = (number) => {}
+            const addNumber = () => {
+                const alea = Math.floor(Math.random() * 10);
+                // concat crée un nouvel objet => React pensera que la variable à changer => exécutera son render
+                const newNumbers = numbers.concat(alea)
+
+                setNumbers(newNumbers); // l'objet a changé nouvel référence => il fait le render tout de suite
+            }
 
             return (
                 <React.Fragment>
                     <h1>{props.title}</h1>
                     <p>Count : {count}</p>
                     <div><button onClick={() => setCount(count + 1)}> count + 1 </button></div>
-                   
+                    <div><button onClick={addNumber}> Add Number </button></div>
+                    <Numbers numbers={numbers} />
                 </React.Fragment>
             )
         }
 
         const Numbers = (props) => {
 
-
             return(
                 <ul>
-                    
+                    { props.numbers.map((number, i) => <li key={i} >{number}</li>)}
                 </ul>
             )
         }
