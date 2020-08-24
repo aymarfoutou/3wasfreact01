@@ -24,17 +24,41 @@
     <div id="root"></div>
     <script type="text/babel">
 
+        // créez un composant Numbers dans App se composant on lui ajoute un nombre qui s'affichera dans Numbers dans
+        // un ul.li 
+
         const App = (props) => {
-            // state de notre composant
+            
+            // Définition du state avec useState 2 paramètres respectivement:
+            // 1. Variable pour le state.
+            // 2. Fonction qui mettra à jour le state.
             const [count, setCount] = React.useState(0);
 
+            // si on a besoin d'autre state dans ce cas on le définit
+            const [numbers, setNumbers] = React.useState([]);
+
+            return (
+                <React.Fragment>
+                    <h1>{props.title}</h1>
+                    <p>Count : {count}</p>
+                    <div><button onClick={() => setCount(count + 1)}> count + 1 </button></div>
+                    
+                </React.Fragment>
+            )
+        }
+
+        const Numbers = (props) => {
+
+
             return(
-                <p>Count : {count}</p>
+                <ul>
+                    
+                </ul>
             )
         }
 
         ReactDOM.render(
-            <App />,
+            <App title="Example state" />,
             document.getElementById('root')
         );
     </script>
