@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+
+        .principal {
+            background-color: beige;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        // créez un composant Numbers dans App se composant on lui ajoute un nombre qui s'affichera dans Numbers dans
+        // un ul.li 
+
+        const App = (props) => {
+            
+            // Définition du state avec useState 2 paramètres respectivement:
+            // 1. Variable pour le state.
+            // 2. Fonction qui mettra à jour le state.
+            const [count, setCount] = React.useState(0);
+
+            // si on a besoin d'autre state dans ce cas on le définit
+            const [numbers, setNumbers] = React.useState([]);
+
+            const addNumber = () => {
+                const alea = Math.floor(Math.random() * 10);
+                // concat crée un nouvel objet => React pensera que la variable à changer => exécutera son render
+                const newNumbers = numbers.concat(alea)
+
+                setNumbers(newNumbers); // l'objet a changé nouvel référence => il fait le render tout de suite
+            }
+
+            return (
+                <React.Fragment>
+                    <h1>{props.title}</h1>
+                    <p>Count : {count}</p>
+                    <div><button onClick={() => setCount(count + 1)}> count + 1 </button></div>
+                    <div><button onClick={addNumber}> Add Number </button></div>
+                    <Numbers numbers={numbers} />
+                </React.Fragment>
+            )
+        }
+
+        const Numbers = (props) => {
+
+            return(
+                <ul>
+                    { props.numbers.map((number, i) => <li key={i} >{number}</li>)}
+                </ul>
+            )
+        }
+
+        ReactDOM.render(
+            <App title="Example state" />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
