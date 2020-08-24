@@ -139,15 +139,14 @@ const Counter = () => {
 }
 ```
 
-Dans certain cas vous pouvez indiquer à React **de n'exécuter qu'une seule fois**, au montage, le code se trouvant dans useEffect. Il faudra alors passer en deuxième paramètre un tableau vide. Cela indique à React que votre **effet** (code dans useEffect) ne dépend d’aucune valeur issue d'un state (local), donc il n’a jamais besoin d’être ré-exécuté...
+Dans certain cas vous pouvez indiquer à React **de n'exécuter qu'une seule fois**, au montage (après le premier affichage), le code se trouvant dans useEffect. Il faudra alors passer en deuxième paramètre un tableau vide. Cela indique à React que votre **effet** (code dans useEffect) ne dépend d’aucune valeur issue d'un state (local), donc il n’a jamais besoin d’être ré-exécuté...
+
 
 ```js
-// Au montage uniquement et éventuellement au démontage.
 useEffect(() => {
 
-  return () => {
-    // ...
-  }
+  // faire quelque chose au montage du composant React
+  
 }, []);
 ```
 
@@ -156,9 +155,29 @@ useEffect(() => {
 Dans la fonction **useEffect** nous pouvons également appeler une méthode pour faire quelque chose lorsque :
 
 - Soit nous démontons le composant du DOM.
-- Soit lorsque React nettoie les effets du rendu précédent.
+- Soit lorsque React nettoie les effets du rendu précédent. Dans ce cas useEffect est lié à une/des variable(s) du state.
 
 Vous pouvez implémenter ces fonctionnalités en définissant dans le premier paramètre de la fonction useEffect une fonction de retour, voyez l'exemple qui suit :
+
+```js
+useEffect(() => {
+
+  return ()=> {
+    // à chaque fois que active change de valeur & au démontage du composant
+  }  
+}, [active]);
+```
+
+Si on souhaite exécuter une fonction de nettoyage uniquement au démontage on ne liera pas le useEffect à un state :
+
+```js
+useEffect(() => {
+
+  return ()=> {
+    // quelque chose uniquement au démontage du composant
+  }  
+}, []);
+```
 
 ```js
 const Counter = () => {
