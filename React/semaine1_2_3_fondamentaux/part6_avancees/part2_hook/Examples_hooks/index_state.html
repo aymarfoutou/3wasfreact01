@@ -37,12 +37,14 @@
             // si on a besoin d'autre state dans ce cas on le définit
             const [numbers, setNumbers] = React.useState([]);
 
+            const addNumber = (number) => {}
+
             return (
                 <React.Fragment>
                     <h1>{props.title}</h1>
                     <p>Count : {count}</p>
                     <div><button onClick={() => setCount(count + 1)}> count + 1 </button></div>
-                    
+                   
                 </React.Fragment>
             )
         }
