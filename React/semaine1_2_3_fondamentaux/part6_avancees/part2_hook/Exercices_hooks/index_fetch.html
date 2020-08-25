@@ -16,19 +16,56 @@
         const URL_USERS = `https://jsonplaceholder.typicode.com/users`;
         const CONTAINER = document.getElementById('root');
 
-        const App = (props) => {
+        const App = () => {
+
+            return(
+                <div className="container">
+                    <Search />
+                </div>
+            )
+        }
+
+        const Users = (props) => {
+
+            // Todo afficher les users
+            return(
+                <ul>
+                </ul>
+            )
+        }
+
+        const Search = (props) => {
             const [users, setUsers] = React.useState([]);
+            const [isLoading, setIsloading ] = React.useState(true);
 
             React.useEffect(() => {
                 // requete sur des serveurs distants 
                 // 1. then prépare les données dans un format demané
                 // 2. then récupérer les données au format demandé
-                fetch(URL_USERS).then( response => response.json() ).then( users => console.log(users))
-                                
+                fetch(URL_USERS).then( response => {
+
+                    // il a récupéré les données
+                    if(response.ok){
+
+                        // les données ne sont plus en chargement 
+                        setIsloading(false)
+
+                        return response.json()
+                    }
+
+                 }).then( users => setUsers(users))
+
             }, []);
 
             return (
-                <p>Fetch</p>
+                <React.Fragment>
+                    <p>Fetch</p>
+                    {isLoading ? <p>loading ...</p> : <p>Ok</p>}
+                    {users.length > 0 && users.map((user, i) => (
+                        <p key={user.id}>{user.name}</p>
+                    ))
+                    }
+                </React.Fragment>
             )
         }
 
