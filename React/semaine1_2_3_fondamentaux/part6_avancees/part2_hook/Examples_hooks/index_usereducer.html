@@ -24,38 +24,53 @@
     <div id="root"></div>
     <script type="text/babel">
 
-        const initialstate = {
-            number1: '', number2: ''
+        /**
+         *  Super state + algorithmique
+        */
+
+        // on va pouvoir gérer un state avec plus données qu'avec un simple useState
+        const initialState = {
+            number1: '',
+            number2: ''
         }
 
-        // algo sur le state la fonction dispatch envoie action et met à jour le state
-        // au départ state est appelé par useReducer avec initialState
+        // On va pouvoir selon la variable du state considérée appliquer un algorithme spécifique
+        // state : initialState voir useReducer plus bas
         const reducer = (state, action) => {
 
-            console.log(action) 
-
-            console.log(state)
+            console.log(action)
 
             switch (action.type) {
+                case "number1":
 
-                case 'number1':
-                    return { ...state, number1: action.number1 }; // diff un delta 
+                    // faire de l'algo
 
-                case 'number2':
-                    return { ...state, number2: action.number2 };
+                    return {
+                        ...state, number1: action.number1
+                    };
+
                 default:
                     return state;
             }
         }
 
-        const App = () => {
-            // un super state avec la possibillité de mettre de l'algo
-            const [state, dispatch] = React.useReducer(reducer, initialstate);
+        const App = (props) => {
+
+            // state & dispatch sorte de setState     // reducer : algorithmique initialState : initialisation des states
+            const [state, dispatch] = React.useReducer(reducer, initialState);
+
+            console.log(state, "dans le composant lui même")
+
+            const handleChangeNb1 = e => {
+                const { value } = e.target;
+
+                dispatch({ type: "number1", number1: value }); // setValue 
+            }
 
             return (
                 <div>
-                    <p>Number1 :<input type="text" value={state.number1} onChange={ e => dispatch({ type : 'number1' , number1 : e.target.value})} />{state.number1}</p>
-                    <p>Number2 : <input type="text" value={state.number2} onChange={ e => dispatch({ type : 'number2' , number2 : e.target.value})} />{state.number2}</p>
+                    <p>Number 1 : {state.number1}</p>
+                    <div>Number 1 :<input type="text" value={state.number1} onChange={handleChangeNb1} /></div>
                 </div>
             )
         }
