@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+
+        .principal {
+            background-color: beige;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const App = (props) => {
+
+            const [count, setCount] = React.useState(0);
+            const [count2, setCount2] = React.useState(0);
+
+            // pas besoin de forcer la maj du state
+            // 
+            React.useEffect(() => {
+                // cette fonction est exécuté qu'une fois mais comme le count change
+                // le useEffect se re-exécute du coup on a une horloge
+                setTimeout(() => {
+                    setCount(count +1)
+                }, 1000)
+            }, [count]);
+
+            React.useEffect(() => {
+                // cette fonction est exécuté qu'une fois mais comme le count change
+                // le useEffect se re-exécute du coup on a une horloge
+                setInterval(() => {
+                    setCount2(count2 => count2 +1) // force à maj dans render
+                }, 1000)
+            }, []);
+
+            return (
+                <React.Fragment>
+                    <p>count : {count}</p>
+                    <p>{count2}</p>
+                </React.Fragment>
+            )
+        }
+
+
+        ReactDOM.render(
+            <App title="Example state" />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
