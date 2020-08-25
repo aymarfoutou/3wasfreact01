@@ -254,12 +254,17 @@ const url = `https://jsonplaceholder.typicode.com/users`;
 
 - 1. Faites un moteur de recherche, sur le name des users que vous avez récupérez dans la variable users. Dans la partie Search créez un formulaire de recherche : un champ de saisi et un bouton pour lancer la recherche à proprement dite.
 
-Vous êtes libre de proposer une méthode de recherche qui vous paraît la plus appropriée. Par exemple rechercher dans les names un nom exacte ou faire une recherche plus large en testant si un caractère est présent dans le name. Vous pouvez utiliser la méthode includes de JS sur une chaîne de caractères.
+
+La recherche se fera sur le variable name de la variable users.
+
+Vous implémenterez une recherche de votre choix par exemple vous pouvez rechercher dans la variable name de users un nom exacte ou faire une recherche plus large en testant si un caractère est présent dans cette chaîne de caractères. Utilisez la méthode **includes** de JS :
 
 
 ```js
 "Bonjour".includes("B") // true
 "Bonjour".includes("Bonjour") // true
+
+"Bonjour".includes("X") // false
 ```
 
 ```txt
