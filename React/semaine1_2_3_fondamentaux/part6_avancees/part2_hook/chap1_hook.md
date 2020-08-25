@@ -157,7 +157,7 @@ Dans la fonction **useEffect** nous pouvons également appeler une méthode pour
 - Soit nous démontons le composant du DOM.
 - Soit lorsque React nettoie les effets du rendu précédent. Dans ce cas useEffect est lié à une/des variable(s) du state.
 
-Vous pouvez implémenter ces fonctionnalités en définissant dans le premier paramètre de la fonction useEffect une fonction de retour, voyez l'exemple qui suit :
+Vous pouvez implémenter ces fonctionnalitées en définissant dans le premier paramètre de la fonction useEffect une fonction de retour, voyez l'exemple qui suit :
 
 ```js
 useEffect(() => {
