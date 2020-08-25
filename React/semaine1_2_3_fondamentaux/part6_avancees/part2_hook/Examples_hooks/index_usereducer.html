@@ -38,7 +38,7 @@
         // state : initialState voir useReducer plus bas
         const reducer = (state, action) => {
 
-            console.log(action)
+            // console.log(action)
 
             switch (action.type) {
                 case "number1":
@@ -49,6 +49,15 @@
                         ...state, number1: action.number1
                     };
 
+                case "number2":
+
+                    // faire de l'algo
+
+                    return {
+                        ...state, number2: action.number2
+                    };
+
+
                 default:
                     return state;
             }
@@ -58,19 +67,26 @@
 
             // state & dispatch sorte de setState     // reducer : algorithmique initialState : initialisation des states
             const [state, dispatch] = React.useReducer(reducer, initialState);
+            const { number1, number2 } = state;
 
-            console.log(state, "dans le composant lui même")
+            // console.log(state, "dans le composant lui même")
 
-            const handleChangeNb1 = e => {
-                const { value } = e.target;
+            const handleChange = e => {
+                const { value, name } = e.target;
 
-                dispatch({ type: "number1", number1: value }); // setValue 
+                if (name === 'number1')
+                    dispatch({ type: "number1", number1: value }); // setValue 
+
+                if (name === 'number2')
+                    dispatch({ type: "number2", number2: value }); // setValue 
             }
 
             return (
                 <div>
-                    <p>Number 1 : {state.number1}</p>
-                    <div>Number 1 :<input type="text" value={state.number1} onChange={handleChangeNb1} /></div>
+                    <p>Number 1 : {number1}, Number2 : {number2} </p>
+                    <div>Number 1 :<input type="text" name="number1" value={number1} onChange={handleChange} /></div>
+                    <div>Number 2 :<input type="text" name="number2" value={number2} onChange={handleChange} /></div>
+
                 </div>
             )
         }
