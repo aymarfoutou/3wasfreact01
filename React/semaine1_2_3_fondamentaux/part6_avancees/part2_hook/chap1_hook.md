@@ -252,7 +252,18 @@ Vous allez maintenant utiliser l'API fetch de JS pour rechercher des utilisateur
 const url = `https://jsonplaceholder.typicode.com/users`;
 ```
 
-On voudrait faire un petit moteur de recherche comme suit, en tapant les premières lettres on afficherait le résultat sous le champ de recherche :
+- 1. Faites un moteur de recherche, dans la partie Search créez un formulaire de recherche, un champ de saisi et un bouton pour lancer la recherche à proprement dite :
+
+```txt
+
+search : []
+[Ok]
+
+```
+
+Une deuxième version de la recherche, faite un autre fichier on vous inspirant de ce que l'on vient de faire pour faire ce deuxième moteur de recherche
+
+2. On voudrait faire un petit moteur de recherche comme suit, en tapant les premières lettres on afficherait le résultat sous le champ de recherche :
 
 ![moteur de recherche](images/search_users.png)
 
