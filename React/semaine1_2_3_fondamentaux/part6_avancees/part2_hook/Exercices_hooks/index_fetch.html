@@ -25,11 +25,12 @@
             )
         }
 
-        const Users = (props) => {
+        // par décomposition on récupère la clé users
+        const Users = ({users}) => {
 
-            // Todo afficher les users
             return(
                 <ul>
+                    {users.map((user, i) => <li key={i} >{user.name}</li>)}
                 </ul>
             )
         }
@@ -37,6 +38,9 @@
         const Search = (props) => {
             const [users, setUsers] = React.useState([]);
             const [isLoading, setIsloading ] = React.useState(true);
+
+            // pour le champ de votre formulaire
+            const [user, setUser] = React.useState('');
 
             React.useEffect(() => {
                 // requete sur des serveurs distants 
@@ -53,18 +57,15 @@
                         return response.json()
                     }
 
-                 }).then( users => setUsers(users))
+                 }).then( users => setUsers(users)) // 
 
             }, []);
 
             return (
                 <React.Fragment>
                     <p>Fetch</p>
-                    {isLoading ? <p>loading ...</p> : <p>Ok</p>}
-                    {users.length > 0 && users.map((user, i) => (
-                        <p key={user.id}>{user.name}</p>
-                    ))
-                    }
+                    { /* formulaire de recherche */}
+                    {isLoading ? <p>loading ...</p> : <Users users={users} />}
                 </React.Fragment>
             )
         }
@@ -74,8 +75,6 @@
             CONTAINER
         );
     </script>
-
-    <script src="./dist/bundle.js"></script>
 </body>
 
 </html>
