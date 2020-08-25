@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const CONTAINER = document.getElementById('root');
+
+        // Provider
+        // création d'un contexte, on peut l'initialiser sans rien mettre dedans
+        const PostContext = React.createContext({});
+
+        const initialState = {
+            posts: ["a", "b"]
+        }
+
+        const reducer = (state, action) => {
+
+            switch (action.type) {
+                case "add":
+
+                    return {
+                        ...state, posts: state.posts.concat(action.post)
+                    };
+
+                default:
+                    return state;
+            }
+        }
+
+
+        const PostProvider = ({ children }) => {
+
+            const [state, dispatch] = React.useReducer(reducer, initialState);
+
+            // composition
+            return (
+                <PostContext.Provider value={[state, dispatch]}>
+                    {children}
+                </PostContext.Provider>
+            )
+        }
+
+        // contextualiser l'arbre de React
+        const App = () => {
+
+            // contextualise 
+            return (
+                <PostProvider>
+                    <Posts />
+                </PostProvider>
+            )
+        }
+
+        // consommation du Provider
+        const Posts = props => {
+
+            // Hook connecter au context dans lequel on a le provider
+            const [state, dispatch] = React.useContext(PostContext);
+
+            console.log(state)
+
+            return (
+                <React.Fragment>
+                    <p>Hello</p>
+                </React.Fragment>
+            )
+        }
+
+
+        ReactDOM.render(
+            <App />,
+            CONTAINER
+        );
+    </script>
+</body>
+
+</html>
