@@ -18,7 +18,7 @@
 
         const App = () => {
 
-            return(
+            return (
                 <div className="container">
                     <Search />
                 </div>
@@ -26,9 +26,9 @@
         }
 
         // par décomposition on récupère la clé users
-        const Users = ({users}) => {
+        const Users = ({ users }) => {
 
-            return(
+            return (
                 <ul>
                     {users.map((user, i) => <li key={i} >{user.name}</li>)}
                 </ul>
@@ -37,35 +37,68 @@
 
         const Search = (props) => {
             const [users, setUsers] = React.useState([]);
-            const [isLoading, setIsloading ] = React.useState(true);
-
+            const [isLoading, setIsloading] = React.useState(true);
             // pour le champ de votre formulaire
             const [user, setUser] = React.useState('');
+            const [message, setMessage] = React.useState('');
 
+            // resultat de la recherche
+            const [search, setSearch] = React.useState([]);
+
+            // On récupère les données
             React.useEffect(() => {
                 // requete sur des serveurs distants 
                 // 1. then prépare les données dans un format demané
                 // 2. then récupérer les données au format demandé
-                fetch(URL_USERS).then( response => {
+                fetch(URL_USERS).then(response => {
 
                     // il a récupéré les données
-                    if(response.ok){
-
+                    if (response.ok) {
                         // les données ne sont plus en chargement 
                         setIsloading(false)
 
-                        return response.json()
+                        // retourner les données dans une promesse sous forme d'un JSON
+                        return response.json();
                     }
 
-                 }).then( users => setUsers(users)) // 
+                }).then(users => setUsers(users)) // 
 
             }, []);
+
+            const handleSubmit = e => {
+                e.preventDefault();
+
+                if( user.trim() === ''){
+
+                    setMessage("Attention votre champ de recherche est vide")
+
+                    return;
+                }
+
+                const search = users.filter(u => u.name.includes(user) );
+                setSearch(search);
+            }
+
+            const handleChange = e => {
+                const { value } = e.target;
+                setUser(value);
+                setSearch([]);
+                setMessage('');
+            }
 
             return (
                 <React.Fragment>
                     <p>Fetch</p>
-                    { /* formulaire de recherche */}
-                    {isLoading ? <p>loading ...</p> : <Users users={users} />}
+                    <form onSubmit={handleSubmit}>
+                        {message != '' && <p>{message}</p>}
+                        <div>
+                            <input type="text" name="user" value={user} onChange={handleChange} />
+                        </div>
+                        <div>
+                            <input type="submit"  />
+                        </div>
+                    </form>
+                    {isLoading ? <p>loading ...</p> : <Users users={search} />}
                 </React.Fragment>
             )
         }
