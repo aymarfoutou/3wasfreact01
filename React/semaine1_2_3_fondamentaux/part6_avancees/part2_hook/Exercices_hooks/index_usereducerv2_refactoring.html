@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+
+        .principal {
+            background-color: beige;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        /**
+         *  Super state + algorithmique
+        */
+
+        // on va pouvoir gérer un state avec plus données qu'avec un simple useState
+        // SOURCE DE VERITE
+        const initialState = {
+            number1: '',
+            number2: '',
+            result: 0
+        }
+
+        // On va pouvoir selon la variable du state considérée appliquer un algorithme spécifique
+        // state : initialState voir useReducer plus bas
+        const reducer = (state, action) => {
+
+            // console.log(action)
+
+            switch (action.type) {
+
+                case "number1":
+                case "number2":
+                    const number = action.type;
+
+                    return {
+                        ...state,
+                        [number]: action.number
+                    }
+
+
+                case "addition":
+
+                    return {
+                        ...state,
+                        number1: '',
+                        number2: '',
+                        result: Number(state.number1) + Number(state.number2)
+                    }
+
+                case "multiplication":
+
+                    return {
+                        ...state,
+                        number1: '',
+                        number2: '',
+                        result: Number(state.number1) * Number(state.number2)
+                    }
+
+                case "reset":
+
+                    return {
+                        ...initialState
+                    }
+
+                default:
+                    return state;
+            }
+        }
+
+        const App = (props) => {
+
+            // state & dispatch sorte de setState     // reducer : algorithmique initialState : initialisation des states
+            const [state, dispatch] = React.useReducer(reducer, initialState);
+            const { number1, number2, result } = state;
+
+            const handleChange = e => {
+                const { value, name } = e.target;
+
+                dispatch({ type: name, number: value });
+            }
+
+            return (
+                <div>
+                    <p>Number 1 : {number1}, Number2 : {number2} </p>
+                    <div>Number 1 :<input type="text" name="number1" value={number1} onChange={handleChange} /></div>
+                    <div>Number 2 :<input type="text" name="number2" value={number2} onChange={handleChange} /></div>
+                    <div><button onClick={() => dispatch({ type: "addition" })}>Addition</button></div>
+                    <div><button onClick={() => dispatch({ type: "multiplication" })}>Multiplication</button></div>
+                    <div><button onClick={() => dispatch({ type: "reset" })}>Reset</button></div>
+                    <p>Resultat : {result}</p>
+                </div>
+            )
+        }
+
+        ReactDOM.render(
+            <App />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
