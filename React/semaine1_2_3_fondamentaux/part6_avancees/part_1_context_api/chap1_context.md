@@ -108,7 +108,6 @@ const Posts = () => {
 
 Créez l'arbre suivant dans un fichier index.html
 
-
 ```txt
       App
        .
@@ -120,3 +119,16 @@ Créez l'arbre suivant dans un fichier index.html
 ```
 
 Créez un context NumberContext, un provider NumberProvider. Dans le composant Numbers on créera un champ de formulaire pour ajouter un nombre. Affichez la liste des nombres dans ce composant, vous pouvez éventuellement créer un composant Number pour gérer l'affichage des nombres (de la présentation).
+
+Numbers :
+
+```txt
+  nombre : [15] // controle saisi state
+  [add]        // action => ajouter le nombre dans la liste
+
+    15        // affiche
+```
+
+- Pensez maintenant à vérifier le type de valeur introduite dans numbers (que des nombres). Gérez les messages d'erreurs.
+
+- Faites en sorte que l'on ne puisse pas ajouter un nombre qui se trouve déjà dans le tableau numbers.

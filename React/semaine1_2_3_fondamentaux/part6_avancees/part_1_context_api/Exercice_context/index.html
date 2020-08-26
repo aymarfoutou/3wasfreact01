@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React Context API</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const NumberContext = React.createContext({});
+
+        // Source de vérité
+        const initialState = {
+            numbers: [],
+            number: '' // controler la saisie
+        };
+
+        const reducer = (state, action) => {
+            switch (action.type) {
+                case 'INIT':
+
+                    return {
+                        ...state,
+                        numbers: action.numbers
+                    }
+
+                case "SET_NUMBER":
+
+                    return {
+                        ...state,
+                        number: action.number
+                    }
+
+                case "ADD_NUMBER":
+                    const numbers = [...state.numbers]; // copie car tableau simple de valeur(s)
+                    numbers.push( Number( state.number ) );
+
+                    return {
+                        ...state,
+                        number : '',
+                        numbers: numbers
+                    }
+
+                default:
+                    return state;
+            }
+        }
+
+        // Provider
+        const NumberProvider = ({ children }) => {
+
+            const [state, dispatch] = React.useReducer(reducer, initialState);
+
+            React.useEffect(() => {
+                dispatch({
+                    type: 'INIT', numbers: [
+                        11,
+                        15,
+                        10
+                    ]
+                })
+            }, []);
+
+            return (
+                <NumberContext.Provider value={[state, dispatch]}>
+                    {children}
+                </NumberContext.Provider>
+            )
+        }
+        // 
+        const App = props => {
+
+            return (
+                <Container />
+            )
+        }
+
+        const Container = props => {
+
+            return (
+                <div className="container">
+                    <Numbers />
+                </div>
+            )
+        }
+
+        const Numbers = (props) => {
+
+            // permet de récupérer le provider avec son useReducer
+            const [state, dispatch] = React.useContext(NumberContext);
+            const { numbers, number } = state;
+
+            console.log(state)
+
+            const handleChange = e => {
+                const { value, name } = e.target;
+
+                dispatch({ type: "SET_NUMBER", number: value });
+            }
+
+            const handleSubmit = e => {
+                e.preventDefault();
+
+                dispatch({ type: "ADD_NUMBER" });
+            }
+
+            return (
+                <form onSubmit={handleSubmit}>
+                    <div><input type="text" name="number" value={number} onChange={handleChange} /></div>
+                    <div><button>Add</button></div>
+                    {numbers.map((num, i) => <p key={i}>{num}</p>)}
+                </form>
+            )
+        }
+
+        // rendu dans le DOM
+        ReactDOM.render(
+            <NumberProvider>
+                < App />
+            </NumberProvider>,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
