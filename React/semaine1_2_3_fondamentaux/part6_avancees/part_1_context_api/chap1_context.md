@@ -1,145 +1,122 @@
-# Contexte API
+# Contexte API avec des Hooks
 
-Nous nous placerons dans le cas où vous auriez installé un projet React avec CRA et que vous avez un arbre React comme suit :
+On partira d'un arbre très simple :
 
-```text
-     Home
-      .
-      .
-    Numbers
-      .
-      .
-    Number
+```txt
+      App
+       .
+       .
+     Posts
 ```
 
-Le contexte permet de faire passer des props dans l'arbre React sans passer explicitement à travers tous les composants. Notez que vous pouvez donner une valeur par défaut à votre contexte.
-
-Pensez à exporter votre contexte si ce dernier se trouve dans un fichier séparé.
+On crée d'abord le contexte, on prendra un exemple de posts que l'on souhaite shuffelisés.
 
 ```js
-const MyContext = React.createContext({ data : [4, 5, 6]});
-
-export default MyContext;
+ const PostContext = React.createContext({});
 ```
 
-## Création du Provider
-
-Une fois le contexte défini il faut créer un Provider, il vous permettra alors de contextualiser un arbre React. Dans l'exemple ci-dessous on a modifié la valeur par défaut du contexte data :
+On définit ensuite notre Provider (service) il permettra de centraliser notre algorithmique.
 
 ```js
-import MyContext from './MyContext';
+ // Source de vérité propre au useReducer
+const initialState = {
+    posts: []
+};
 
-class MyProvider extends React.Component {
-  render() {
+// la partie algorithmique que l'on souhaite centraliser
+const reducer = (state, action) => {
+    switch (action.type) {
+
+        case 'INIT':
+
+            return {
+                ...state,
+                posts: action.posts
+            }
+
+        case 'SHUFFLE':
+            const posts = [...state.posts];
+            posts.sort(() => Math.random() - .5);
+
+            return {
+                ...state,
+                posts: posts
+            }
+
+        default:
+            return state;
+    }
+}
+```
+
+Le provider est un composant qui permettra par composition de récupérer le context et de le passer à tout l'arbre React ou une partie. Dans le provider on peut également utiliser notre dispatch pour par exemple initialiser des valeurs. Ci-dessous on initialise quelques posts dans notre "store" ou state.
+
+```js
+const PostProvider = ({ children }) => {
+
+    // on met le useReducer dans le provider
+    const [state, dispatch] = React.useReducer(reducer, initialState);
+
+    React.useEffect(() => {
+        dispatch({
+            type: 'INIT', posts: [
+                { id: 1, title: "hello1" },
+                { id: 2, title: "hello2" },
+                { id: 3, title: "hello3" },
+                { id: 4, title: "hello4" },
+
+            ]
+        })
+    }, []);
+
     return (
-      <MyContext.Provider value={ { data : [1, 2, 3] } }>
-        {this.props.children}
-      </MyContext.Provider>
-    );
-  }
+        <PostContext.Provider value={[state, dispatch]}>
+            {children}
+        </PostContext.Provider>
+    )
 }
 ```
 
-## Contextualisation
+Remarque vous passerez dans votre provider le state et le dispatch pour les récupérer dans un composant particulier.
 
-Puis on passe à la contextualisation à proprement parlé :
+On peut alors contextualiser l'arbre React comme suit (par composition):
 
 ```js
-import MyProvider from './MyProvider';
-
-class App extends Component{
-
-    render(){
-
-        return(
-            <MyProvider>
-                <Home />
-            </MyProvider>
-        )
-    }
-}
+<PostProvider>
+    < App />
+</PostProvider>
 ```
 
-Vous pouvez consommer votre contexte dans le composant Post, React lira la première contextualisation, avec votre provider MyProvider qu'il trouvera dans l'arbre. Dans l'exemple ci-dessous, on lit la valeur data passée dans le Provider : 
+Puis on peut alors dans l'arbre React utiliser notre Provider comme suit, notez qu'il faudra utiliser le hook useContext et le contexte que l'on créé PostContext pour se "connecter" à notre useReducer. Vous pourrez ainsi lire le state, attention en lecture seul, principe de base de React pour les données, et utiliser nos actions à l'aide de notre dispatch :
 
 ```js
-import MyContext from './MyContext';
+const Posts = () => {
+    // permet de récupérer le provider avec son useReducer
+    const [state, dispatch] = React.useContext(PostContext);
+    const { posts } = state;
 
-class Number extends Component{
-
-    render(){
-
-        return(
-            <MyContext.Consumer>
-                {value => console.log(value) /*[1, 2, 3]*/ }
-            </MyContext.Consumer>
-        )
-    }
-}
-```
-
-## Gestion d'un state avec le contexte
-
-Vous pouvez également définir dans votre Provider un state avec de la logique métier (méthodes de classes). Dans ce cas lorsque vous consommer votre contexte dans un composant donné, vous pourrez à la fois lire le state de votre Provider, mais également appeler des méthodes définies dans votre provider. Il faudra cependant passer les méthodes au context afin de pourvoir les appeler dans le composant qui consomme votre API.
-
-```js
-import MyContext from './MyContext';
-
-class MyProvider extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-           data : [1, 2, 3]
-        }
-        this.addNumber = this.addNumber.bind(this);
-    }
-
-    addNumber(number) {
-        this.state.data.push(number);
-
-        this.setState({
-            data : this.state.data
-        });
-    }
-
-  render() {
-
-    const { data } = this.state;
-    
     return (
-      <MyContext.Provider value={ { data : data , addNumber : this.addNumber } }>
-        {this.props.children}
-      </MyContext.Provider>
-    );
-  }
-}
-```
-
-Consommation de votre API dans le composant Number, la méthode addNumber peut être appelée directement dans le composant Number. Une fois cliqué sur le bouton Add Number le state du provider se mettra à jour. Le render du composant Number sera alors ré-exécuter car les props de l'API changent.
-
-```js
-import MyContext from './MyContext';
-
- class Number extends Component {
-    render() {
-        return (
-            <MyContext.Consumer>
-                {({ data, addNumber }) => {
-                    return (
-                        <>
-                            {data.map((num, i) => <p key={i}>{num}</p>)}
-                            <button onClick={() => addNumber(Math.floor(Math.random() * 10))} >Add Number</button>
-                        </>
-                    )
-                }
-                }
-            </MyContext.Consumer>
-        )
-    }
+        <React.Fragment>
+            {posts && posts.map((post, i) => <p key={i}>{post.title}</p>)}
+            <button onClick={() => dispatch({ type: 'SHUFFLE' })}>Shuffle</button>
+        </React.Fragment>
+    )
 }
 ```
 
 ## Exercice d'application
 
-Dans un fichier index_class_api_context.html mettez en place l'exemple du cours. Gérez la possibilité d'ajouter maintenant un nombre de votre choix dans le composant Number.
+Créez l'arbre suivant dans un fichier index.html
 
+
+```txt
+      App
+       .
+       .
+    Container
+       .
+       .
+     Numbers
+```
+
+Créez un context NumberContext, un provider NumberProvider. Dans le composant Numbers on créera un champ de formulaire pour ajouter un nombre. Affichez la liste des nombres dans ce composant, vous pouvez éventuellement créer un composant Number pour gérer l'affichage des nombres (de la présentation).
