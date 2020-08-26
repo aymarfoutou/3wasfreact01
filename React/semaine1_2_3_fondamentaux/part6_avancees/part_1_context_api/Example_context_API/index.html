@@ -18,10 +18,11 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
-        // création d'un context
-        const ExampleContext = React.createContext();
+        // création d'un context avec éventuellement des données dedans
+        // nous on en mettra pas
+        const PostContext = React.createContext({});
 
-        // Provider
+        // Source de vérité
         const initialState = {
             posts: []
         };
@@ -29,12 +30,16 @@
         const reducer = (state, action) => {
             switch (action.type) {
 
+                // charger les posts au lancement de l'application
                 case 'INIT':
 
                     return { ...state, posts: action.posts }
 
                 case 'SHUFFLE':
+                    // copie des posts que se trouve dans le state : pas toucher à la source de vérité
                     const posts =  [ ...state.posts ];
+
+                    // astuce pour mélanger les données dans un tableau
                     posts.sort(() => Math.random() - .5 );
 
                     return { ...state, posts: posts}
@@ -44,26 +49,33 @@
             }
         }
 
+        // Définition d'un Provider par composition
         // on passe le state et le dispatch au provider pour pouvoir accéder au state et au dispatch 
         // dans un context d'arbre React donné
-        const ExampleProvider = ({ children }) => {
+        const PostProvider = ({ children }) => {
 
             const [state, dispatch] = React.useReducer(reducer, initialState);
 
             React.useEffect(() => {
-                dispatch({ type: 'INIT', posts: [{ id: 1, title: "hello1" }, { id: 2, title: "hello2" }] })
+                dispatch({ type: 'INIT', posts: [
+                    { id: 1, title: "hello1" }, 
+                    { id: 2, title: "hello2" },
+                    { id: 3, title: "hello3" },
+                    { id: 4, title: "hello4" },
+
+                    ] })
             }, []);
 
             return (
-                <ExampleContext.Provider value={[state, dispatch]}>
+                <PostContext.Provider value={[state, dispatch]}>
                     {children}
-                </ExampleContext.Provider>
+                </PostContext.Provider>
             )
         }
 
         const Posts = () => {
 
-            const [state, dispatch] = React.useContext(ExampleContext);
+            const [state, dispatch] = React.useContext(PostContext);
             const { posts } = state;
 
             return (
@@ -78,9 +90,9 @@
         const App = props => {
 
             return (
-                <ExampleProvider>
+                <PostProvider>
                     <Posts />
-                </ExampleProvider>
+                </PostProvider>
             )
         }
         // rendu dans le DOM
