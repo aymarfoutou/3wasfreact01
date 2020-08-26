@@ -1,14 +1,12 @@
 import React, { useContext } from 'react';
 
 import './App.css';
-import { NotesContext } from './reducer/notes';
+import Form from './components/Form';
 
 const App = () => {
-  const [state, dispatch] = useContext(NotesContext);
   return (
     <div className="App">
-      <p>Hello</p>
-  { state.notes.map((note, i) => <p key={i}>{note}</p>)}
+      <Form />
     </div>
   );
 }
