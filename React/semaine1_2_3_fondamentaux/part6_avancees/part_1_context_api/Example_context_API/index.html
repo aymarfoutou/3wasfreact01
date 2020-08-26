@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React Context API</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+        .heading {
+            color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // création d'un context
+        const ExampleContext = React.createContext();
+
+        // Provider
+        const initialState = {
+            posts: []
+        };
+
+        const reducer = (state, action) => {
+            switch (action.type) {
+
+                case 'INIT':
+
+                    return { ...state, posts: action.posts }
+
+                case 'SHUFFLE':
+                    const posts =  [ ...state.posts ];
+                    posts.sort(() => Math.random() - .5 );
+
+                    return { ...state, posts: posts}
+
+                default:
+                    return state;
+            }
+        }
+
+        // on passe le state et le dispatch au provider pour pouvoir accéder au state et au dispatch 
+        // dans un context d'arbre React donné
+        const ExampleProvider = ({ children }) => {
+
+            const [state, dispatch] = React.useReducer(reducer, initialState);
+
+            React.useEffect(() => {
+                dispatch({ type: 'INIT', posts: [{ id: 1, title: "hello1" }, { id: 2, title: "hello2" }] })
+            }, []);
+
+            return (
+                <ExampleContext.Provider value={[state, dispatch]}>
+                    {children}
+                </ExampleContext.Provider>
+            )
+        }
+
+        const Posts = () => {
+
+            const [state, dispatch] = React.useContext(ExampleContext);
+            const { posts } = state;
+
+            return (
+                <React.Fragment>
+                    {posts && posts.map((post, i) => <p key={i}>{post.title}</p>)}
+                    <button onClick={() => dispatch({ type: 'SHUFFLE' })}>Shuffle</button>
+                </React.Fragment>
+            )
+        }
+
+        // 
+        const App = props => {
+
+            return (
+                <ExampleProvider>
+                    <Posts />
+                </ExampleProvider>
+            )
+        }
+        // rendu dans le DOM
+        ReactDOM.render(
+            < App />,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+
+</html>
