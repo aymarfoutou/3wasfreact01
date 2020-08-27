@@ -101,7 +101,7 @@ Pensez à les récupérez avec un hook lors du lancement du QCM.
 
 ### Page d'accueil
 
-Par défaut vous afficherez la page d'accueil avec le message suivant. le mot ici et QCM sont cliquables et afficheront le QCM.
+Par défaut vous afficherez la page d'accueil avec le texte suivant : le mot **ici** et **QCM** dans le texte sont cliquables et vous re-dirigent vers le QCM.
 
 Le menu est composé de deux item : Home (page ci-dessous) et QCM page pour commencer le QCM.
 
