@@ -89,9 +89,19 @@ Dans cette partie vous utiliserez react-router-dom.
 
 Dans ce deuxième projet réalisé le même QCM sur plusieurs pages. A chaque fois que l'on répond à une question on affiche la suivante. Vous implémenterez un menu, voir le wireframe ci-dessous.
 
+### Facultatif fetch JSON
+
+Vous pouvez mais ce n'est pas obligé faire ce qui suit pour la partie donnée :
+
+Pour la partie Data vous pouvez mettre les données dans un fichier qcm.json dans le dossier public et le dossier assets. L'url de récupération des données dans ce cas sera : http://localhost:3000/assets/qcm.json.
+
+remarques : attention à bien mettre les clés & valeurs (si string) en doubles cotes dans le fichier JSON.
+
+Pensez à les récupérez avec un hook lors du lancement du QCM.
+
 ### Page d'accueil
 
-Par défaut vous afficherez la page d'accueil avec le message suivant, dans le test vous ici et QCM sont cliquables et même au QCM lui-même. 
+Par défaut vous afficherez la page d'accueil avec le message suivant. le mot ici et QCM sont cliquables et afficheront le QCM.
 
 Le menu est composé de deux item : Home (page ci-dessous) et QCM page pour commencer le QCM.
 
