@@ -2,6 +2,8 @@
 
 Temps de réalisation : 1 jour.
 
+Vous devez faire cet exercice en autonomie, il n'est pas noté. Il nous permettra de tester nos connaissances.
+
 Attention, il y a deux versions possibles v1 ou v2. Lisez le brief avant de commencer. Et choisissez une version unique à développer.
 
 Vous devez utiliser **CRA** pour initialiser le squelette du projet.
