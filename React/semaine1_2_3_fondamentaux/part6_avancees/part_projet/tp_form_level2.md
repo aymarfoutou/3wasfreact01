@@ -22,7 +22,7 @@ Vous devez pour le projet utiliser la structure de données proposées dans le d
 
 Décomposez le projet en **composants** pour plus de modularité.
 
-Une fois le QCM réalisé, vous afficherez dans un composant spécifique le score.
+Une fois le QCM réalisé, vous afficherez dans un composant spécifique le score. Le QCM ne pourra pas être re-tenté (sauf rechargement de la page).
 
 Wireframe (sur une seule page v1)
 
@@ -67,7 +67,7 @@ Wireframe (sur une seule page v1)
 
 ```
 
-Une fois le formulaire soumis afficher le score obtenu :
+Une fois le formulaire soumis afficher le score obtenu. On ne pourra pas re-tenter le QCM (sauf rechargement de la page).
 
 ```txt
 
@@ -85,7 +85,26 @@ Une fois le formulaire soumis afficher le score obtenu :
 
 ## Présentation de la v2
 
-Dans ce deuxième projet réalisé le même QCM sur plusieurs pages. A chaque fois que l'on répond à une question on affiche la suivante :
+Dans cette partie vous utiliserez react-router-dom.
+
+Dans ce deuxième projet réalisé le même QCM sur plusieurs pages. A chaque fois que l'on répond à une question on affiche la suivante. Vous implémenterez un menu, voir le wireframe ci-dessous.
+
+### Page d'accueil
+
+Par défaut vous afficherez la page d'accueil avec le message suivant, dans le test vous ici et QCM sont cliquables et même au QCM lui-même. 
+
+Le menu est composé de deux item : Home (page ci-dessous) et QCM page pour commencer le QCM.
+
+```txt
+  [Home] [QCM]
+
+  Vous avez un QCM à faire cliquez [ici] ou dans le menu [QCM] pour commencer.
+
+```
+
+### La page QCM
+
+Une fois le QCM réalisé vous serez redirigé vers la page présentant son score.
 
 ```txt
 
@@ -97,6 +116,22 @@ Dans ce deuxième projet réalisé le même QCM sur plusieurs pages. A chaque fo
     votre email (*) : [ ]
 
     Laissez votre avatar [ ]
+```
+
+### Page de score 
+
+```txt
+
+    Voici votre score pour ce QCM 2/3
+
+    Feeback
+
+    Q1 : Bravo ! vous avez bien répondu React est bien une librairie.
+
+    Q2 : Dommage ce n'est pas juste. JSX est un sur-ensemble développé par Facebook.
+
+    Q3 : Bravo! Vous avez bien répondu, Symfony est basé sur le pattern MVC.
+
 ```
 
 ## Facultatif Options possibles 
