@@ -152,7 +152,8 @@ Ces options sont valables pour les deux versions si vous souhaitez les implémen
 
 - Ajoutez des coefficients aux questions 
 
-- Faites un système de connexion nom & email au QCM indivisualisé. Chaque sondé aura son propre score. Vous êtes dans ce cas libre de modifier le state. 
+- Faites un système de connexion nom & email au QCM indivisualisé. Avant même d'afficher le jeu. Donc si on n'est pas connecté on a un formulaire de connexion. Une fois connecté on est redirigé vers la page QCM.
+Vous êtes dans ce cas libre de modifier le state.
 
 Bon développement.
 
@@ -185,5 +186,4 @@ Bon développement.
                 feedback : 'JSX est un sur ensemble à JS'
             }
         }
-
 ```
