@@ -187,3 +187,7 @@ Bon développement.
             }
         }
 ```
+
+### Dernière partie
+
+Vous allez maintenant créez un composant spécifique pour administrer les questions. Chacune de ces questions est une question avec comme choix : "yes" ou "no", elles seront donc toutes de type radio et n'auront pas de feedback.
