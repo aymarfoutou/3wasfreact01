@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redux basic example</title>
+    <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+
+      // initialisation du state Source de véritié
+      let stateInit = {
+        messages : []
+      };
+
+      // reducer Algorithmique, dans l'action : 1. le type de l'action 2. les données éventuelles pour notre new state
+      function messageReducer(state = stateInit, action) {
+
+        switch (action.type) {
+          case 'ADD_MESSAGE':
+
+             // lire la source de véritié
+             let messages = [ ...state.messages, action.message];
+
+            // on crée un nouvel état => nouvel objet
+            // return { ...state, messages }
+
+            // return Object.assign({}, state, {messages : messages });
+
+            // copie du state new state newState = { ...state }, c'est un clone du state
+            return { ...state, messages };
+      
+          default:
+            return state
+        }
+      }
+
+      // définition du store
+      let store = Redux.createStore(messageReducer);
+
+      // subscribe au state global pour voir les changements
+      // On écoute les changement et on lit les changements pour les afficher ou les traiter dans l'application
+      let unsubscribe = store.subscribe(() => {
+        // on verra 
+        console.log('message', store.getState());
+      });
+
+      // lire le state dans l'application
+      console.log('state initiale', store.getState());
+
+      // dispatch les données dans le store global
+      // type définir les actions
+      // Dans l'application on peut déclencher des actions dans le store
+      store.dispatch({type : 'ADD_MESSAGE', message : "Hello world 1 !"});
+      store.dispatch({type : 'ADD_MESSAGE', message : "Hello world 2 !"});
+      store.dispatch({type : 'ADD_MESSAGE', message : "Hello world 3 !"});
+      store.dispatch({type : 'ADD_MESSAGE', message : "Hello world 4 !"});
+      store.dispatch({type : 'ADD_MESSAGE', message : "Hello world 5 !"});
+
+      // fonction de callback qui permet de de désinscrire du subscribe de l'écoute.
+      unsubscribe();
+
+      store.dispatch({type : 'ADD_MESSAGE', message : "Hello world 6 !"});
+
+    </script>
+  </body>
+</html>
