@@ -51,7 +51,7 @@ Notez que vous pouvez également utiliser yarn pour installer ces dépendances. 
 Nous importerons tout d'abord **createStore** tout en haut de notre fichier.
 
 ```js
-import { createStore } from 'reduce';
+import { createStore } from 'redux';
 
 // Définition de la source de vérité
 let stateInit = {
