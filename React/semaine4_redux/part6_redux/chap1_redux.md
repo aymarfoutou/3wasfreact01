@@ -91,13 +91,22 @@ let questionsReducer = (state = stateInit, action = {}) => {
 
 Nous rappelons ci-dessous comment faire une copie d'un objet. Vous devez le mettre en place dans Redux; le pattern impose des fonctions pures pour retourner la copie du state modifiée.
 
-### Copie d'un objet en JS
+### Copie d'un objet en JS (pour des objets simples)
+
+La technique ci-dessous ne marche pas si on a des objets dans des objets (références imbriquées).
 
 ```js
+// source de vérité
 const state = { a: 1, b: 2 };
+// On veut modifier la valeur a dans la source de vérité
 const deltaState = { a: 3};
-// Copie du nouvel état sans modification du state
-const newState = { ...state, ...deltaState };
+
+// Copie du nouvel état sans modification du state (source de vérité)
+const newState = { 
+    ...state, 
+    ...deltaState 
+};
+
 console.log(newState); // -> { a: 3, b: 2}
 
 // En JS vous pouvez également écrire ceci
