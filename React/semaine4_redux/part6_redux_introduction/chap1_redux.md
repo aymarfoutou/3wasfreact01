@@ -279,6 +279,63 @@ this.props.addMessage("Mon message")
 
 ```
 
+## Approche avec les Hooks
+
+L'approche précédente est orientée class. Maintenant avec l'approche Hooks c'est beaucoup plus simple d'accéder au store ou de dispatcher une action.
+
+### Pour lire le store avec des Hooks
+
+On utilise le Hook useSelector, celui-ci est écrit dans react-redux, qui est une méthode simple pour lire (read-only) le store de Redux. Dans un composant :
+
+```js
+
+import Reactfrom 'react';
+
+// le module react-redux permettant de travailler avec Redux dans React
+import { useSelector } from 'react-redux'; 
+
+
+const Messages = (props) =>{
+    
+    // permet de lire le state par décomposition de votre reducer et de récupérer la variables messages
+    /*
+        newState = { messages : ["Hello message1"] ; count : 1 } 
+    */
+    const { messages } = useSelector(state => state) ;
+    
+    return(
+        <ul>
+            {messages.map((m, i ) => <li key={i} >{m}</li> ) }
+        </ul>
+    )
+}
+```
+
+### Pour dispatcher une action dans le contexte Hooks
+
+Si vous souhaitez dispatcher une action vous utiliserez le hook suivant dans react-redux :
+
+```js
+import React from 'react';
+
+// le module react-redux permettant de travailler avec Redux dans React
+import { useSelector, useDispatch } from 'react-redux'; 
+
+const Messages = (props) =>{
+    const { messages, count } = useSelector(state => state) ;
+    const dispatch = useDispatch();
+    
+    return(
+      <>
+        <ul>
+            {messages.map((m, i ) => <li key={i} >{m}</li> ) }
+        </ul>
+        <p><button onClick={ () => dispatch({type : "ADD_MESSAGE", message : `Hello world ${count + 1}` }) } >Add message Hello + 1</button></p>
+      </>
+    )
+}
+```
+
 ## 1 Exercice
 
 Créez un squelette d'application. Vous allez développer une calculatrice qui aura les fonctionnalités suivantes :
@@ -289,7 +346,7 @@ Créez un squelette d'application. Vous allez développer une calculatrice qui a
 
 - reset, cette action permettra de remettre à jour les résultats.
 
-Installez une nouvelle application calculatrice à l'aide de create-react-app.
+Installez une nouvelle application calculatrice à l'aide de create-react-app (CRA).
 
 Importez les dépendances Redux dans l'application :
 
@@ -299,6 +356,10 @@ npm install react-redux
 ```
 
 Puis créez un dossier **reducer** et un fichier dans ce dossier **calculatrice.js**.
+
+src/reducer/calculatrice.js
+
+Dans le contenu du fichier 
 
 Fichier calculatrice.js
 
