@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
-
-import { useSelector, useDispatch } from 'react-redux';
+import Calculator from './components/Calculator';
 
 const App = () => {
-  const { message } = useSelector(state => state);
+
   return (
     <div>
-      { message }
+      <Calculator
+        title="Calculatrice"
+      />
     </div>
   );
 }
