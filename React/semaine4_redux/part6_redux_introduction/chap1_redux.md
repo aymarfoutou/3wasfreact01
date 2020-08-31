@@ -530,10 +530,12 @@ Faites en sorte que l'incrémentation du nombre de dragons se fasse également d
 
 Gérez les erreurs lors de l'insertion d'un dragon (champ vide, insertion d'un même dragon interdit).
 
+Vous afficherez dans la barre de navigation le nombre de dragon(s) dans le store (voir le wireframe).
+
 ### Partie 2 suppression d'un dragon
 
 Vous allez maintenant ajouter la fonctionnalité de suppression d'un dragon. Faites attention à bien nommer vos actions (convention de nommage).
 
 ### Partie 3 inversion de la liste des dragons
 
-Ajoutez un bouton dans l'application qui permet d'inverser l'ordre d'affichage de la liste des dragons.
+Ajoutez un bouton dans l'application qui permet d'inverser l'ordre d'affichage de la liste des dragons. Placez ce bouton en-dessous du bouton de l'ajout des dragons.
