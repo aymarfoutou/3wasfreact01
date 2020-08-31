@@ -71,14 +71,13 @@ let questionsReducer = (state = stateInit, action = {}) => {
     // gestion des actions du Reducer
     switch(action.type){
         case 'ADD_QUESTION':
-            let questions = {
-                questions : [ ...state.questions, action.question],
+           
+           // On doit retourner un nouveau state (sans toucher à la source de vérité)
+            return { 
+                ...state, 
+                questions : questions.concat(action.question),
                 count : state.count + 1
             };
-
-            // Attention il ne faut pas faire muter vos objets, vous devez retourner
-            // une copie du state modifié :
-            return { ...state, ...questions };
 
         // Si aucun changement de state
         default:
