@@ -44,6 +44,8 @@ npm install react-redux
 npm install --save-dev redux-devtools
 ```
 
+Notez que vous pouvez également utiliser yarn pour installer ces dépendances. Faites cependant attention à ne pas mélanger les deux approches en particulier vérifier que vous n'avez pas deux fichiers yarn.lock et package-lock.json dans votre projet pour éviter les conflits.
+
 ### Exemple
 
 Nous importerons tout d'abord **createStore** tout en haut de notre fichier.
