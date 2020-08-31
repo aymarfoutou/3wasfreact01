@@ -51,7 +51,7 @@ Notez que vous pouvez également utiliser yarn pour installer ces dépendances. 
 Nous importerons tout d'abord **createStore** tout en haut de notre fichier.
 
 ```js
-import { createStore } from 'reduce';
+import { createStore } from 'redux';
 
 // Définition de la source de vérité
 let stateInit = {
@@ -66,19 +66,18 @@ Puis nous définissons un reducer qui contiendra **la logique algorithmique** de
 ```js
 
 // Définition du Reducer
-let questionsReducer = (state = stateInit, action = {}) => {
+const questionsReducer = (state = stateInit, action = {}) => {
 
     // gestion des actions du Reducer
     switch(action.type){
         case 'ADD_QUESTION':
-            let questions = {
-                questions : [ ...state.questions, action.question],
+           
+           // On doit retourner un nouveau state (sans toucher à la source de vérité)
+            return { 
+                ...state, 
+                questions : questions.concat(action.question),
                 count : state.count + 1
             };
-
-            // Attention il ne faut pas faire muter vos objets, vous devez retourner
-            // une copie du state modifié :
-            return { ...state, ...questions };
 
         // Si aucun changement de state
         default:
@@ -86,19 +85,30 @@ let questionsReducer = (state = stateInit, action = {}) => {
     }
 
 }
+
+export default questionsReducer;
 ```
 
 ## Précision JS pour la modification du state dans Redux
 
 Nous rappelons ci-dessous comment faire une copie d'un objet. Vous devez le mettre en place dans Redux; le pattern impose des fonctions pures pour retourner la copie du state modifiée.
 
-### Copie d'un objet en JS
+### Copie d'un objet en JS (pour des objets simples)
+
+La technique ci-dessous ne marche pas si on a des objets dans des objets (références imbriquées).
 
 ```js
+// source de vérité
 const state = { a: 1, b: 2 };
+// On veut modifier la valeur a dans la source de vérité
 const deltaState = { a: 3};
-// Copie du nouvel état sans modification du state
-const newState = { ...state, ...deltaState };
+
+// Copie du nouvel état sans modification du state (source de vérité)
+const newState = { 
+    ...state, 
+    ...deltaState 
+};
+
 console.log(newState); // -> { a: 3, b: 2}
 
 // En JS vous pouvez également écrire ceci
@@ -109,8 +119,11 @@ const nS = Object.assign({}, state, deltaState );
 Nous allons maintenant créer le store et passer le reducer à ce dernier, la méthode getState nous retournera le contenu du store :
 
 ```js
+
+import questionsReducer from 'questionsReducer';
+
 // Création du store avec le reducer
-let store = createStore(questionsReducer);
+const store = createStore(questionsReducer);
 
 // état initial
 console.log('state init', store.getSate());
