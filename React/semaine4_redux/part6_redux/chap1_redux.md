@@ -66,7 +66,7 @@ Puis nous définissons un reducer qui contiendra **la logique algorithmique** de
 ```js
 
 // Définition du Reducer
-let questionsReducer = (state = stateInit, action = {}) => {
+const questionsReducer = (state = stateInit, action = {}) => {
 
     // gestion des actions du Reducer
     switch(action.type){
@@ -85,6 +85,8 @@ let questionsReducer = (state = stateInit, action = {}) => {
     }
 
 }
+
+export default questionsReducer;
 ```
 
 ## Précision JS pour la modification du state dans Redux
@@ -117,8 +119,11 @@ const nS = Object.assign({}, state, deltaState );
 Nous allons maintenant créer le store et passer le reducer à ce dernier, la méthode getState nous retournera le contenu du store :
 
 ```js
+
+import questionsReducer from 'questionsReducer';
+
 // Création du store avec le reducer
-let store = createStore(questionsReducer);
+const store = createStore(questionsReducer);
 
 // état initial
 console.log('state init', store.getSate());
