@@ -1,7 +1,8 @@
 import {
     SET_DRAGON,
     ADD_DRAGON,
-    DELETE_DRAGON
+    DELETE_DRAGON,
+    REVERSE_DRAGON_LIST
 } from "../constants/actions";
 
 import {
@@ -79,6 +80,17 @@ const reducer = (state = stateInit, action = {}) => {
                 dragons,
                 message: `votre dragon ${dragon} a bien été supprimé`,
                 count: state.count - 1
+            }
+
+        case REVERSE_DRAGON_LIST:
+            //copie des dragons pour ne pas faire muter le state
+            dragons = [ ...state.dragons ];
+
+            dragons.sort( _ => Math.random() - .5 );
+
+            return {
+                ...state,
+                dragons
             }
 
         default:

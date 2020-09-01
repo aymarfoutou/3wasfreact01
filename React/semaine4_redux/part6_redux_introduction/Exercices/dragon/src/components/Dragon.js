@@ -12,7 +12,7 @@ const Dragon = ({ dragon }) => {
   return (
     <div>
       <p>Name : {dragon}</p>
-      <p><button onClick={() => dispatch(delete_dragon(dragon)) }>Delete</button></p>
+      <p><button onClick={() => dispatch(delete_dragon(dragon))}>Delete {dragon}</button></p>
     </div>
   );
 }
