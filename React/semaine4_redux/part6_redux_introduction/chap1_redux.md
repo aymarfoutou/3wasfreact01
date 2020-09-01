@@ -432,42 +432,49 @@ Pensez à utiliser **connect** pour utiliser les fonctions de lecture et de disp
 
 ## 2 Exercice Liste de Dragons Mise en place
 
-Nous partirons d'un squelette d'application (create-react-app) qui permettra d'ajouter/supprimer des dragons d'une liste définie.
+Nous partirons d'un squelette d'application (create-react-app CRA) qui permettra d'ajouter/supprimer des dragons d'une liste définie.
 
-Importez le bootstrap CSS dans le projet.
-
-Organisation des dossiers pour Redux. Dans le dossier constantes le fichier actions.js contiendra l'ensemble des constantes d'action. Dans le dossier actions le fichier actions-types contiendra l'ensemble des types d'actions passées aux fonctions du dispatcher. Voyez les exemples ci-dessous
+Organisation des dossiers pour Redux. Dans le dossier constantes le fichier actions.js contiendra l'ensemble des constantes d'action. Dans le dossier actions le fichier actions-types contiendra l'ensemble des types d'actions passées aux fonctions du dispatcher. Et le dossier reducers contiendra l'ensemble des reducers, ici vous n'avez qu'une seule reducer pour cet exercice.
 
 ```txt
 
-reducer/
-    dragons.js
+reducers/
+    dragon.js
 
 constants/
-    actions.js
+    actions.js.  <--- les constantes export const ADD_DRAGON = "ADD_DRAGON" ; ...
 
 actions/
-    actions-types.js
+    actions-types.js. <--- factoriser les actions du dispatcher dans une fonction, par add_dragon pour les écrire dans le code : dispatch( add_dragon( dragon ) )
 
 ```
 
-Fichier actions.js
+Fichier constantes actions.js. On les utilise dans actions-types et dans le reducer.
 
 ```js
 export const ADD_DRAGON = 'ADD_DRAGON';
 // TODO ...
 ```
 
-Fichier actions-types.js
+Fichier actions-types.js, factoriser le code dans le dispatch
 
 ```js
 import { ADD_DRAGON } from '../constants/actions';
 
-export const addDragon = (payload) => {
+// payload correspond à ce que vous allez passer comme valeur à votre action { ... name : "Super dragon", force : 10 }
+export const addDragon = payload => {
     return {
         type: ADD_DRAON, payload
     }
 };
+```
+
+Notez que lorsque vous allez accéder aux valeurs dans vos action dans le reducer avec payload :
+
+```js
+
+const { name, force } = action.payload;
+
 ```
 
 Utilisez ces constantes dans l'exercice.
@@ -523,10 +530,12 @@ Faites en sorte que l'incrémentation du nombre de dragons se fasse également d
 
 Gérez les erreurs lors de l'insertion d'un dragon (champ vide, insertion d'un même dragon interdit).
 
+Vous afficherez dans la barre de navigation le nombre de dragon(s) dans le store (voir le wireframe).
+
 ### Partie 2 suppression d'un dragon
 
 Vous allez maintenant ajouter la fonctionnalité de suppression d'un dragon. Faites attention à bien nommer vos actions (convention de nommage).
 
 ### Partie 3 inversion de la liste des dragons
 
-Ajoutez un bouton dans l'application qui permet d'inverser l'ordre d'affichage de la liste des dragons.
+Ajoutez un bouton dans l'application qui permet d'inverser l'ordre d'affichage de la liste des dragons. Placez ce bouton en-dessous du bouton de l'ajout des dragons.
