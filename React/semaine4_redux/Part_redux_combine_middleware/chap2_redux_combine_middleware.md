@@ -61,7 +61,7 @@ const { a, b } = useSelector( state = {
 
 ## Exercice d'application
 
-1 . Récupérez le projet Dragon. Puis créez un reducer log. La gestion des logs se fera lorsqu'on supprime ou ajoute un dragon. Utilisez moment JS pour gérer les dates correspondantes aux actions de vos logs. Vous pouvez également utiliser un Map JS pour dans votre reducer log. 
+1. Récupérez le projet Dragon. Puis créez un reducer log. La gestion des logs se fera lorsqu'on supprime ou ajoute un dragon. Utilisez moment JS pour gérer les dates correspondantes aux actions de vos logs. Vous pouvez également utiliser un Map JS pour dans votre reducer log. 
 
 2. Affichez l'ensemble des logs sous le formulaire dans la colonne de gauche.
 
