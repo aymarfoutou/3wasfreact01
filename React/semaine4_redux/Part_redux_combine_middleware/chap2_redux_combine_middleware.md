@@ -26,7 +26,7 @@ export default combineReducers({
 
 ```
 
-Si vous utilisez create-react-app, vous importerez le fichier **index.js** dans votre fichier de bootstrap, fichier index.js à la racine de votre application. Le "combine reducer" se récupère comme un reducer classique :
+Si vous utilisez create-react-app, vous importerez le fichier **index.js** dans votre fichier de bootstrap de l'application (démarrage de l'application), fichier index.js à la racine de votre application. Le "combine reducer" se récupère comme un reducer classique :
 
 ```js
 
@@ -61,9 +61,9 @@ const { a, b } = useSelector( state = {
 
 ## Exercice d'application
 
-1. Récupérez le projet Dragon. Puis créez un reducer log. La gestion des logs se fera lorsqu'on supprime ou ajoute un dragon. Utilisez moment JS pour gérer les dates correspondantes aux actions de vos logs. Vous pouvez également utiliser un Map JS pour dans votre reducer log. 
+1. Récupérez le projet Dragon. Puis créez un reducer log. La gestion des logs se fera lorsqu'on supprime ou ajoute un dragon. Utilisez moment JS pour gérer les dates correspondantes. Vous pouvez si vous le souhaiter utiliser la structure de données Map JS dans votre reducer log pour la gestion des actions à enregistrer.
 
-2. Affichez l'ensemble des logs sous le formulaire dans la colonne de gauche.
+2. Affichez l'ensemble des logs, dans une liste par exemple, sous le formulaire dans la colonne de gauche.
 
 
 ## Middleware
