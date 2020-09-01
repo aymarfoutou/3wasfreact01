@@ -13,7 +13,14 @@ import a from './a';
 import b from './b';
 
 export default combineReducers({
-    a,
+    aReducer : a,
+    bReducer : b
+});
+
+// vous pouvez également écrire directement comme ceci pour combiner vos reducers :
+
+export default combineReducers({
+     a,
     b
 });
 
@@ -43,10 +50,21 @@ ReactDOM.render(
 Dans la lecture des props dans un composant, il faudra faire attention à sélecionner le bon store. Dans l'exemple que nous avons donné dans le cours pour lire le store a ou b vous devrez écrire :
 
 ```js
-// this.props.a, this.props.b
-const { a, b } = this.props;
-
+// importez useSelector
+const { a, b } = useSelector( state = {
+    
+    return {
+        a : state.aReducer,
+        b : state.bReducer
+})
 ```
+
+## Exercice d'application
+
+1 . Récupérez le projet Dragon. Puis créez un reducer log. La gestion des logs se fera lorsqu'on supprime ou ajoute un dragon. Utilisez moment JS pour gérer les dates correspondantes aux actions de vos logs. Vous pouvez également utiliser un Map JS pour dans votre reducer log. 
+
+2. Affichez l'ensemble des logs sous le formulaire dans la colonne de gauche.
+
 
 ## Middleware
 
