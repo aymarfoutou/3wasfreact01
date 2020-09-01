@@ -1,14 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
-import Provider from './Provider';
 import * as serviceWorker from './serviceWorker';
+
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'; // contextualiser le store
+import reducer from './reducers/index'; // on récupère dragon & log
+
+const store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider>
+    <Provider store={store} >
       <App />
     </Provider>
   </React.StrictMode>,

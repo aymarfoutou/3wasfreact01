@@ -1,0 +1,21 @@
+.Author {
+  text-align: left;
+  font-size: 1.2rem;
+  margin: 5% 0;
+}
+
+.Author-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Author-link {
+  color: #61dafb;
+}
+
