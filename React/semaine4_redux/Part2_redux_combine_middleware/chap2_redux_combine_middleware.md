@@ -87,7 +87,15 @@ const customMiddleware = store => next => action {
 Cette écriture de fonction anonyme est pratique pour éviter les problèmes de this, mais si on souhaite l'écrire avec le mot réservé function de JS :
 
 ```js
+function customMiddleware(store) {
+  const next = store.dispatch;
 
+  return function dispatch(action) {
+    const returnAction = next(action);
+    
+    return returnAction;
+  }
+}
 
 ```
 
@@ -103,7 +111,9 @@ const myFunc = a => b => a + b ;
 // Retournera 20
 myFunc(10)(10)
 ```
+## Exercice logs avec un middleware
 
+Refactorez les logs en créant un middleware : middlewareLog. Vous pouvez créer une branch avec Git refactoring (facultatif). Lorsqu'on ajoute ou supprime un dragon et uniquement pour ces actions, notifiez le dans les logs à l'aide de votre middleware.
 
 ## Middleware thunk
 
@@ -171,11 +181,10 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 ```
-## Exercice d'application Dragon
 
-1. Ajoutez une action dans actions-types.js permettant de gérer une horloge. Elle se déclenchera au chargement de l'application.
+## Exercice horloge dans le projet Dragon
 
-2. Refactorez les logs en créant un middleware. Vous pouvez créer une branch avec Git refactoring.
+Ajoutez une action dans actions-types.js permettant de gérer une horloge, dans ce cas vous devez mettre thunk en place dans votre projet. Elle se déclenchera au chargement de l'application et sera affichée dans le header.
 
 ## Exercice fecth score
 
