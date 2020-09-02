@@ -9,10 +9,15 @@ import { Provider } from 'react-redux'; // contextualiser le store
 import reducer from './reducers/index'; // on récupère dragon & log
 
 const middlewareTest = store => next => action => {
-  const dragon = store.getState().dragonReducer;
-  console.log(dragon)
+  // const dragon = store.getState().dragonReducer;
+  // console.log("middleware", dragon)
+
+  // action 
+  console.log("dispatching",action);
   
-  return next(action);
+  const returnAction = next(action);
+
+  console.log("next state", store.getState())
 }
 
 const store = createStore(reducer, applyMiddleware(middlewareTest));
