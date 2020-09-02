@@ -78,8 +78,17 @@ Voici la signature d'un middleware :
 
 ```js
 const customMiddleware = store => next => action {
-
+    const state = store.getState(); 
+    const returnAction = next(action);
+    
+    return returnAction ;
 }
+```
+Cette écriture de fonction anonyme est pratique pour éviter les problèmes de this, mais si on souhaite l'écrire avec le mot réservé function de JS :
+
+```js
+
+
 ```
 
 Cette fonction fonction reçoit le store elle retourne une fonction qui reçoit les next. Ici (dans la partie next) nous pouvons donc décider d'envoyer d'autre(s) action(s) à un reduceur (ou un autre middleware). Cette dernière fonction retournera également l'action en cours de dispatching.
@@ -94,6 +103,7 @@ const myFunc = a => b => a + b ;
 // Retournera 20
 myFunc(10)(10)
 ```
+
 
 ## Middleware thunk
 
