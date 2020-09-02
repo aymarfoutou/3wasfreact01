@@ -47,8 +47,8 @@ Dans la lecture des props dans un composant, il faudra faire attention à sélec
 const { a, b } = useSelector(state => {
 
   return {
-    a : aRdeucer,
-    b : bReducer
+    a : state.aRdeucer,
+    b : state.bReducer
   }
 })
 
