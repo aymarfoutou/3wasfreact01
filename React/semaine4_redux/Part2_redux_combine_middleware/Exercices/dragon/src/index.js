@@ -4,11 +4,18 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'; // contextualiser le store
 import reducer from './reducers/index'; // on récupère dragon & log
 
-const store = createStore(reducer);
+const middlewareTest = store => next => action => {
+  const dragon = store.getState().dragonReducer;
+  console.log(dragon)
+  
+  return next(action);
+}
+
+const store = createStore(reducer, applyMiddleware(middlewareTest));
 
 ReactDOM.render(
   <React.StrictMode>
