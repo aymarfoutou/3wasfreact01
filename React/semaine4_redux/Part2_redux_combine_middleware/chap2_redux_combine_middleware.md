@@ -165,6 +165,8 @@ serviceWorker.unregister();
 
 1. Ajoutez une action dans actions-types.js permettant de gérer une horloge. Elle se déclenchera au chargement de l'application.
 
+2. Refactorez les logs en créant un middleware. Vous pouvez créer une branch avec Git refactoring.
+
 ## Exercice fecth score
 
 Installez un projet React avec Redux, créez un store uniquement pour lire des scores, dans ce but vous créerez l'action FETCH_SCORE qui permettra la récupération des données.
