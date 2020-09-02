@@ -87,7 +87,15 @@ const customMiddleware = store => next => action {
 Cette écriture de fonction anonyme est pratique pour éviter les problèmes de this, mais si on souhaite l'écrire avec le mot réservé function de JS :
 
 ```js
+function customMiddleware(store) {
+  const next = store.dispatch;
 
+  return function dispatch(action) {
+    const returnAction = next(action);
+    
+    return returnAction;
+  }
+}
 
 ```
 
