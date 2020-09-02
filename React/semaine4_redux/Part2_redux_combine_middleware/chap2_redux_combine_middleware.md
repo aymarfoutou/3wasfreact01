@@ -60,6 +60,10 @@ const { a, b } = useSelector(state => {
 
 2. Ajoutez un bouton permettant de supprimer tous les logs.
 
+3. Créez un nouveau reducer pour ajouter des chevaliers. Vous afficherez la liste des chevaliers à côté de la liste des dragons. Vous créez un nouveau champ sous le champ de saisi des dragons pour les chevaliers. Dans cette gestion vous mettrez en place l'ajout et la suppression des chevaliers.
+
+4. (facultatif) Réfléchissez à une mise en relation avec les dragons. Ainsi chaque chevalier peut être associé à un dragon.
+
 ## Middleware
 
 Les middlewares se trouvent, ensemble de fonction(s), entre l'envoie (dispatch) et les réduceurs (reducers). Nous pouvons donc techniquement modifier les actions distribuées avant qu'ils arrivent aux réduceurs, ou exécuter une fonctionnalités lors de ce processus.
@@ -157,6 +161,9 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 ```
+## Exercice d'application Dragon
+
+1. Ajoutez une action dans actions-types.js permettant de gérer une horloge. Elle se déclenchera au chargement de l'application.
 
 ## Exercice fecth score
 
