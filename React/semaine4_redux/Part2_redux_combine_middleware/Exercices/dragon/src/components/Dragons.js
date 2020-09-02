@@ -14,6 +14,7 @@ const Dragons = () => {
     if (dragons.length > 0)
         return (
             <div className="Dragons-principal">
+                <h2>Dragon(s)</h2>
                 {dragons.map((dragon, i) => (
                     <Dragon
                         key={i}

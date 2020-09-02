@@ -6,7 +6,7 @@ import {
 } from "../constants/actions";
 
 import {
-    checkDragonExist
+    checkElemExist
 } from "../actions/actions-types";
 
 const stateInit = {
@@ -46,7 +46,7 @@ const reducer = (state = stateInit, action = {}) => {
                     dragon: ''
                 }
 
-            if (checkDragonExist(dragon, dragons) === true)
+            if (checkElemExist(dragon, dragons) === true)
                 return {
                     ...state,
                     message: `Attention le dragon ${dragon} existe déjà dans la liste `,
@@ -67,14 +67,14 @@ const reducer = (state = stateInit, action = {}) => {
             dragon = action.payload;
             dragons = [ ...state.dragons ] ;
 
-            if (checkDragonExist(dragon, dragons) === false)
+            if (checkElemExist(dragon, dragons) === false)
                 return {
                     ...state,
                     message: `Le dragon ${dragon} que vous essayez de supprimer n'existe pas `,
                     dragon: ''
                 }
 
-            dragons = dragons.filter(d => d != dragon);
+            dragons = dragons.filter(d => d !== dragon);
 
             return {
                 ...state,

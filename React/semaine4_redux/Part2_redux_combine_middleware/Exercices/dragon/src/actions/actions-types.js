@@ -3,7 +3,10 @@ import {
     ADD_DRAGON,
     DELETE_DRAGON,
     REVERSE_DRAGON_LIST,
-    SET_LOG
+    SET_LOG,
+    SET_KNIGHT,
+    ADD_KNIGHT,
+    DELETE_KNIGHT
 } from '../constants/actions';
 
 import moment from 'moment';
@@ -36,18 +39,39 @@ export const reverse_dragon_list = () => {
     };
 }
 
+// reducer log
 export const set_log = payload => {
     return {
         type: SET_LOG, payload
     };
 }
 
+// reducer knight
+export const set_knight = payload => {
+    return {
+        type: SET_KNIGHT, payload
+    };
+}
+
+export const add_knight = () => {
+    return {
+        type: ADD_KNIGHT
+    };
+}
+
+export const delete_knight = payload => {
+
+    return {
+        type: DELETE_KNIGHT, payload
+    };
+}
+
 // Fonctions utiles
-export const checkDragonExist = (dragon, dragons) => {
+export const checkElemExist = (elem, elems) => {
 
-    if( dragons.lenght === 0 ) return false;
+    if( elems.lenght === 0 ) return false;
 
-    if( dragons.find( d => d === dragon ) ) return true;
+    if( elems.find( d => d === elem ) ) return true;
 
     return false;
 }

@@ -4,22 +4,22 @@ import {
     useSelector, useDispatch
 } from 'react-redux';
 
-import { set_dragon, add_dragon } from '../actions/actions-types'
+import { set_knight, add_knight } from '../actions/actions-types'
 
-const Form = () => {
-    const { dragon, message } = useSelector(state => state.dragonReducer );
+const FormKnight = () => {
+    const { knight, message } = useSelector(state => state.knightReducer );
     const dispatch = useDispatch();
 
     const handleChange = e => {
-        const { value: dragon } = e.target;
+        const { value: knight } = e.target;
 
-        dispatch(set_dragon(dragon));
+        dispatch(set_knight(knight));
     }
 
     const handleSubmit = e => {
         e.preventDefault();
 
-        dispatch(add_dragon());
+        dispatch(add_knight());
     }
 
     return (
@@ -35,7 +35,7 @@ const Form = () => {
                     <input
                         type="text"
                         onChange={handleChange}
-                        value={dragon}
+                        value={knight}
                     />
                 </div>
                 <div>
@@ -46,4 +46,4 @@ const Form = () => {
     );
 }
 
-export default Form;
+export default FormKnight;
