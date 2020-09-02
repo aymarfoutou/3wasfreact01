@@ -47,8 +47,8 @@ Dans la lecture des props dans un composant, il faudra faire attention à sélec
 const { a, b } = useSelector(state => {
 
   return {
-    a : aRdeucer,
-    b : bReducer
+    a : state.aRdeucer,
+    b : state.bReducer
   }
 })
 
@@ -56,7 +56,13 @@ const { a, b } = useSelector(state => {
 
 ## Exercice d'application Dragon
 
-Reprendre le projet précédent sur les Dragons. Créez un reducer log il permettra de notifier la création et la suppression des dragons. Vous pouvez utiliser moment JS pour la gestion des dates dans votre partie log.
+1. Reprendre le projet précédent sur les Dragons. Créez un reducer log il permettra de notifier la création et la suppression des dragons. Vous pouvez utiliser moment JS pour la gestion des dates dans votre partie log.
+
+2. Ajoutez un bouton permettant de supprimer tous les logs.
+
+3. Créez un nouveau reducer pour ajouter des chevaliers. Vous afficherez la liste des chevaliers à côté de la liste des dragons. Vous créez un nouveau champ sous le champ de saisi des dragons pour les chevaliers. Dans cette gestion vous mettrez en place l'ajout et la suppression des chevaliers.
+
+4. (facultatif) Mettez en place la possibilité d'associer un chevalier à un dragon. Un chevalier ne peut avoir au plus qu'un dragon.
 
 ## Middleware
 
@@ -155,6 +161,9 @@ ReactDOM.render(
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 ```
+## Exercice d'application Dragon
+
+1. Ajoutez une action dans actions-types.js permettant de gérer une horloge. Elle se déclenchera au chargement de l'application.
 
 ## Exercice fecth score
 
