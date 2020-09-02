@@ -62,7 +62,7 @@ const { a, b } = useSelector(state => {
 
 3. Créez un nouveau reducer pour ajouter des chevaliers. Vous afficherez la liste des chevaliers à côté de la liste des dragons. Vous créez un nouveau champ sous le champ de saisi des dragons pour les chevaliers. Dans cette gestion vous mettrez en place l'ajout et la suppression des chevaliers.
 
-4. (facultatif) Réfléchissez à une mise en relation avec les dragons. Ainsi chaque chevalier peut être associé à un dragon.
+4. (facultatif) Mettez en place la possibilité d'associer un chevalier à un dragon. Un chevalier ne peut avoir au plus qu'un dragon.
 
 ## Middleware
 
