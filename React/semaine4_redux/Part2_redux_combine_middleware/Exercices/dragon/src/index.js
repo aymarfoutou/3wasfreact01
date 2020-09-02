@@ -8,19 +8,25 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'; // contextualiser le store
 import reducer from './reducers/index'; // on récupère dragon & log
 
-const middlewareTest = store => next => action => {
-  // const dragon = store.getState().dragonReducer;
-  // console.log("middleware", dragon)
+import { ADD_DRAGON, DELETE_DRAGON } from './constants/actions';
+import { set_log, getDateNow } from './actions/actions-types';
 
-  // action 
-  console.log("dispatching",action);
+const middlewareLog = store => next => action => {
   
-  const returnAction = next(action);
+  console.log("avant l'action", store.getState().dragonReducer);
 
-  console.log("next state", store.getState())
+  const returnAction = next(action); // SET_DRAGON, ...
+
+  console.log("après l'action", store.getState().dragonReducer);
+  console.log(store.getState().dragonReducer)
+
+  //boucle infini
+  // store.dispatch({ type : ADD_DRAGON , dragon : "dragon" })
+
+  return returnAction;
 }
 
-const store = createStore(reducer, applyMiddleware(middlewareTest));
+const store = createStore(reducer, applyMiddleware(middlewareLog));
 
 ReactDOM.render(
   <React.StrictMode>

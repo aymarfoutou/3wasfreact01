@@ -9,8 +9,6 @@ const Dragons = () => {
     // vous devez récupérer spécifiquement la clés dragon correspondante à ce reducer
     const { dragons } = useSelector(state => state.dragonReducer );
 
-    console.log(dragons)
-
     if (dragons.length > 0)
         return (
             <div className="Dragons-principal">
