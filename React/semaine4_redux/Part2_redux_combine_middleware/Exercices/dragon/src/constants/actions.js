@@ -11,3 +11,7 @@ export const SET_LOG = "SET_LOG";
 export const SET_KNIGHT = "SET_KNIGHT" ;
 export const ADD_KNIGHT = "ADD_KNIGHT" ;
 export const DELETE_KNIGHT = "DELETE_KNIGHT" ;
+
+// reducer chrono
+export const SET_COUNTER = 'SET_COUNTER';
+export const TIME =  1000;

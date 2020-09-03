@@ -6,7 +6,9 @@ import {
     SET_LOG,
     SET_KNIGHT,
     ADD_KNIGHT,
-    DELETE_KNIGHT
+    DELETE_KNIGHT,
+    SET_COUNTER,
+    TIME
 } from '../constants/actions';
 
 import moment from 'moment';
@@ -65,6 +67,25 @@ export const delete_knight = payload => {
         type: DELETE_KNIGHT, payload
     };
 }
+
+// reducer chrono
+export const  set_counter = payload => {
+  return {
+    type: SET_COUNTER, payload
+  };
+}
+
+let interval;
+
+
+export const startCounter = () => {
+
+   return dispatch => {
+        interval= setInterval(() => {
+            dispatch(set_counter(1)); // Se fait toutes les TIME (1s) de manière asynchrone
+        }, TIME);
+  };
+};
 
 // Fonctions utiles
 export const checkElemExist = (elem, elems) => {

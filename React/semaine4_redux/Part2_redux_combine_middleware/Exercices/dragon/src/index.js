@@ -6,10 +6,12 @@ import * as serviceWorker from './serviceWorker';
 
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'; // contextualiser le store
+import thunk from 'redux-thunk';
+
 import reducer from './reducers/index'; // on récupère dragon & log
 import middlewareLog from './middlewares/log';
 
-const store = createStore(reducer, applyMiddleware(middlewareLog));
+const store = createStore(reducer, applyMiddleware(middlewareLog, thunk));
 
 ReactDOM.render(
   <React.StrictMode>
