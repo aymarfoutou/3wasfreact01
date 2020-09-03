@@ -11,13 +11,13 @@ Sur le serveur Express vous avez les méthodes fonctionnelles suivantes, elles s
 - app.get('/author/:id', (req, res) ... ) récupérer un auteur en fonction de son ID.
 
 ```txt
-htto://localhost:3000/author/3hj9ecwzc5
+http://localhost:3000/author/3hj9ecwzc5
 ```
 
 - app.get('/authors' (req, res) ... ) récupérer tous les auteurs.
 
 ```txt
-htto://localhost:3000/authors
+http://localhost:3000/authors
 ```
 
 Pour ces méthodes voyez la partie 3 et 4 ci-dessous
@@ -52,11 +52,11 @@ Vous devez installez les dépendances suivantes :
 
 - react-router-dom
 
-- Styled components  Gestion des styles en CSS-In-JS
+- Styled components Gestion des styles en CSS-In-JS
 
 - Vous utiliserez axios ou fetch (voir un dans la partie annexes)
 
-Attention, comme vous utilisez fetch qui est asynchrone pour consommer l'API et que vous devez utiliser Redux pensez à mettre en place dans vos actions-types.js les actions asynchrone.
+Attention, comme vous utilisez fetch qui est asynchrone pour consommer l'API et que vous devez utiliser Redux pensez à mettre en place dans vos actions-types.js les actions asynchrones avec le middleware thunk (configuration dans index.js)
 
 La page principale sera structurée sur deux colonnes. Elle comporte un menu principal avec deux items **Home** et **Add Author**.  
 
@@ -162,24 +162,37 @@ Pour récupérez l'ensemble des auteurs avec fetch vous devez écrire une foncti
 
 ```js
 
-
+// JS async/await
+/*
+*  fetch est une fonction asynchrone async/await permet d'attendre que les fonctions aient retournées quelque chose avant d'exécuter le reste du script
+*/
 const fetchData = async () => {
-    const results = await fetch("http://localhost:3000/authors");
-    const data = await results.json();
+    
+    // 1
+    const response = await fetch("http://localhost:3000/authors"); // await attend que le serveur réponde 
+    
+    // 2
+    const data = await response.json(); // Puis dans response on demande à fetch de nous renvoyer les data dans un JSON
 
+    // 3
     console.log(data);
 }
 
+// Pour exécuter cette fonction 
+fetchData();
+
+// Deuxième syntaxe possible pour le fetch en utilisant une approche Promesse 
+fetch("http://localhost:3000/authors").then( response => {
+    
+    return response.json()
+}).then( data => console.log(data ) );
+
 ```
-
-
 Pour ajouter un auteur dans l'API :
 
 ```js
 
 const fetchAuthor = async () => {
-
-
     const author = {
         name : "Antoine",
         shop : "Fnac"
@@ -187,14 +200,14 @@ const fetchAuthor = async () => {
 
     const options = {
         method: 'POST',
-        body: JSON.stringify(author),
+        body: JSON.stringify(author), // format chaîne de caractères (objet => chaîne de caractères )
         headers: { "Content-Type": "application/json" }
     }
 
-    const results = await fetch("http://localhost:3000/add", options);
-    const author = await results.json();
+    const response = await fetch("http://localhost:3000/add", options);
+    const info = await response.json(); // le serveur vous retourne un message que l'on souhaite récupérer en JSON
 
-    console.log(author);
+    console.log(info);
 }
 
 ```
