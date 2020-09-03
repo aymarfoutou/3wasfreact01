@@ -146,11 +146,17 @@ export const asyncCounter = () => {
 
 ### Partie 1
 
-Mettez en place une horologe simple dans l'application Dragon que nous avons développé. N'utilisez pas pour l'instant le module thunk pour mettre en évidence la problématique de l'asynchrone des actions dans Redux.
+Mettez en place un chrono simple dans l'application Dragon que nous avons développé. N'utilisez pas pour l'instant le module thunk pour mettre en évidence la problématique de l'asynchrone des actions dans Redux. 
+
+Dans le header de l'application:
+
+```txt
+  [14] <-- secondes qui défilent
+```
 
 ### Partie 2
 
-Installez le module puis mettre en place la configuration (voir plus bas). Et vérifiez maintenant que votre horloge fonctionne correctement.
+Installez le module puis mettre en place la configuration (voir plus bas). Et vérifiez maintenant que votre chrono fonctionne correctement.
 
 ```bash
 npm install redux-thunk
