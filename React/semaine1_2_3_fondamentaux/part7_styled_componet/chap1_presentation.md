@@ -48,9 +48,9 @@ Vous pouvez installer styled components avec yarn ou npm.
 npm install styled-components --save
 ```
 
-## Création de classes
+## Création de classes CSS
 
-Vous pouvez créer des classes pour ciblier un élément spécifique :
+Vous pouvez créer des classes CSS pour ciblier un élément spécifique :
 
 Un élément HTML :
 
@@ -60,7 +60,7 @@ Un élément HTML :
 </div>
 ```
 
-Et pour la partie CSS :
+Et pour la partie CSS les règles SASS sont possibles :
 
 ```css
 
@@ -77,7 +77,7 @@ Et pour la partie CSS :
 }
 ```
 
-## Création de composant avec styled component
+## Création de composant avec Styled components
 
 Ci-dessous on définit un composant Presentation qui sera un titre de niveau 1 (h1).
 
@@ -99,7 +99,7 @@ export default App;
 
 ```
 
-Styled components créera dans le DOM une classe spécifique pour titre h1 :
+Styled components créera dans le DOM une classe spécifique, elle sera unique et propre au composant.
 
 ```html
 <h1 class="sc-bdGXs ghtXs">Hello Styled components</h1>
@@ -107,7 +107,7 @@ Styled components créera dans le DOM une classe spécifique pour titre h1 :
 
 ## Style global
 
-Vous pouvez créer des règles CSS globales à l'aide de la méthode createGlobalStyle de styled-components :
+Vous pouvez créer des règles CSS globales à l'aide de la méthode createGlobalStyle de styled-components
 
 ```js
 const GlobalStyle = createGlobalStyle`
@@ -115,21 +115,13 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Container = styled.div``;
-const Section = styled.div``;
 
 const App = () => (
   <Container>
     <GlobalStyle />
-    <Form />
+    <p>Hello React</p>
   </Container>
 );
 
 export default App;
 ```
-
-Il faudra insérez le composant GlobalStyle dans votre composant racine comme dans l'exemple ci-dessus.
-
-
-## Exercice création d'un menu
-
-Créez
