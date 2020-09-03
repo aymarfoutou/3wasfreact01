@@ -132,7 +132,7 @@ export const  set_counter = payload => {
 }
 
 // Cette action est asynchrone (...)
-export const asyncCounter = () => {
+export const startCounter = () => {
 
    return dispatch => {
         setInterval(() => {
