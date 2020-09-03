@@ -11,13 +11,13 @@ Sur le serveur Express vous avez les méthodes fonctionnelles suivantes, elles s
 - app.get('/author/:id', (req, res) ... ) récupérer un auteur en fonction de son ID.
 
 ```txt
-htto://localhost:3000/author/3hj9ecwzc5
+http://localhost:3000/author/3hj9ecwzc5
 ```
 
 - app.get('/authors' (req, res) ... ) récupérer tous les auteurs.
 
 ```txt
-htto://localhost:3000/authors
+http://localhost:3000/authors
 ```
 
 Pour ces méthodes voyez la partie 3 et 4 ci-dessous
@@ -52,11 +52,11 @@ Vous devez installez les dépendances suivantes :
 
 - react-router-dom
 
-- Styled components  Gestion des styles en CSS-In-JS
+- Styled components Gestion des styles en CSS-In-JS
 
 - Vous utiliserez axios ou fetch (voir un dans la partie annexes)
 
-Attention, comme vous utilisez fetch qui est asynchrone pour consommer l'API et que vous devez utiliser Redux pensez à mettre en place dans vos actions-types.js les actions asynchrone.
+Attention, comme vous utilisez fetch qui est asynchrone pour consommer l'API et que vous devez utiliser Redux pensez à mettre en place dans vos actions-types.js les actions asynchrones avec le middleware thunk (configuration dans index.js)
 
 La page principale sera structurée sur deux colonnes. Elle comporte un menu principal avec deux items **Home** et **Add Author**.  
 
