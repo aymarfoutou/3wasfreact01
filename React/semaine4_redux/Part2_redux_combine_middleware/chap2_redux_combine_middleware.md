@@ -199,7 +199,8 @@ serviceWorker.unregister();
 
 ### Partie 3
 
-Mettez en place dans l'application un bouton permettant d'arrêter le compteur.
+Le compteur de notre chrono fonctionne maintenant à l'aide de Thunk middleware qui permet de gérer dans Redux les actions dispatchées de manière asynchrone.
+Trouvez un moyen de mettre un bouton permettant l'arrêt du chrono.
 
 ## Exercice axios score
 
