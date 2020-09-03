@@ -4,9 +4,9 @@
 
 Nous allons créer une application **medialibrary** REST elle permettra de lire, créer, mettre à jour et supprimer des auteurs.
 
-Créez une application React **medialibrary** dans un dossier API_project. Dans ce dossier vous pourrez également mettre le serveur Express, dossier **server** dans le dossier **API_project**
+Créez une application React **medialibrary** dans un dossier API_project. Dans ce dossier vous pourrez également mettre le serveur Express, dans un dossier **server** par exemple.
 
-Sur le serveur Express vous avez les méthodes fonctionnelles suivantes, elles se consomment en http, voyez les exemples ci-dessous :
+Sur le serveur Express vous avez les méthodes fonctionnelles suivantes, elles se consomment en http de manière classique, voyez les exemples ci-dessous :
 
 - app.get('/author/:id', (req, res) ... ) récupérer un auteur en fonction de son ID.
 
@@ -20,7 +20,7 @@ http://localhost:3000/author/3hj9ecwzc5
 http://localhost:3000/authors
 ```
 
-Pour ces méthodes voyez la partie 3 et 4 ci-dessous
+Pour ces méthodes voyez la partie 3 et 4 ci-dessous.
 
 - app.post('/add', (req, res) ... ) enregistrer un nouvel auteur.
 
