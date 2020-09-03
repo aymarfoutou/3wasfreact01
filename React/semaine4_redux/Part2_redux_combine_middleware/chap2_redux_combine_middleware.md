@@ -186,11 +186,11 @@ serviceWorker.unregister();
 
 Ajoutez une action dans actions-types.js permettant de gérer une horloge, dans ce cas vous devez mettre thunk en place dans votre projet. Elle se déclenchera au chargement de l'application et sera affichée dans le header.
 
-## Exercice fecth score
+## Exercice axios score
 
-Installez un projet React avec Redux, créez un store uniquement pour lire des scores, dans ce but vous créerez l'action FETCH_SCORE qui permettra la récupération des données.
+Installez un projet React avec Redux, créez un store uniquement pour lire des scores, dans ce but vous créerez l'action FETCH_SCORE qui permettra la récupération des données. Utilisez axios pour récupérer les données dans votre fichier actions-types.js.
 
-Créez une base de données game dans firebase, puis dans cette base de données créez le document scores suivant :
+Créez une base de données game dans firebase, puis dans cette base de données puis ajouter les données suivantes
 
 ```json
 {
