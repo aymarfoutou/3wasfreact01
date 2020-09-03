@@ -162,24 +162,37 @@ Pour récupérez l'ensemble des auteurs avec fetch vous devez écrire une foncti
 
 ```js
 
-
+// JS async/await
+/*
+*  fetch est une fonction asynchrone async/await permet d'attendre que les fonctions aient retournées quelque chose avant d'exécuter le reste du script
+*/
 const fetchData = async () => {
-    const results = await fetch("http://localhost:3000/authors");
-    const data = await results.json();
+    
+    // 1
+    const response = await fetch("http://localhost:3000/authors"); // await attend que le serveur réponde 
+    
+    // 2
+    const data = await response.json(); // Puis dans response on demande à fetch de nous renvoyer les data dans un JSON
 
+    // 3
     console.log(data);
 }
 
+// Pour exécuter cette fonction 
+fetchData();
+
+// Deuxième syntaxe possible pour le fetch en utilisant une approche Promesse 
+fetch("http://localhost:3000/authors").then( response => {
+    
+    return response.json()
+}).then( data => console.log(data ) );
+
 ```
-
-
 Pour ajouter un auteur dans l'API :
 
 ```js
 
 const fetchAuthor = async () => {
-
-
     const author = {
         name : "Antoine",
         shop : "Fnac"
@@ -187,14 +200,14 @@ const fetchAuthor = async () => {
 
     const options = {
         method: 'POST',
-        body: JSON.stringify(author),
+        body: JSON.stringify(author), // format chaîne de caractères (objet => chaîne de caractères )
         headers: { "Content-Type": "application/json" }
     }
 
-    const results = await fetch("http://localhost:3000/add", options);
-    const author = await results.json();
+    const response = await fetch("http://localhost:3000/add", options);
+    const info = await response.json(); // le serveur vous retourne un message que l'on souhaite récupérer en JSON
 
-    console.log(author);
+    console.log(info);
 }
 
 ```
