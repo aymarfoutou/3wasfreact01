@@ -1,164 +1,200 @@
 # Rest API
 
-Nous allons créer une petite application REST pour lire, afficher, supprimer et modifier des auteurs d'une librairie.
+## Présentation
 
-Créez le serveur Express suivant et placez les données authors directement sur le serveur. Insallez les dépendances nécessaire puis lanez le serveur dans un dossier à l'extérieur du projet React.
+Nous allons créer une application **medialibrary** REST elle permettra de lire, créer, mettre à jour et supprimer des auteurs.
 
-```js
-const express = require('express');
-const cors = require('cors');
+Créez une application React **medialibrary** dans un dossier API_project. Dans ce dossier vous pourrez également mettre le serveur Express, dossier **server** dans le dossier **API_project**
 
-const app = express();
-const port = 3000;
-app.use(cors());
+Sur le serveur Express vous avez les méthodes fonctionnelles suivantes, elles se consomment en http, voyez les exemples ci-dessous :
 
-let authors = [{
-    "_id": "3hj9ecwzc5",
-    "name": "Alan",
-    "bio": "DEA à l'université Luminy",
-    "shop_name" : "fnac",
-    "books" : ["Javascript", "Eloquent JavaScript, Second Edition"]
-},
-{
-    "_id": "ii3v6javys",
-    "name": "Albert",
-    "bio": "BAC science et stages au CNRS",
-    "shop_name" : "librarie grande rue",
-    "books" : ["Maths", "Relativité restreinte"]
-},
-{
-    "_id": "ii3v6jaYUY",
-    "name": "Sophie",
-    "bio": "Science po",
-    "shop_name" : "librarie",
-     "books" : ["Politique", "Ecologie"]
-},
-{
-    "_id": "81928usije",
-    "name": "Alice",
-    "bio": "Brevet des collège",
-    "shop_name" : "fnac",
-     "books" : ["Le pays des merveilles", "un monde merveilleux"]
-},
-{
-    "_id": "8798uhyek",
-    "name": "Phil",
-    "bio": "Médecine",
-    "shop_name" : "fnac",
-    "books": ["néphrologie", "beta bloquant"]
-}
-];
+- app.get('/author/:id', (req, res) ... ) récupérer un auteur en fonction de son ID.
 
-app.use(express.json({ limit: "1mb" }));
-
-// Get all
-app.get('/authors', (req, res) => {
-    res.json(authors);
-});
-
-// store author
-app.post('/author', (req, res) => {
-    const { name, bio, shop_mame, books } = req.body;
-
-    authors.push(req.body);
-
-    res.json({
-        status: 'success',
-        name: name
-    });
-});
-
-// get one author 
-app.get('/author/:id', (req, res) => {
-    const { id } = req.params;
-    const author = authors.filter(author => author._id === id);
-
-    if (author.length > 0)
-        res.json({
-            status: 'success',
-            id: id,
-            author: JSON.stringify( author[0] )
-        });
-
-    else
-        res.status(404).send('Author not found');
-});
-
-app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
+```txt
+htto://localhost:3000/author/3hj9ecwzc5
 ```
 
-## React API Objectifs
+- app.get('/authors' (req, res) ... ) récupérer tous les auteurs.
 
-Dans ce API nous allons créer une application qui affiche des auteurs et de l'information liée à ces auteurs. Nous faisons ici un CRUD sur des auteurs : lecture, création, modification et suppression.
+```txt
+htto://localhost:3000/authors
+```
 
-Ces actions sont défnies sur le serveur ci-dessus.
+Pour ces méthodes voyez la partie 3 et 4 ci-dessous
 
-### Mise en place de l'asynchrone dans React & Redux
+- app.post('/add', (req, res) ... ) enregistrer un nouvel auteur.
 
-Le dispatcher de Redux est synchrone or ici pour consommer notre API nous utiliserons axios qui est asynchrone. Pour rés
+- app.put('/author/:id' , (req, res) ... ) mettre à jour un auteur.
+
+- app.delete('/author/:id', (req, res) ... ) supprimer un auteur.
+
+*Remarque : on ne vous demande pas de développer le serveur, mais simplement de consommer l'API Express.*
+
+## Installation du serveur
+
+Dans le dossier serveur tapez la commande suivante :
 
 ```bash
-npm install redux-thunk
+npm install
 ```
 
-Puis dans votre index.js configurer React pour que Redux prenne en compte cette dépendance. Dans l'exemple ci-dessous on utilise applyMiddleware une méthode de Redux pour lui passer le module thunk permettant de gérer l'asynchrone dans React.
+Puis lancez le serveur :
 
-```js
-// pensez à importer les classes nécessaires
-import { createStore, applyMiddleware } from 'redux';
-
-const store = createStore(shop, applyMiddleware(thunk));
-```
-
-Voici un exemple dans le fichier actions-types.js d'une méthode asynchrone que l'on peut maintenant écrire :
-
-```js
-
-export const fetch_promise_response = payload => {
-    return {
-        type: 'FETCH_PROMISE', payload
-    };
-}
-
-export const fetch_promise_async = () => {
-
-    return dispatch => {
-
-        const fetch_promise = async () => {
-
-            const response = await new Promise(res => {
-                setTimeout(() => {
-                    res(false);
-                }, 1000);
-            });
-
-            dispatch(fetch_promise_response(response));
-        }
-
-        fetch_promise();
-    };
-}
+```bash
+node server.js
 ```
 
 ## Partie 1
 
-Gérez l'affichage des auteurs sur la page principale. Ajoutez un bouton sous chaque nom afin d'afficher le détails d'un auteur dans la colonne latérale.
+Vous devez installez les dépendances suivantes :
 
-Vous afficherez lorsqu'on cliquera sur le bouton détails :
+- Redux & thunk-redux
 
-Nom 
-Bio
-Librairie
-Livres de l'auteur
+- react-router-dom
 
-## Partie 2
+- Styled components  Gestion des styles en CSS-In-JS
 
-Créez un formulaire permettant d'ajouter un nouvel auteur. Placez ce bouton sur la page principale. Vous pouvez si vous le souhaitez utilise un module externe pour gérer du routing.
+- Vous utiliserez axios ou fetch (voir un dans la partie annexes)
+
+Attention, comme vous utilisez fetch qui est asynchrone pour consommer l'API et que vous devez utiliser Redux pensez à mettre en place dans vos actions-types.js les actions asynchrone.
+
+La page principale sera structurée sur deux colonnes. Elle comporte un menu principal avec deux items **Home** et **Add Author**.  
+
+- La page Home affiche l'ensemble des noms des auteurs uniquement sous chaque nom vous créez deux boutons : Détails & Delete (voir plus loin pour les fonctionnalités à développer pour ces derniers).
+
+
+```txt
+
+---------------------------------------------------
+
+    [ Home ]  [ Add author ]
+
+    Liste des auteurs          Details d'un auteur
+    
+    Alan 
+    [Details]
+    [Delete]
+
+    ...
+
+---------------------------------------------------
+
+
+```
+
+*Remarques : les données sont visibles sur le serveur dans le fichier server.js et dans la variables authors, chaque auteur est structuré comme suit dans un fichier JSON*
+
+```json
+{
+    "id": "3hj9ecwzc5",
+    "name": "Alan",
+    "bio": "DEA à l'université Luminy",
+    "shop_name": "fnac",
+    "books": ["Javascript", "Eloquent JavaScript, Second Edition"]
+},
+```
+
+### Bouton Details
+
+Une fois que l'on clique sur le bouton Details on affichera dans la colonne de droite le détail d'un auteur :
+
+```txt
+
+---------------------------------------------------
+
+    [ Home ]  [ Add author ]
+
+    Liste des auteurs          Details d'un auteur
+    
+    Alan 
+    [details]                  name : Alan
+                                    bio : DEA à l'université Luminy
+                                    shop : Fnac
+                                    Books : 
+                                        Javascript
+                                        Eloquent JavaScript, Second Edition
+
+    ...
+
+---------------------------------------------------
+
+```
+
+## Partie 2 Ajouter un auteur
+
+
+Le bouton **Add author** permet d'ajouter un auteur vous développerez un champ pour définir le nom de l'auteur et un champ pour définir la librairie dans laquelle l'auteur à publier ses livres, ce dernier champ est un bouton select. La liste des librairies est donnée dans l'énoncé du projet voir ci-après :
+
+```txt
+
+---------------------------------------------------
+
+    [ Home ]  [ Add author ]
+
+    
+    Name : []
+
+    Shop : [Fnac] 
+
+    [Ok]
+
+    ...
+
+---------------------------------------------------
+
+```
+
+Facultatif ajoutez un champ pour définir une liste de livres par auteur.
+
 
 ## Partie 3
 
-Ajoutez pour chaque auteur un bouton permettant de le supprimer.
+Implémentez la suppression d'un auteur.
 
 ## Partie 4
 
-Ajoutez maintenant un bouton pour chaque auteur "Mise à jour". Il permettra de modifier les informations liés à l'auteur.
+Mettre en place la mise à jour d'un auteur.
+
+
+## Annexes
+
+Pour récupérez l'ensemble des auteurs avec fetch vous devez écrire une fonction comme suit :
+
+```js
+
+
+const fetchData = async () => {
+    const results = await fetch("http://localhost:3000/authors");
+    const data = await results.json();
+
+    console.log(data);
+}
+
+```
+
+
+Pour ajouter un auteur dans l'API :
+
+```js
+
+const fetchAuthor = async () => {
+
+
+    const author = {
+        name : "Antoine",
+        shop : "Fnac"
+    };
+
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(author),
+        headers: { "Content-Type": "application/json" }
+    }
+
+    const results = await fetch("http://localhost:3000/add", options);
+    const author = await results.json();
+
+    console.log(author);
+}
+
+```
