@@ -117,31 +117,46 @@ Refactorez les logs en créant un middleware : middlewareLog. Vous pouvez créer
 
 ## Middleware thunk
 
-Si on a une action asynchrone comme suit, redux ne la gère pas nativement. Redux est synchrone, si on souhaite traiter une action asynchrone il faut utiliser le middleware : **thunk**.
+Les actions sont dispatchées de manière synchrone dans le reducer. Pour pouvoir gérer des actions asynchrones on doit installer le module thunk qui est un middleware. Il permettra de gérer l'asynchrone des actions dans le reducer.
 
-Imaginons la problématique suivante :
+Imaginons la problématique suivante dans le fichier actions-types.js :
 
 ```js
-const FETCH_SCORE = 'FETCH_SCORE';
+const COUNTER = 'COUNTER';
 
-export const  fetch_score = () => {
+// Cette action est synchrone
+export const  set_counter = payload => {
   return {
-    type: FETCH_SCORE,
+    type: COUNTER, payload
   };
 }
 
-// passer par les props de votre composant pour déclencher cet action
-export const fetchAsync = () => {
+// Cette action est asynchrone (...)
+export const startCounter = () => {
 
    return dispatch => {
-        setTimeout(() => {
-        dispatch(fetch_score()); // Dispatch asynchrone gérer par Redux
+        setInterval(() => {
+        dispatch(set_counter(1)); // Ici on dispatch une action asynchrone => Redux ne sait pas le faire nativement (...)
         }, 1000);
   };
 }
 ```
 
-- Installez le middleware suivant :
+## Exercice d'application
+
+### Partie 1
+
+Mettez en place un chrono simple, créez un nouveau reducer, dans l'application Dragon que nous avons développé. N'utilisez pas pour l'instant le module thunk, nous allons essayer de mettre en évidence la problématique des actions asynchrones dans Redux. Théoriquement votre chrono ne marchera pas (...).
+
+Dans le header de l'application:
+
+```txt
+  [14] <-- secondes qui défilent
+```
+
+### Partie 2
+
+Installez le module puis mettre en place la configuration (voir plus bas). Et vérifiez maintenant que votre chrono fonctionne correctement.
 
 ```bash
 npm install redux-thunk
@@ -182,9 +197,10 @@ ReactDOM.render(
 serviceWorker.unregister();
 ```
 
-## Exercice horloge dans le projet Dragon
+### Partie 3
 
-Ajoutez une action dans actions-types.js permettant de gérer une horloge, dans ce cas vous devez mettre thunk en place dans votre projet. Elle se déclenchera au chargement de l'application et sera affichée dans le header.
+Le compteur de notre chrono fonctionne maintenant à l'aide de Thunk middleware qui permet de gérer dans Redux les actions dispatchées de manière asynchrone.
+Trouvez un moyen de mettre un bouton permettant l'arrêt du chrono.
 
 ## Exercice axios score
 
