@@ -5,6 +5,8 @@ import {
 
 import { delete_dragon } from '../actions/actions-types';
 
+import './Dragon.scss';
+
 const Dragon = ({ dragon }) => {
   const dispatch = useDispatch();
 

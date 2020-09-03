@@ -11,7 +11,6 @@ const reducer = (state = stateInit, action = {}) => {
     switch (action.type) {
 
         case SET_LOG:
-            const { count, date } = action.payload;
 
             // copie profonde (nested) d'objet
             const logs = state.logs.map( log => {
@@ -19,7 +18,7 @@ const reducer = (state = stateInit, action = {}) => {
                 return { ...log }
             } ) ;
 
-            logs.push({ count : count, date : date });
+            logs.push({ ...action.payload });
 
             return {
                 ...state,

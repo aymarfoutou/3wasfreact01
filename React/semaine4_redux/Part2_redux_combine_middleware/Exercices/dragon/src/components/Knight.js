@@ -4,7 +4,9 @@ import {
 } from 'react-redux';
 
 import { delete_knight } from '../actions/actions-types';
-  
+
+import './Knight.scss';
+
 const Knight = ({ knight }) => {
   const dispatch = useDispatch();
 

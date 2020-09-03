@@ -4,7 +4,9 @@ import {
     useSelector, useDispatch
 } from 'react-redux';
 
-import { set_dragon, add_dragon } from '../actions/actions-types'
+import { set_dragon, add_dragon } from '../actions/actions-types';
+
+import './Form.scss';
 
 const FormDragon = () => {
     const { dragon, message } = useSelector(state => state.dragonReducer );

@@ -4,7 +4,9 @@ import {
     useSelector, useDispatch
 } from 'react-redux';
 
-import { set_knight, add_knight } from '../actions/actions-types'
+import { set_knight, add_knight } from '../actions/actions-types';
+
+import './Form.scss';
 
 const FormKnight = () => {
     const { knight, message } = useSelector(state => state.knightReducer );

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import {
   useSelector,
-  useDispatch
 } from 'react-redux';
 
 import Dragons from './components/Dragons';
@@ -30,7 +29,7 @@ const App = () => {
         <FormKnight />
         <ul>
           <li>Log(s) :</li>
-          {logs.map((log, i) => <li key={i} >Date : {log.date} nb dragon(s) : {log.count}</li>)}
+          {logs.map((log, i) => <li key={i} >Date : {log.date} nb {log.name} : {log.count}</li>)}
         </ul>
       </Col>
       <Col>
