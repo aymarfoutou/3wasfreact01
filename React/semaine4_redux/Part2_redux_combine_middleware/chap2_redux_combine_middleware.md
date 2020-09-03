@@ -146,7 +146,7 @@ export const asyncCounter = () => {
 
 ### Partie 1
 
-Mettez en place un chrono simple dans l'application Dragon que nous avons développé. N'utilisez pas pour l'instant le module thunk pour mettre en évidence la problématique de l'asynchrone des actions dans Redux. 
+Mettez en place un chrono simple, créez un nouveau reducer, dans l'application Dragon que nous avons développé. N'utilisez pas pour l'instant le module thunk, nous allons essayer de mettre en évidence la problématique des actions asynchrones dans Redux. Théoriquement votre chrono ne marchera pas (...).
 
 Dans le header de l'application:
 
@@ -197,9 +197,9 @@ ReactDOM.render(
 serviceWorker.unregister();
 ```
 
-## Exercice horloge dans le projet Dragon
+### Partie 3
 
-Ajoutez une action dans actions-types.js permettant de gérer une horloge, dans ce cas vous devez mettre thunk en place dans votre projet. Elle se déclenchera au chargement de l'application et sera affichée dans le header.
+Mettez en place dans l'application un bouton permettant d'arrêter le compteur.
 
 ## Exercice axios score
 
