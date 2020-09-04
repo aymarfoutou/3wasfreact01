@@ -56,11 +56,17 @@ Vous devez installez les dépendances suivantes :
 
 - Vous utiliserez axios ou fetch (voir un dans la partie annexes)
 
-Attention, comme vous utilisez fetch qui est asynchrone pour consommer l'API et que vous devez utiliser Redux pensez à mettre en place dans vos actions-types.js les actions asynchrones avec le middleware thunk (configuration dans index.js)
+Facultatifs :
 
-La page principale sera structurée sur deux colonnes. Elle comporte un menu principal avec deux items **Home** et **Add Author**.  
+- Redux toolkit peut également être utilisé.
 
-- La page Home affiche l'ensemble des noms des auteurs uniquement sous chaque nom vous créez deux boutons : Détails & Delete (voir plus loin pour les fonctionnalités à développer pour ces derniers).
+- Middleware : dans ce cas faites historiques des créations d'auteurs
+
+Attention, comme vous utilisez fetch (ou axios) qui est asynchrone et Redux pour la gestion des stores vous devez mettre en place le middleware thunk (configuration dans index.js).
+
+La page principale sera structurée sur deux colonnes. Elle comporte un menu principal avec deux items **Home** et **Add Author**. Créez un dossier Styles dans lequel vous placerez les fichiers de styles de Styled components.  
+
+- La page Home affichera l'ensemble des noms des auteurs uniquement, sous chaque nom vous créez deux boutons : **Détails** & **Delete** (voir plus loin pour ces  fonctionnalités à développer).
 
 
 ```txt
@@ -78,7 +84,6 @@ La page principale sera structurée sur deux colonnes. Elle comporte un menu pri
     ...
 
 ---------------------------------------------------
-
 
 ```
 
@@ -122,8 +127,7 @@ Une fois que l'on clique sur le bouton Details on affichera dans la colonne de d
 
 ## Partie 2 Ajouter un auteur
 
-
-Le bouton **Add author** permet d'ajouter un auteur vous développerez un champ pour définir le nom de l'auteur et un champ pour définir la librairie dans laquelle l'auteur à publier ses livres, ce dernier champ est un bouton select. La liste des librairies est donnée dans l'énoncé du projet voir ci-après :
+Le bouton **Add author** permet d'ajouter un auteur, vous développerez un champ pour définir le nom de l'auteur et un champ pour définir la librairie dans laquelle l'auteur à publier ses livres, ce dernier champ est un bouton select. La liste des librairies est donnée dans l'énoncé du projet voir ci-après :
 
 ```txt
 
@@ -144,17 +148,45 @@ Le bouton **Add author** permet d'ajouter un auteur vous développerez un champ 
 
 ```
 
-Facultatif ajoutez un champ pour définir une liste de livres par auteur.
+Liste des librairies ( pour le bouton select ) :
 
+- Fnac
+- Eyrolles
+- Gibert Jeune
+
+Facultatif, ajoutez un champ pour définir une liste de livres par auteur :
+
+```txt
+
+---------------------------------------------------
+
+    [ Home ]  [ Add author ]
+
+    Name : [Tony]
+
+    Shop : [Fnac] 
+
+    Book(s) : [ ] [Add] ( 2 books )
+
+        - Javascript avancé
+        - MongoDB
+
+    [Ok]
+    ...
+
+---------------------------------------------------
+
+```
 
 ## Partie 3
 
-Implémentez la suppression d'un auteur.
+Implémentez la suppression d'un auteur, ce bouton sera implémenté directement en page d'accueil.
+
+Facultatif : créez un pop-in permettant de confirmer la suppression d'un auteur.
 
 ## Partie 4
 
 Mettre en place la mise à jour d'un auteur.
-
 
 ## Annexes
 
