@@ -25,7 +25,7 @@
             const [response, setResponse] = React.useState('');
             const [message, setMessage] = React.useState('');
 
-            const fetchCallback = React.useMemo(
+             React.useEffect(
                 () => {
 
                     const fetchData = async () => {
@@ -33,9 +33,7 @@
                         const data = await results.json();
 
                         console.log(Math.random(), data);
-
                         setAuthors(data);
-
                     }
 
                     fetchData();
@@ -51,8 +49,10 @@
                     headers: { "Content-Type": "application/json" }
                 }
 
-                const results = await fetch("http://localhost:3000/author", options);
-                const { status, name } = await results.json();
+                const response = await fetch("http://localhost:3000/author", options);
+
+                const { status, name } = await response.json();
+                
                 setAuthorId(author._id); // refresh data avec la fonction useMemo
 
                 setMessage(() => `status : ${status}, merci pour votre ajout l'auteur ${name} est bien ajouté à la base de données.`);
