@@ -425,7 +425,9 @@ Créez un champ centré permettant de saisir une chaine de caractères. Affichez
 
 ### Exercice votes 
 
-Développez l'application votes suivante, vous pouvez utiliser snack.expo. Il y a 4 couples de candidats, à chaque fois l'utilisateur doit voter pour un candidat. Une fois tous les votes effectués on affichera les résultats sur une "page" différente. Un bouton reset est prévu pour réinitialiser les votes. Utilisez l'approche fonctionnelle de React ainsi que le Hook **useReducer** pour réaliser cet exercice. Faites deux composants : App et Favorite. Vous pouvez gérer, pour l'instant, le développement de ces deux composants dans le même fichier App.js.
+Développez l'application votes suivante, vous pouvez utiliser snack.expo. Il y a 4 couples de deux candidats, à chaque fois l'utilisateur doit voter pour un candidat. Une fois tous les votes effectués on affichera les résultats sur une "page" différente. Un bouton reset est prévu pour réinitialiser les votes. Utilisez l'approche fonctionnelle de React ainsi que le Hook **useReducer** pour réaliser cet exercice. Faites deux composants : App et Favorite. Vous pouvez gérer, pour l'instant, le développement de ces deux composants dans le même fichier App.js.
+
+Voyez les wireframes ci-dessous.
 
 Pensez à utiliser la documentation officiel pour réaliser cet exercice.
 
@@ -473,7 +475,7 @@ Vous utiliserez également le composant **FlatList** il permet de rendre une lis
 
 ```
 
-- fig 1 composant App
+- fig 1 composant App : on vote pour un des deux candidats.
 
 ```text
 -------------------
@@ -486,7 +488,9 @@ Vous utiliserez également le composant **FlatList** il permet de rendre une lis
 -------------------
 ```
 
-- fig 2 composant Favorite
+Puis, on vote pour les 3 restants et on affiche alors le résultat des votes :
+
+- fig 2 composant Favorite (résultats des votes)
 
 ```text
 -------------------
@@ -498,9 +502,11 @@ Vous utiliserez également le composant **FlatList** il permet de rendre une lis
 |   3. It' Alice  |
 |   4. It' Lisa   |
 -------------------
-|  Reset Favorites|
+| Reset Favorites |
 -------------------
 ```
+
+Le bouton Reset Favorites permettra de réinitialiser les votes. Si on clique dessus dans ce cas ré-afficher la première vue fig 1 ci-dessus.
 
 ## Exercice Navigation School App 3h
 
