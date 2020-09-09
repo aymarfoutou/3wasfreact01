@@ -600,10 +600,7 @@ export default App;
 
 3. Création des menus de l'application et mise en place des données. Voyez ci-dessous les données à utiliser pour l'exercice. 
 
-Attention, on ne vous demande pas ici d'utiliser Redux mais les technologies suivantes :
-
-- Création d'un contexte et d'un provider pour gérer le state.
-- Utilisez useReducer pour factoriser l'algorithmique dans l'application.
+Utilisez Redux ou Context API de React pour gérer le store dans l'application.
 
 - Pour garder les données initiales comme source de vérité vous allez créer une copie de l'objet initalState pour votre reducer. Attention, le spread operator ne peut pas faire une copie d'un objet trop complexe simplement. Pour copier l'objet ci-dessous nous vous proposons une solution voyez ce qui suit :
 
